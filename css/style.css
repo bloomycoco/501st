@@ -414,6 +414,20 @@ details.accordion .accordion-body h4 {
 
 details.accordion .accordion-body h4:first-child { margin-top: 0; }
 
+details.accordion .accordion-body h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.h4-icon {
+  height: 30px;
+  width: auto;
+  max-width: 46px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .accordion-group { margin-bottom: 24px; }
 
 .accordion-group > .group-title {
