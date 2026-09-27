@@ -468,13 +468,13 @@ details.accordion .accordion-body h4:first-child { margin-top: 0; }
 
 .vehicle-img {
   display: block;
-  width: 100%;
-  max-height: 280px;
+  max-width: 220px;
+  max-height: 140px;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  background: #05070c;
-  border: 1px solid var(--border);
-  padding: 14px;
-  margin-bottom: 16px;
+  background: transparent;
+  margin: 0 0 14px;
 }
 
 /* ---------- Guide gallery (PDF pages) ---------- */
