@@ -464,6 +464,65 @@ details.accordion .accordion-body h4:first-child { margin-top: 0; }
   margin: 0;
 }
 
+/* ---------- Access gate ---------- */
+
+.gate {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 34px 30px;
+  background: var(--panel);
+  border: 1px solid var(--border-bright);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  text-align: center;
+}
+
+.gate .lock-icon { font-size: 2.4rem; margin-bottom: 10px; }
+
+.gate h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gate p { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 20px; }
+
+.gate input[type="password"] {
+  width: 100%;
+  background: var(--panel-alt);
+  border: 1px solid var(--border-bright);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 10px;
+  margin-bottom: 14px;
+}
+
+.gate input[type="password"]:focus { outline: 1px solid var(--accent); }
+
+.gate button {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gate .error {
+  color: var(--red);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+.gate .error.show { display: block; }
+
+.officer-content { display: none; }
+.officer-content.show { display: block; }
+
 /* ---------- Vehicle cards ---------- */
 
 .vehicle-img {

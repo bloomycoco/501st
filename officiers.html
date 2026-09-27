@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Espace Officier - Site 501st</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9A%94%EF%B8%8F</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">501st Légion d'Attaque<small>Site officiel</small></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+      </ul>
+      <div class="section-label">Documents utiles</div>
+      <ul class="submenu">
+        <li><a href="doc-accueil-ct.html">Accueil CT</a></li>
+        <li><a href="doc-reglement.html">Règlement</a></li>
+        <li><a href="doc-securite-incendie.html">Sécurité incendie</a></li>
+        <li><a href="doc-commandement.html">Commandement</a></li>
+        <li><a href="doc-rapport-hebdo.html">Rapport Hebdomadaire</a></li>
+      </ul>
+      <div class="section-label">Codex Tactique</div>
+      <ul class="submenu">
+        <li><a href="codex-tactique.html">Codex Tactique</a></li>
+        <li><a href="codex-vehicules.html">Véhicules</a></li>
+      </ul>
+      <div class="section-label">Spécialisation 501st</div>
+      <ul class="submenu">
+        <li><a href="specialisation.html">Vue d'ensemble</a></li>
+        <li><a href="spe-soldat.html">Soldat</a></li>
+        <li><a href="spe-heavy.html">Heavy</a></li>
+        <li><a href="spe-medecin.html">Médecin</a></li>
+        <li><a href="spe-arf.html">ARF</a></li>
+        <li><a href="spe-torrent.html">Torrent</a></li>
+        <li><a href="spe-arc-trooper.html">ARC Trooper</a></li>
+      </ul>
+      <ul>
+        <li><a href="tenues.html">🧥 Tenues 501st</a></li>
+        <li><a href="bareme-promotion.html">🧾 Barème de promotion</a></li>
+        <li><a href="recrutement.html">📝 Recrutement 501st</a></li>
+      </ul>
+      <div class="section-label">Accès restreint</div>
+      <ul>
+        <li><a href="officiers.html" class="active">🔒 Espace Officier</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main>
+
+    <div id="gate" class="gate">
+      <div class="lock-icon">🔒</div>
+      <h2>Espace Officier</h2>
+      <p>Section réservée au corps des officiers de la 501st. Saisissez le code d'accès régimentaire.</p>
+      <input type="password" id="gate-input" placeholder="CODE D'ACCÈS" autocomplete="off" maxlength="20">
+      <button class="btn" id="gate-submit">Déverrouiller</button>
+      <div class="error" id="gate-error">Code incorrect. Contactez votre commandement.</div>
+    </div>
+
+    <div id="officer-content" class="officer-content">
+      <h1><span class="kicker">Accès restreint</span>🔒 Espace Officier</h1>
+      <p class="subtitle">Voici l'espace officiel des officiers de la 501st Légion d'Attaque. Vous trouverez ici tous les documents nécessaires à la direction du régiment.</p>
+
+      <details class="accordion" open>
+        <summary>📘 Fonctionnement Doc' Effectif</summary>
+        <div class="accordion-body">
+          <p>Le document d'effectif constitue l'outil central de gestion du régiment : il permet de suivre les membres de la 501st, de visualiser leur progression en grades et formations, et de maintenir la cohérence entre le roleplay et la gestion interne. C'est une référence officielle, pas un outil décoratif.</p>
+
+          <h4>Principes généraux</h4>
+          <ul class="clean">
+            <li>Respecter l'exactitude des informations inscrites.</li>
+            <li>Mettre à jour immédiatement après tout changement RP.</li>
+            <li>Vérifier la cohérence avec les informations Discord.</li>
+            <li>Appliquer les consignes fournies.</li>
+          </ul>
+
+          <h4>Gestion des membres</h4>
+          <p>Chaque profil membre doit contenir : identité RP, matricule, identifiants Discord/Steam (ID64 et ID32), grade actuel, spécialisation, et date de dernière promotion/rétrogradation.</p>
+
+          <h4>Promotion et rétrogradation</h4>
+          <ul class="clean">
+            <li>Déplacer la ligne complète en haut du nouveau grade.</li>
+            <li>Mettre à jour grade, dates et quotas de lead.</li>
+            <li>Vérifier les prérequis du nouveau grade.</li>
+            <li>Valider via le canal Discord dédié.</li>
+          </ul>
+
+          <h4>Formations — statuts</h4>
+          <ul class="clean">
+            <li>❌ Non validée (accessible mais non effectuée)</li>
+            <li>⚙️ En cours (reçue, en attente de validation)</li>
+            <li>✅ Validée (complète et reconnue)</li>
+          </ul>
+
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/1oYMWk6MadhzfffIr39Xr-P3jYwnYEx2JLJyLFmVuWCU/edit?usp=sharing" target="_blank" rel="noopener">Ouvrir le document d'effectif</a>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>🧭 Promoteur — Grades</summary>
+        <div class="accordion-body">
+          <p>Toute personne respectant le tableau ci-dessous est autorisée à promouvoir une unité, en accord avec le reste du corps officier et le commandement.</p>
+          <table>
+            <tr><th>Promoteur</th><th>Promu au maximum</th><th>Nécessaire pour être promu</th></tr>
+            <tr><td>2nd-LTN</td><td>CPL</td><td>CPL-C : FIR obligatoire</td></tr>
+            <tr><td>LTN</td><td>CPL-C</td><td>SGT : formation lead & formation TX-130</td></tr>
+            <tr><td>CPT-2nd</td><td>SGT / SGT-C</td><td>SGT-C : formation Recrutement & formation régimentaire 501st</td></tr>
+            <tr><td>CPT</td><td>ADJ / ADJ-C</td><td>ADJ-C : être formateur régimentaire 501st</td></tr>
+            <tr><td>MJR</td><td>LTN-2nd / LTN</td><td>CPT : formation Commandant de mission</td></tr>
+            <tr><td>V-CMD</td><td>CPT-2nd / CPT</td><td>—</td></tr>
+            <tr><td>CMD</td><td>MJR</td><td>—</td></tr>
+          </table>
+          <p>Une promotion représente une confiance supplémentaire accordée à l'unité. Les officiers sont responsables des conséquences si une promotion contredit les décisions de leurs supérieurs.</p>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>🎖️ Promoteur — Médailles</summary>
+        <div class="accordion-body">
+          <p>Les médailles accompagnent la carrière des soldats pour les faire évoluer et les récompenser. Il convient de ne pas en attribuer trop à bas grade, afin de laisser place à des récompenses futures. Les médailles doivent correspondre au mérite du membre ; si aucune ne lui correspond, aucune médaille ne doit lui être accordée.</p>
+
+          <h4>Limites par grade</h4>
+          <p>CT (0) · CPL/CPL-C (1) · SGT/SGT-C (2) · ADJ/ADJ-C (3) · 2nd LTN/LTN (4) · CPT-2nd/CPT (6) · MJR (7)</p>
+
+          <h4>Les 7 médailles de la 501st</h4>
+          <ul class="clean">
+            <li><strong>Survivant</strong> : pour les unités ayant survécu à de nombreuses batailles, représentant la devise régimentaire.</li>
+            <li><strong>Tireur d'Élite</strong> : pour les unités démontrant une capacité à atteindre n'importe quelle cible.</li>
+            <li><strong>Soldat d'Élite</strong> : récompense les membres qui savent impliquer et discerner dans leur comportement durant les opérations, la dignité et la qualité.</li>
+            <li><strong>Vétéran</strong> : attribuée après plus de 5 mois de présence continue.</li>
+            <li><strong>Honneur</strong> : pour comportement exemplaire en base et en mission.</li>
+            <li><strong>Excellence</strong> : pour les membres honorant le régiment et prouvant quotidiennement leur mérite auprès des officiers supérieurs.</li>
+            <li><strong>Commandement</strong> : réservée aux officiers ayant démontré des qualités exceptionnelles de leader.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>🪐 Affiliation régimentaire</summary>
+        <div class="accordion-body">
+          <p>Répartition des référents et affiliations transversales du régiment.</p>
+          <h4>Commandant Jedi</h4>
+          <p>Référent Jedi rattaché au commandement de la 501st.</p>
+          <h4>Arc Alpha</h4>
+          <p>Référent régimentaire des ARC Troopers ; reçoit leurs rapports hebdomadaires (voir <a href="spe-arc-trooper.html">page ARC Trooper</a>).</p>
+          <h4>Marine Référant</h4>
+          <p>Référent de liaison avec les unités navales de la flotte Cosmos.</p>
+          <div class="notice">Les noms/matricules actuellement en poste pour ces trois rôles n'ont pas pu être récupérés automatiquement depuis le document source. Communique-les-moi pour que je les ajoute ici.</div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>📝 Incorporation opérationnelle</summary>
+        <div class="accordion-body">
+          <p>Formulaire à utiliser pour l'incorporation opérationnelle au sein de la 501st.</p>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeH9O-NEC7CVBe7CVKsZ-FxtCAwFwhUKaB6OnvQs_rP-GKU0A/viewform" target="_blank" rel="noopener">Ouvrir le formulaire</a>
+        </div>
+      </details>
+
+      <footer>
+        Site 501st &middot; Espace Officier &middot; Reproduction non-officielle basée sur le site Google Sites d'origine.
+      </footer>
+    </div>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  var CODE_HASH = "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f";
+  var STORAGE_KEY = "site501st_officier_unlocked";
+
+  var gate = document.getElementById("gate");
+  var content = document.getElementById("officer-content");
+  var input = document.getElementById("gate-input");
+  var submit = document.getElementById("gate-submit");
+  var error = document.getElementById("gate-error");
+
+  function unlock() {
+    gate.style.display = "none";
+    content.classList.add("show");
+  }
+
+  async function sha256(text) {
+    var data = new TextEncoder().encode(text);
+    var hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    var bytes = Array.from(new Uint8Array(hashBuffer));
+    return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  async function tryCode(code) {
+    var hash = await sha256(code.trim().toUpperCase());
+    if (hash === CODE_HASH) {
+      try { localStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
+      unlock();
+    } else {
+      error.classList.add("show");
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  submit.addEventListener("click", function () {
+    if (input.value) tryCode(input.value);
+  });
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && input.value) tryCode(input.value);
+  });
+
+  try {
+    if (localStorage.getItem(STORAGE_KEY) === "1") unlock();
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
