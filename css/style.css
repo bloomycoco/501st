@@ -464,6 +464,38 @@ details.accordion .accordion-body h4:first-child { margin-top: 0; }
   margin: 0;
 }
 
+/* ---------- Guide gallery (PDF pages) ---------- */
+
+.guide-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-bottom: 24px;
+}
+
+.guide-page {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--border-bright);
+}
+
+.guide-page img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-page .caption {
+  padding: 14px 20px;
+  color: var(--text-dim);
+}
+
+.guide-page .caption h3 {
+  margin: 0 0 4px;
+  color: var(--gold);
+}
+
 /* ---------- Grid ---------- */
 
 .grid-2 {
