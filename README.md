@@ -17,8 +17,8 @@ Site statique (HTML/CSS pur, sans dépendance) reconstitué à partir du site Go
 
 - **Effectif** : le lien vers la feuille Google Sheets d'effectif n'a pas pu être récupéré automatiquement (lien "#" dans la barre de navigation de chaque page). À renseigner manuellement.
 - **Recrutement** : le bouton du formulaire Google Forms est un lien "#" à remplacer par l'URL réelle.
-- **PDF** : "Guide du CT 501st-1-1.pdf" (page Accueil CT) et "501e Legion - Guide du commandant de mission-7.pdf" (page Commandement) sont référencés mais pas hébergés ; à ajouter dans un dossier `assets/documents/` et à lier.
-- Les pages de spécialisation pointent vers les sites Google Sites externes d'origine (Soldat, Heavy, Médecin, ARF, Torrent, ARC Trooper) ; leur contenu n'a pas été rapatrié ici.
+- **Guide du commandant de mission** : "501e Legion - Guide du commandant de mission-7.pdf" (page Commandement) est référencé mais pas hébergé ; à ajouter dans `assets/` et à lier, comme fait pour `assets/guide-ct/` (Guide du CT).
+- **ARF** : le contenu de cette spécialisation est dans un Google Doc privé, non récupérable automatiquement ; le texte reste à fournir.
 
 ## Publier sur GitHub Pages
 
