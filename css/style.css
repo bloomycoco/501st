@@ -334,7 +334,7 @@ tr:hover td { background: rgba(74,144,255,0.04); }
 }
 
 .notice::before {
-  content: "AVIS RÉGIMENTAIRE — ";
+  content: "AVIS RÉGIMENTAIRE : ";
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--gold);

@@ -4,14 +4,15 @@ Site statique (HTML/CSS pur, sans dépendance) reconstitué à partir du site Go
 
 ## Structure
 
-- `index.html` — Accueil
-- `doc-accueil-ct.html`, `doc-reglement.html`, `doc-securite-incendie.html`, `doc-commandement.html`, `doc-rapport-hebdo.html` — Documents utiles
-- `codex-tactique.html`, `codex-vehicules.html` — Codex Tactique
-- `specialisation.html`, `spe-soldat.html`, `spe-heavy.html`, `spe-medecin.html`, `spe-arf.html`, `spe-torrent.html`, `spe-arc-trooper.html` — Spécialisations
-- `tenues.html` — Tenues 501st
-- `bareme-promotion.html` — Barème de promotion
-- `recrutement.html` — Recrutement
-- `css/style.css` — Feuille de style commune
+- `index.html` : Accueil
+- `doc-accueil-ct.html`, `doc-reglement.html`, `doc-securite-incendie.html`, `doc-commandement.html`, `doc-rapport-hebdo.html` : Documents utiles
+- `codex-tactique.html`, `codex-vehicules.html` : Codex Tactique
+- `specialisation.html`, `spe-soldat.html`, `spe-heavy.html`, `spe-medecin.html`, `spe-arf.html`, `spe-torrent.html`, `spe-arc-trooper.html` : Spécialisations
+- `tenues.html` : Tenues 501st
+- `bareme-promotion.html` : Barème de promotion
+- `recrutement.html` : Recrutement
+- `officiers.html` : Espace Officier (protégé par code d'accès)
+- `css/style.css` : Feuille de style commune
 
 ## À compléter
 
