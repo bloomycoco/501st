@@ -5,7 +5,6 @@ Site statique (HTML/CSS pur, sans dépendance) reconstitué à partir du site Go
 ## Structure
 
 - `index.html` — Accueil
-- `planning.html` — Planning des activités
 - `doc-accueil-ct.html`, `doc-reglement.html`, `doc-securite-incendie.html`, `doc-commandement.html`, `doc-rapport-hebdo.html` — Documents utiles
 - `codex-tactique.html`, `codex-vehicules.html` — Codex Tactique
 - `specialisation.html`, `spe-soldat.html`, `spe-heavy.html`, `spe-medecin.html`, `spe-arf.html`, `spe-torrent.html`, `spe-arc-trooper.html` — Spécialisations
@@ -33,3 +32,5 @@ git push -u origin main
 ```
 
 Puis dans les paramètres du dépôt GitHub : **Settings → Pages → Source : branche `main`, dossier `/ (root)`**.
+
+Site en ligne : https://bloomycoco.github.io/501st/
