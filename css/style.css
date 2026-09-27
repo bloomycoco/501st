@@ -227,6 +227,66 @@ footer {
 ul.clean { padding-left: 20px; }
 ul.clean li { margin-bottom: 6px; }
 
+details.accordion {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+details.accordion summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 20px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+details.accordion summary::-webkit-details-marker { display: none; }
+
+details.accordion summary::after {
+  content: "+";
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+details.accordion[open] summary::after { content: "\2212"; }
+
+details.accordion summary:hover { background: var(--panel-alt); }
+
+details.accordion .accordion-body {
+  padding: 4px 20px 18px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+details.accordion .accordion-body h4 {
+  color: var(--gold);
+  font-size: 0.95rem;
+  margin: 14px 0 4px;
+}
+
+details.accordion .accordion-body h4:first-child { margin-top: 14px; }
+
+.accordion-group {
+  margin-bottom: 24px;
+}
+
+.accordion-group > .group-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #5b6474;
+  margin-bottom: 8px;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
