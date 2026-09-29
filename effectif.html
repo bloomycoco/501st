@@ -273,12 +273,18 @@ const effCol = collection(db, "effectif");
 
 const GRADES = ["CT","CPL","CPL-C","SGT","SGT-C","ADJ","ADJ-C","2nd-LTN","LTN","CPT-2nd","CPT","MJR","VCMD","CMD"];
 
-// Ordre hiérarchique du plus haut grade au plus bas (inclut les roles hors echelle standard).
-const GRADE_ORDER = ["ALPHA","EM","MR","GNL","CMDJ","CMDM","CMD","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT"];
+// Rang hierarchique du plus haut grade au plus bas (inclut les roles hors echelle
+// standard). CMD et CMDJ partagent le meme rang (equivalents).
+const GRADE_RANK = {
+  "ALPHA": 0, "EM": 1, "MR": 2,
+  "CMDM": 3, "GNL": 4, "CMD": 5, "CMDJ": 5, "VCMD": 6, "MJR": 7,
+  "CPT": 8, "CPT-2nd": 9, "LTN": 10, "2nd-LTN": 11,
+  "ADJ-C": 12, "ADJ": 13, "SGT-C": 14, "SGT": 15,
+  "CPL-C": 16, "CPL": 17, "CT": 18
+};
 
 function gradeRank(g) {
-  var i = GRADE_ORDER.indexOf(g);
-  return i === -1 ? GRADE_ORDER.length : i;
+  return GRADE_RANK.hasOwnProperty(g) ? GRADE_RANK[g] : 99;
 }
 const SPECS = ["-","Soldat","Heavy","Médecin","ARF","Torrent","ARC Trooper"];
 
@@ -324,9 +330,10 @@ function showStatus(elId, msg, isError) {
   el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
 }
 
-function renderRow(id, data, editing) {
+function renderRow(id, data, editing, groupStart) {
+  var cls = groupStart ? ' class="grade-group-start"' : '';
   if (editing) {
-    return '<tr data-id="' + id + '">' +
+    return '<tr data-id="' + id + '"' + cls + '>' +
       '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
       '<td><input data-field="matricule" value="' + esc(data.matricule) + '"></td>' +
       '<td><input data-field="discord" value="' + esc(data.discord) + '"></td>' +
@@ -338,7 +345,7 @@ function renderRow(id, data, editing) {
         '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
       '</td></tr>';
   }
-  return '<tr data-id="' + id + '">' +
+  return '<tr data-id="' + id + '"' + cls + '>' +
     '<td>' + esc(data.rpName) + '</td>' +
     '<td>' + esc(data.matricule) + '</td>' +
     '<td>' + esc(data.discord) + '</td>' +
@@ -360,7 +367,7 @@ function daysSince(dateStr) {
   return diff >= 0 ? diff : null;
 }
 
-function renderPromoRow(data) {
+function renderPromoRow(data, groupStart) {
   var days = daysSince(data.lastPromo);
   var delay = PROMO_DELAYS[data.grade];
   var daysCell = days === null ? "N/A" : days + " j";
@@ -371,7 +378,7 @@ function renderPromoRow(data) {
   else if (days >= delay) statusCell = "✅ Éligible";
   else statusCell = "❌ Pas encore (" + (delay - days) + " j restants)";
 
-  return '<tr>' +
+  return '<tr' + (groupStart ? ' class="grade-group-start"' : '') + '>' +
     '<td>' + esc(data.rpName) + '</td>' +
     '<td>' + esc(data.grade) + '</td>' +
     '<td>' + daysCell + '</td>' +
@@ -401,8 +408,11 @@ function draw() {
   if (!latestDocs.length) {
     body.innerHTML = '<tr><td colspan="7">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
+    var prevGrade = null;
     body.innerHTML = latestDocs.map(function (d) {
-      return renderRow(d.id, d.data, d.id === editingId);
+      var groupStart = d.data.grade !== prevGrade;
+      prevGrade = d.data.grade;
+      return renderRow(d.id, d.data, d.id === editingId, groupStart);
     }).join("");
   }
 
@@ -410,7 +420,12 @@ function draw() {
   if (!latestDocs.length) {
     promoBody.innerHTML = '<tr><td colspan="5">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
-    promoBody.innerHTML = latestDocs.map(function (d) { return renderPromoRow(d.data); }).join("");
+    var prevGrade2 = null;
+    promoBody.innerHTML = latestDocs.map(function (d) {
+      var groupStart = d.data.grade !== prevGrade2;
+      prevGrade2 = d.data.grade;
+      return renderPromoRow(d.data, groupStart);
+    }).join("");
   }
 
   renderSpecBreakdown(latestDocs);

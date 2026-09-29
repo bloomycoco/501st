@@ -657,10 +657,15 @@ table .kama-thumb {
 
 #eff-table { min-width: 720px; }
 
-#eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid var(--border-hi); }
-#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.045); }
-#eff-table tbody tr:hover, #promo-table tbody tr:hover { background: rgba(91,124,255,0.12); }
-#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 11px 12px; }
+#eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
+#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
+#eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
+#eff-table tbody tr:hover, #promo-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
+#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 12px 14px; }
+
+#eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start {
+  border-top: 2px solid var(--blue);
+}
 
 #eff-table input, #eff-table select {
   width: 100%;
