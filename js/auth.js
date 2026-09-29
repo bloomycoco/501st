@@ -90,7 +90,81 @@ export function mountOwnerResetButton(onClick) {
   btn.title = "Réinitialiser les accès de tout le monde (Owner)";
   btn.textContent = "🔄";
   btn.className = "owner-reset-fab";
+  btn.style.right = "20px";
   btn.addEventListener("click", onClick);
   document.body.appendChild(btn);
   return btn;
+}
+
+// Second bouton flottant (a cote du reset), telecharge une sauvegarde JSON
+// complete (effectif + rapports + config) directement sur l'appareil de
+// l'utilisateur. Rien n'est envoye a un service tiers.
+export function mountOwnerBackupButton(onClick) {
+  if (document.getElementById("owner-backup-fab")) return document.getElementById("owner-backup-fab");
+  var btn = document.createElement("button");
+  btn.id = "owner-backup-fab";
+  btn.title = "Télécharger une sauvegarde complète (Owner)";
+  btn.textContent = "💾";
+  btn.className = "owner-reset-fab";
+  btn.style.right = "78px";
+  btn.addEventListener("click", onClick);
+  document.body.appendChild(btn);
+  return btn;
+}
+
+function decodeFirestoreValue(v) {
+  if (v == null) return null;
+  if ("stringValue" in v) return v.stringValue;
+  if ("doubleValue" in v) return v.doubleValue;
+  if ("integerValue" in v) return Number(v.integerValue);
+  if ("booleanValue" in v) return v.booleanValue;
+  if ("nullValue" in v) return null;
+  if ("mapValue" in v) return decodeFirestoreFields(v.mapValue.fields || {});
+  if ("arrayValue" in v) return (v.arrayValue.values || []).map(decodeFirestoreValue);
+  return v;
+}
+
+function decodeFirestoreFields(fields) {
+  var out = {};
+  Object.keys(fields || {}).forEach(function (k) { out[k] = decodeFirestoreValue(fields[k]); });
+  return out;
+}
+
+async function fetchCollectionPlain(projectId, collectionName) {
+  var out = [];
+  var pageToken;
+  do {
+    var url = "https://firestore.googleapis.com/v1/projects/" + projectId + "/databases/(default)/documents/" + collectionName + "?pageSize=300" + (pageToken ? "&pageToken=" + pageToken : "");
+    var res = await fetch(url);
+    if (!res.ok) throw new Error(collectionName + " : HTTP " + res.status);
+    var data = await res.json();
+    (data.documents || []).forEach(function (d) {
+      out.push({ id: d.name.split("/").pop(), data: decodeFirestoreFields(d.fields || {}) });
+    });
+    pageToken = data.nextPageToken;
+  } while (pageToken);
+  return out;
+}
+
+// Construit une sauvegarde JSON complete (effectif + rapports) et la
+// declenche en telechargement dans le navigateur. Aucune donnee n'est
+// envoyee ailleurs que sur l'appareil de la personne qui clique.
+export async function downloadFullBackup(projectId) {
+  var effectif = await fetchCollectionPlain(projectId, "effectif");
+  var rapports = await fetchCollectionPlain(projectId, "rapports");
+  var backup = {
+    generatedAt: new Date().toISOString(),
+    effectif: effectif,
+    rapports: rapports
+  };
+  var blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "backup-501st-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  return backup;
 }

@@ -285,7 +285,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
   loadSession, saveSession, clearSession, readAccessConfig,
-  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton
+  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
+  mountOwnerBackupButton, downloadFullBackup
 } from "./js/auth.js";
 
 const firebaseConfig = {
@@ -314,7 +315,19 @@ function unlock(role) {
   gate.style.display = "none";
   content.classList.add("show");
   window.dispatchEvent(new CustomEvent("officier-unlocked"));
-  if (role === "owner") mountOwnerResetButton(handleOwnerReset);
+  if (role === "owner") {
+    mountOwnerResetButton(handleOwnerReset);
+    mountOwnerBackupButton(handleOwnerBackup);
+  }
+}
+
+async function handleOwnerBackup() {
+  try {
+    var backup = await downloadFullBackup("site501st");
+    alert("Sauvegarde téléchargée : " + backup.effectif.length + " membre(s), " + backup.rapports.length + " rapport(s).");
+  } catch (e) {
+    alert("Échec de la sauvegarde : " + e.message);
+  }
 }
 
 async function handleOwnerReset() {

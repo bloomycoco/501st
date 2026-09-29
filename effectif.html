@@ -217,7 +217,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
   OWNER_HASH, sha256, loadSession, saveSession, clearSession, readAccessConfig,
-  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton
+  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
+  mountOwnerBackupButton, downloadFullBackup
 } from "./js/auth.js";
 
 const firebaseConfig = {
@@ -321,6 +322,7 @@ function applyRoleUI() {
     ownerPanel.style.display = currentRole === "owner" ? "block" : "none";
     if (currentRole === "owner") {
       mountOwnerResetButton(handleOwnerReset);
+      mountOwnerBackupButton(handleOwnerBackup);
     }
   } else {
     loggedOut.style.display = "block";
@@ -329,6 +331,8 @@ function applyRoleUI() {
     ownerPanel.style.display = "none";
     var fab = document.getElementById("owner-reset-fab");
     if (fab) fab.remove();
+    var fab2 = document.getElementById("owner-backup-fab");
+    if (fab2) fab2.remove();
   }
   draw();
 }
@@ -343,6 +347,15 @@ async function handleOwnerReset() {
     alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
   } catch (e) {
     alert("Échec : " + e.message);
+  }
+}
+
+async function handleOwnerBackup() {
+  try {
+    var backup = await downloadFullBackup("site501st");
+    alert("Sauvegarde téléchargée : " + backup.effectif.length + " membre(s), " + backup.rapports.length + " rapport(s).");
+  } catch (e) {
+    alert("Échec de la sauvegarde : " + e.message);
   }
 }
 

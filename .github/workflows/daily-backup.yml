@@ -1,0 +1,29 @@
+name: Daily Firestore backup
+
+on:
+  schedule:
+    # Tous les jours a 03:00 UTC
+    - cron: "0 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run backup
+        run: node .github/scripts/daily-backup.mjs
+      - name: Commit backup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add backups/
+          git diff --cached --quiet && echo "Aucun changement" && exit 0
+          git commit -m "Sauvegarde automatique $(date -u +%Y-%m-%d)"
+          git push
