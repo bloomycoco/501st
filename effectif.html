@@ -216,6 +216,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 import {
   getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {
+  OWNER_HASH, sha256, loadSession, saveSession, clearSession, readAccessConfig,
+  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton
+} from "./js/auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
@@ -230,15 +234,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const effCol = collection(db, "effectif");
 const accessDocRef = doc(db, "config", "access");
-
-const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
-
-async function sha256(text) {
-  var data = new TextEncoder().encode(text);
-  var hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  var bytes = Array.from(new Uint8Array(hashBuffer));
-  return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
-}
+let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
 const GRADES = ["ALPHA","EM","MR","CMDM","GNL","CMD","CMDJ","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT"];
 
@@ -324,48 +320,64 @@ function applyRoleUI() {
     roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
     addSection.style.display = "block";
     ownerPanel.style.display = currentRole === "owner" ? "block" : "none";
+    if (currentRole === "owner") {
+      mountOwnerResetButton(handleOwnerReset);
+    }
   } else {
     loggedOut.style.display = "block";
     loggedIn.style.display = "none";
     addSection.style.display = "none";
     ownerPanel.style.display = "none";
+    var fab = document.getElementById("owner-reset-fab");
+    if (fab) fab.remove();
   }
   draw();
 }
+
+async function handleOwnerReset() {
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html) ? Chacun devra ressaisir le code.")) return;
+  try {
+    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
+    currentRole = null;
+    currentHash = null;
+    applyRoleUI();
+    alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
+  } catch (e) {
+    alert("Échec : " + e.message);
+  }
+}
+
+async function restoreSessionIfValid() {
+  try {
+    accessConfig = await readAccessConfig(getDoc, accessDocRef);
+  } catch (e) { return; }
+  var restored = tryRestoreSession(accessConfig);
+  if (restored) {
+    currentRole = restored.role;
+    currentHash = restored.hash;
+    applyRoleUI();
+  }
+}
+restoreSessionIfValid();
 
 document.getElementById("login-btn").addEventListener("click", async function () {
   var input = document.getElementById("login-code");
   var errEl = document.getElementById("login-error");
   var code = input.value.trim().toUpperCase();
   if (!code) return;
-  var hash = await sha256(code);
 
-  if (hash === OWNER_HASH) {
-    currentRole = "owner";
-    currentHash = hash;
+  var result = await verifyCode(accessConfig, code);
+  if (result) {
+    currentRole = result.role;
+    currentHash = result.hash;
+    saveSession(result.role, result.hash, accessConfig.authEpoch);
     input.value = "";
     errEl.style.display = "none";
     applyRoleUI();
-    return;
-  }
-
-  try {
-    var snap = await getDoc(accessDocRef);
-    var officerHash = snap.exists() ? snap.data().officerCodeHash : null;
-    if (officerHash && hash === officerHash) {
-      currentRole = "officier";
-      currentHash = hash;
-      input.value = "";
-      errEl.style.display = "none";
-      applyRoleUI();
-    } else {
-      errEl.textContent = "Code incorrect.";
-      errEl.style.display = "block";
-      input.value = "";
-    }
-  } catch (e) {
-    errEl.textContent = "Erreur de vérification : " + e.message;
+  } else {
+    errEl.textContent = "Code incorrect.";
     errEl.style.display = "block";
+    input.value = "";
   }
 });
 
@@ -376,6 +388,7 @@ document.getElementById("login-code").addEventListener("keydown", function (e) {
 document.getElementById("logout-btn").addEventListener("click", function () {
   currentRole = null;
   currentHash = null;
+  clearSession();
   applyRoleUI();
 });
 
@@ -385,7 +398,8 @@ document.getElementById("owner-update-btn").addEventListener("click", async func
   if (!newCode) return;
   var newHash = await sha256(newCode);
   try {
-    await setDoc(accessDocRef, { officerCodeHash: newHash, ownerCodeHash: OWNER_HASH });
+    await setDoc(accessDocRef, { officerCodeHash: newHash, ownerCodeHash: OWNER_HASH, authEpoch: accessConfig.authEpoch });
+    accessConfig.officerCodeHash = newHash;
     statusEl.style.display = "block";
     statusEl.style.borderLeftColor = "var(--blue)";
     statusEl.textContent = "Code officier mis à jour. Communique-le au régiment.";

@@ -280,50 +280,87 @@
   </footer>
 
   <script src="js/site.js?v=2"></script>
-  <script>
-(function () {
-  var CODE_HASH = "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f";
 
-  var gate = document.getElementById("gate");
-  var content = document.getElementById("officer-content");
-  var input = document.getElementById("gate-input");
-  var submit = document.getElementById("gate-submit");
-  var error = document.getElementById("gate-error");
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {
+  loadSession, saveSession, clearSession, readAccessConfig,
+  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton
+} from "./js/auth.js";
 
-  function unlock() {
-    gate.style.display = "none";
-    content.classList.add("show");
-    window.dispatchEvent(new CustomEvent("officier-unlocked"));
+const firebaseConfig = {
+  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
+  authDomain: "site501st.firebaseapp.com",
+  projectId: "site501st",
+  storageBucket: "site501st.firebasestorage.app",
+  messagingSenderId: "862962282467",
+  appId: "1:862962282467:web:548b976251263394d53ad6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const accessDocRef = doc(db, "config", "access");
+let accessConfig = { officerCodeHash: null, authEpoch: "1" };
+let currentRole = null;
+
+var gate = document.getElementById("gate");
+var content = document.getElementById("officer-content");
+var input = document.getElementById("gate-input");
+var submit = document.getElementById("gate-submit");
+var error = document.getElementById("gate-error");
+
+function unlock(role) {
+  currentRole = role;
+  gate.style.display = "none";
+  content.classList.add("show");
+  window.dispatchEvent(new CustomEvent("officier-unlocked"));
+  if (role === "owner") mountOwnerResetButton(handleOwnerReset);
+}
+
+async function handleOwnerReset() {
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html) ? Chacun devra ressaisir le code.")) return;
+  try {
+    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
+    clearSession();
+    alert("Accès réinitialisés. Recharge la page pour ressaisir le code.");
+    location.reload();
+  } catch (e) {
+    alert("Échec : " + e.message);
   }
+}
 
-  async function sha256(text) {
-    var data = new TextEncoder().encode(text);
-    var hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    var bytes = Array.from(new Uint8Array(hashBuffer));
-    return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+async function restoreSessionIfValid() {
+  try {
+    accessConfig = await readAccessConfig(getDoc, accessDocRef);
+  } catch (e) { return; }
+  var restored = tryRestoreSession(accessConfig);
+  if (restored) unlock(restored.role);
+}
+restoreSessionIfValid();
+
+async function tryCode(code) {
+  if (!accessConfig.officerCodeHash) {
+    try { accessConfig = await readAccessConfig(getDoc, accessDocRef); } catch (e) {}
   }
-
-  async function tryCode(code) {
-    var normalized = code.trim().toUpperCase();
-    var hash = await sha256(normalized);
-    if (hash === CODE_HASH) {
-      window.__officerCode = normalized;
-      unlock();
-    } else {
-      error.classList.add("show");
-      input.value = "";
-      input.focus();
-    }
+  var result = await verifyCode(accessConfig, code);
+  if (result) {
+    saveSession(result.role, result.hash, accessConfig.authEpoch);
+    unlock(result.role);
+  } else {
+    error.classList.add("show");
+    input.value = "";
+    input.focus();
   }
+}
 
-  submit.addEventListener("click", function () {
-    if (input.value) tryCode(input.value);
-  });
+submit.addEventListener("click", function () {
+  if (input.value) tryCode(input.value);
+});
 
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && input.value) tryCode(input.value);
-  });
-})();
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && input.value) tryCode(input.value);
+});
 </script>
 
 </body>

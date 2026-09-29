@@ -649,6 +649,25 @@ table .kama-thumb {
   margin: 0 0 14px;
 }
 
+/* ─── OWNER RESET FAB ────────────────────────────────────── */
+.owner-reset-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 500;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-hi);
+  background: linear-gradient(135deg, var(--red), #7a1218);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+
+.owner-reset-fab:hover { filter: brightness(1.15); }
+
 /* ─── EFFECTIF (tableau live) ───────────────────────────── */
 .content.wide { max-width: 1500px; }
 
