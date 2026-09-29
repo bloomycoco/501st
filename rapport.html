@@ -341,21 +341,6 @@ async function setReportStatus(reportId, currentData, newStatus) {
   }
 }
 
-function wireActions(containerId, dataMap) {
-  document.getElementById(containerId).addEventListener("click", function (e) {
-    var btn = e.target.closest("button[data-action]");
-    if (!btn || !isUnlocked()) return;
-    var id = btn.getAttribute("data-id");
-    var action = btn.getAttribute("data-action");
-    var data = dataMap[id];
-    if (!data) return;
-    var newStatus = action === "accept" ? "accepted" : "rejected";
-    setReportStatus(id, data, newStatus).catch(function (err) {
-      alert("Échec : " + err.message);
-    });
-  });
-}
-
 // ---------- File d'attente (rapports pending) ----------
 
 var pendingMap = {};
@@ -381,7 +366,19 @@ function drawPending(list) {
   if (!lastPending.length) { el.innerHTML = "<p>Aucun rapport en attente.</p>"; return; }
   el.innerHTML = lastPending.map(function (p) { return renderReportCard(p.id, p.data); }).join("");
 }
-wireActions("pending-list", pendingMap);
+
+document.getElementById("pending-list").addEventListener("click", function (e) {
+  var btn = e.target.closest("button[data-action]");
+  if (!btn || !isUnlocked()) return;
+  var id = btn.getAttribute("data-id");
+  var action = btn.getAttribute("data-action");
+  var data = pendingMap[id];
+  if (!data) return;
+  var newStatus = action === "accept" ? "accepted" : "rejected";
+  setReportStatus(id, data, newStatus).catch(function (err) {
+    alert("Échec : " + err.message);
+  });
+});
 
 // ---------- Recherche par matricule ----------
 
