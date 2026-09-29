@@ -94,8 +94,11 @@
       <h2>📝 Soumettre un rapport</h2>
       <p>Ouvert à tous, sans code. Un officier validera ou refusera ton rapport.</p>
       <div class="eff-form">
-        <input type="text" id="rep-matricule" placeholder="Matricule (ex: CT-1004)">
+        <select id="rep-matricule">
+          <option value="">Chargement de l'effectif...</option>
+        </select>
       </div>
+      <p style="font-size:0.82rem; color:var(--text-dim); margin:6px 0 0;">Ton nom n'apparaît pas ? Demande à un officier de renseigner ton matricule dans l'<a href="effectif.html">Effectif</a>.</p>
       <div class="eff-form" style="margin-top:10px;">
         <textarea id="rep-content" placeholder="Contenu du rapport (RP)..." rows="5" style="flex:1 1 100%; background: rgba(13,15,30,0.9); border: 1px solid var(--border-hi); color: var(--text); font-family: var(--font-body); font-size: 0.92rem; padding: 10px; border-radius: 4px;"></textarea>
       </div>
@@ -284,16 +287,44 @@ function showStatus(elId, msg, isError) {
   el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
 }
 
+// ---------- Menu deroulant des membres (evite les erreurs de matricule) ----------
+
+var membersByMatricule = {};
+
+onSnapshot(effCol, function (snap) {
+  var members = [];
+  snap.forEach(function (d) {
+    var data = d.data();
+    var matricule = (data.matricule || "").trim();
+    if (!matricule || matricule === "//" || matricule === "///") return;
+    members.push({ matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" });
+  });
+  members.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
+
+  membersByMatricule = {};
+  members.forEach(function (m) { membersByMatricule[m.matricule] = m; });
+
+  var sel = document.getElementById("rep-matricule");
+  var previous = sel.value;
+  sel.innerHTML = '<option value="">-- Choisis ton nom --</option>' + members.map(function (m) {
+    return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
+  }).join("");
+  if (previous && membersByMatricule[previous]) sel.value = previous;
+});
+
 // ---------- Soumission ----------
 
 document.getElementById("rep-submit-btn").addEventListener("click", function () {
   var matricule = document.getElementById("rep-matricule").value.trim();
   var content = document.getElementById("rep-content").value.trim();
-  if (!matricule) { showStatus("rep-submit-status", "Le matricule est obligatoire.", true); return; }
+  if (!matricule) { showStatus("rep-submit-status", "Choisis ton nom dans la liste.", true); return; }
   if (!content) { showStatus("rep-submit-status", "Le contenu du rapport est obligatoire.", true); return; }
+
+  var member = membersByMatricule[matricule];
 
   addDoc(rapportsCol, {
     matricule: matricule,
+    rpName: member ? member.rpName : "",
     content: content,
     status: "pending",
     submittedAt: new Date().toISOString()
@@ -331,8 +362,9 @@ function renderReportCard(id, data) {
       actions += '<button class="eff-icon-btn danger" data-action="reject" data-id="' + id + '">Refuser</button>';
     }
   }
+  var who = data.rpName ? esc(data.rpName) + ' (' + esc(data.matricule) + ')' : esc(data.matricule);
   return '<div class="card" style="margin-bottom:12px;">' +
-    '<p style="margin:0 0 6px;"><strong>' + esc(data.matricule) + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + '</p>' +
+    '<p style="margin:0 0 6px;"><strong>' + who + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + '</p>' +
     '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
     (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
     (actions ? '<div class="eff-row-actions" style="flex-direction:row;">' + actions + '</div>' : '') +
