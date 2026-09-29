@@ -77,6 +77,7 @@
       <a href="bareme-promotion.html">🧾 Barème</a>
       <a href="recrutement.html">📝 Recrutement</a>
       <a href="officiers.html" class="active">🔒 Officier</a>
+      <a href="effectif.html">📋 Effectif</a>
     </div>
   </nav>
 
@@ -100,70 +101,10 @@
       </div>
 
       <details class="accordion" open>
-        <summary>📋 Effectif du régiment</summary>
-        <div class="accordion-body">
-          <p>Tableau en direct, modifiable par tous les officiers. Les changements sont visibles immédiatement par tout le monde, sans recharger la page.</p>
-
-          <div id="eff-status" class="notice" style="display:none;"></div>
-
-          <div class="eff-table-wrap">
-            <table id="eff-table">
-              <thead>
-                <tr>
-                  <th>Identité RP</th>
-                  <th>Matricule</th>
-                  <th>Discord</th>
-                  <th>Grade</th>
-                  <th>Spécialisation</th>
-                  <th>Dernière promo</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="eff-body">
-                <tr><td colspan="7">Chargement de l'effectif...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h4>Ajouter un membre</h4>
-          <div class="eff-form">
-            <input type="text" id="eff-new-name" placeholder="Identité RP">
-            <input type="text" id="eff-new-matricule" placeholder="Matricule (ex: CT-1004)">
-            <input type="text" id="eff-new-discord" placeholder="Discord (pseudo ou ID)">
-            <select id="eff-new-grade">
-              <option value="CT">CT</option>
-              <option value="CPL">CPL</option>
-              <option value="CPL-C">CPL-C</option>
-              <option value="SGT">SGT</option>
-              <option value="SGT-C">SGT-C</option>
-              <option value="ADJ">ADJ</option>
-              <option value="ADJ-C">ADJ-C</option>
-              <option value="2nd-LTN">2nd-LTN</option>
-              <option value="LTN">LTN</option>
-              <option value="CPT-2nd">CPT-2nd</option>
-              <option value="CPT">CPT</option>
-              <option value="MJR">MJR</option>
-              <option value="VCMD">VCMD</option>
-              <option value="CMD">CMD</option>
-            </select>
-            <select id="eff-new-spec">
-              <option value="-">-</option>
-              <option value="Soldat">Soldat</option>
-              <option value="Heavy">Heavy</option>
-              <option value="Médecin">Médecin</option>
-              <option value="ARF">ARF</option>
-              <option value="Torrent">Torrent</option>
-              <option value="ARC Trooper">ARC Trooper</option>
-            </select>
-            <input type="date" id="eff-new-date">
-            <button class="btn" id="eff-add-btn">Ajouter</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion" open>
         <summary>📘 Fonctionnement Doc' Effectif</summary>
         <div class="accordion-body">
+          <p>Le tableau d'effectif en direct (ajout/modification/suppression de membres, éligibilité aux promotions, répartition par spécialisation) a sa propre page : <a href="effectif.html">📋 Effectif</a>.</p>
+
           <p>Le document d'effectif constitue l'outil central de gestion du régiment : il permet de suivre les membres de la 501st, de visualiser leur progression en grades et formations, et de maintenir la cohérence entre le roleplay et la gestion interne. C'est une référence officielle, pas un outil décoratif.</p>
 
           <h4>Principes généraux</h4>
@@ -382,152 +323,6 @@
     if (e.key === "Enter" && input.value) tryCode(input.value);
   });
 })();
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
-  authDomain: "site501st.firebaseapp.com",
-  projectId: "site501st",
-  storageBucket: "site501st.firebasestorage.app",
-  messagingSenderId: "862962282467",
-  appId: "1:862962282467:web:548b976251263394d53ad6"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const effCol = collection(db, "effectif");
-
-const GRADES = ["CT","CPL","CPL-C","SGT","SGT-C","ADJ","ADJ-C","2nd-LTN","LTN","CPT-2nd","CPT","MJR","VCMD","CMD"];
-const SPECS = ["-","Soldat","Heavy","Médecin","ARF","Torrent","ARC Trooper"];
-
-function esc(s) {
-  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
-    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-  });
-}
-
-function selectHtml(name, options, current) {
-  return '<select data-field="' + name + '">' + options.map(function (o) {
-    return '<option value="' + esc(o) + '"' + (o === current ? " selected" : "") + '>' + esc(o) + '</option>';
-  }).join("") + '</select>';
-}
-
-function officerCode() {
-  return window.__officerCode || "";
-}
-
-function showStatus(msg, isError) {
-  var el = document.getElementById("eff-status");
-  if (!msg) { el.style.display = "none"; return; }
-  el.style.display = "block";
-  el.textContent = msg;
-  el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
-}
-
-function renderRow(id, data, editing) {
-  if (editing) {
-    return '<tr data-id="' + id + '">' +
-      '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
-      '<td><input data-field="matricule" value="' + esc(data.matricule) + '"></td>' +
-      '<td><input data-field="discord" value="' + esc(data.discord) + '"></td>' +
-      '<td>' + selectHtml("grade", GRADES, data.grade) + '</td>' +
-      '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
-      '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
-      '<td class="eff-row-actions">' +
-        '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
-        '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
-      '</td></tr>';
-  }
-  return '<tr data-id="' + id + '">' +
-    '<td>' + esc(data.rpName) + '</td>' +
-    '<td>' + esc(data.matricule) + '</td>' +
-    '<td>' + esc(data.discord) + '</td>' +
-    '<td>' + esc(data.grade) + '</td>' +
-    '<td>' + esc(data.spec) + '</td>' +
-    '<td>' + esc(data.lastPromo) + '</td>' +
-    '<td class="eff-row-actions">' +
-      '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
-      '<button class="eff-icon-btn danger" data-action="delete">Supprimer</button>' +
-    '</td></tr>';
-}
-
-var editingId = null;
-var latestDocs = [];
-
-function draw() {
-  var body = document.getElementById("eff-body");
-  if (!latestDocs.length) {
-    body.innerHTML = '<tr><td colspan="7">Aucun membre enregistré pour le moment.</td></tr>';
-    return;
-  }
-  body.innerHTML = latestDocs.map(function (d) {
-    return renderRow(d.id, d.data, d.id === editingId);
-  }).join("");
-}
-
-onSnapshot(effCol, function (snap) {
-  latestDocs = [];
-  snap.forEach(function (d) { latestDocs.push({ id: d.id, data: d.data() }); });
-  latestDocs.sort(function (a, b) { return (a.data.rpName || "").localeCompare(b.data.rpName || ""); });
-  draw();
-}, function (err) {
-  showStatus("Impossible de charger l'effectif : " + err.message, true);
-});
-
-document.getElementById("eff-body").addEventListener("click", function (e) {
-  var btn = e.target.closest("button[data-action]");
-  if (!btn) return;
-  var tr = btn.closest("tr");
-  var id = tr.getAttribute("data-id");
-  var action = btn.getAttribute("data-action");
-
-  if (action === "edit") { editingId = id; draw(); }
-  else if (action === "cancel") { editingId = null; draw(); }
-  else if (action === "delete") {
-    if (!confirm("Supprimer ce membre de l'effectif ?")) return;
-    deleteDoc(doc(db, "effectif", id)).catch(function (err) {
-      showStatus("Suppression refusée : " + err.message, true);
-    });
-  } else if (action === "save") {
-    var payload = { code: officerCode() };
-    tr.querySelectorAll("[data-field]").forEach(function (el) {
-      payload[el.getAttribute("data-field")] = el.value;
-    });
-    updateDoc(doc(db, "effectif", id), payload).then(function () {
-      editingId = null;
-    }).catch(function (err) {
-      showStatus("Enregistrement refusé : " + err.message, true);
-    });
-  }
-});
-
-document.getElementById("eff-add-btn").addEventListener("click", function () {
-  var name = document.getElementById("eff-new-name").value.trim();
-  if (!name) { showStatus("L'identité RP est obligatoire.", true); return; }
-  var payload = {
-    code: officerCode(),
-    rpName: name,
-    matricule: document.getElementById("eff-new-matricule").value.trim(),
-    discord: document.getElementById("eff-new-discord").value.trim(),
-    grade: document.getElementById("eff-new-grade").value,
-    spec: document.getElementById("eff-new-spec").value,
-    lastPromo: document.getElementById("eff-new-date").value
-  };
-  addDoc(effCol, payload).then(function () {
-    showStatus("");
-    ["eff-new-name","eff-new-matricule","eff-new-discord","eff-new-date"].forEach(function (fid) {
-      document.getElementById(fid).value = "";
-    });
-  }).catch(function (err) {
-    showStatus("Ajout refusé : " + err.message, true);
-  });
-});
 </script>
 
 </body>

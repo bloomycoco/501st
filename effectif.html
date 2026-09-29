@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Effectif - Site 501st</title>
+<meta name="theme-color" content="#3F46CA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
+<link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body class="booting">
+
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo-wrap">
+      <div class="boot-ring"></div>
+      <div class="boot-ring inner"></div>
+      <img src="assets/logo/logo-501st.webp" alt="" class="boot-logo">
+    </div>
+    <div class="boot-title">501st Légion d'Attaque</div>
+    <div class="boot-status" id="bootStatus">Connexion en cours</div>
+    <div class="boot-bar"><div class="boot-bar-fill" id="bootBarFill"></div></div>
+    <div class="boot-skip">Cliquez pour passer</div>
+  </div>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-img">
+      <span class="nav-brand">501ST LÉGION D'ATTAQUE</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">🏠 Accueil</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">📁 Documents utiles ⌄</button>
+        <div class="dropdown-content">
+          <a href="doc-accueil-ct.html">📁 Accueil CT</a>
+          <a href="doc-reglement.html">⚖️ Règlement</a>
+          <a href="doc-securite-incendie.html">🔥 Sécurité incendie</a>
+          <a href="doc-commandement.html">🧭 Commandement</a>
+          <a href="doc-rapport-hebdo.html">📋 Rapport Hebdomadaire</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">⚔️ Codex Tactique ⌄</button>
+        <div class="dropdown-content">
+          <a href="codex-tactique.html">⚔️ Codex Tactique</a>
+          <a href="codex-vehicules.html">🚚 Véhicules</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">🗃️ Spécialisation 501st ⌄</button>
+        <div class="dropdown-content">
+          <a href="specialisation.html">🗃️ Vue d'ensemble</a>
+          <a href="spe-soldat.html">Soldat</a>
+          <a href="spe-heavy.html">Heavy</a>
+          <a href="spe-medecin.html">Médecin</a>
+          <a href="spe-arf.html">ARF</a>
+          <a href="spe-torrent.html">Torrent</a>
+          <a href="spe-arc-trooper.html">ARC Trooper</a>
+        </div>
+      </div>
+
+      <a href="tenues.html">🧥 Tenues</a>
+      <a href="bareme-promotion.html">🧾 Barème</a>
+      <a href="recrutement.html">📝 Recrutement</a>
+      <a href="officiers.html">🔒 Officier</a>
+      <a href="effectif.html" class="active">📋 Effectif</a>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <div id="gate" class="gate">
+      <div class="lock-icon">🔒</div>
+      <h2>Effectif du régiment</h2>
+      <p>Section réservée au corps des officiers de la 501st. Saisissez le code d'accès régimentaire.</p>
+      <input type="password" id="gate-input" placeholder="CODE D'ACCÈS" autocomplete="off" maxlength="20">
+      <button class="btn" id="gate-submit">Déverrouiller</button>
+      <div class="error" id="gate-error">Code incorrect. Contactez votre commandement.</div>
+    </div>
+
+    <div id="officer-content" class="officer-content">
+      <div class="page-header">
+        <div class="kicker">Accès restreint</div>
+        <h1>📋 Effectif du régiment</h1>
+        <div class="header-divider"></div>
+        <p class="subtitle">Tableau en direct, modifiable par tous les officiers. Voir aussi les <a href="officiers.html">documents et procédures officier</a>.</p>
+      </div>
+
+      <details class="accordion" open>
+        <summary>📋 Liste des membres</summary>
+        <div class="accordion-body">
+          <p>Les changements sont visibles immédiatement par tout le monde, sans recharger la page.</p>
+
+          <div id="eff-status" class="notice" style="display:none;"></div>
+
+          <div class="eff-table-wrap">
+            <table id="eff-table">
+              <thead>
+                <tr>
+                  <th>Identité RP</th>
+                  <th>Matricule</th>
+                  <th>Discord</th>
+                  <th>Grade</th>
+                  <th>Spécialisation</th>
+                  <th>Dernière promo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="eff-body">
+                <tr><td colspan="7">Chargement de l'effectif...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Ajouter un membre</h4>
+          <div class="eff-form">
+            <input type="text" id="eff-new-name" placeholder="Identité RP">
+            <input type="text" id="eff-new-matricule" placeholder="Matricule (ex: CT-1004)">
+            <input type="text" id="eff-new-discord" placeholder="Discord (pseudo ou ID)">
+            <select id="eff-new-grade">
+              <option value="CT">CT</option>
+              <option value="CPL">CPL</option>
+              <option value="CPL-C">CPL-C</option>
+              <option value="SGT">SGT</option>
+              <option value="SGT-C">SGT-C</option>
+              <option value="ADJ">ADJ</option>
+              <option value="ADJ-C">ADJ-C</option>
+              <option value="2nd-LTN">2nd-LTN</option>
+              <option value="LTN">LTN</option>
+              <option value="CPT-2nd">CPT-2nd</option>
+              <option value="CPT">CPT</option>
+              <option value="MJR">MJR</option>
+              <option value="VCMD">VCMD</option>
+              <option value="CMD">CMD</option>
+            </select>
+            <select id="eff-new-spec">
+              <option value="-">-</option>
+              <option value="Soldat">Soldat</option>
+              <option value="Heavy">Heavy</option>
+              <option value="Médecin">Médecin</option>
+              <option value="ARF">ARF</option>
+              <option value="Torrent">Torrent</option>
+              <option value="ARC Trooper">ARC Trooper</option>
+            </select>
+            <input type="date" id="eff-new-date">
+            <button class="btn" id="eff-add-btn">Ajouter</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion" open>
+        <summary>🎖️ Éligibilité à la promotion</summary>
+        <div class="accordion-body">
+          <p>Calculé automatiquement à partir de la date de dernière promotion de chaque membre et des délais minimums connus (voir <a href="bareme-promotion.html">Barème de promotion</a>). Un ✅ signifie que le délai minimum est atteint : cela ne remplace pas les autres critères (formations, comportement, décision du corps officier).</p>
+
+          <div id="promo-status" class="notice" style="display:none;"></div>
+
+          <div class="eff-table-wrap">
+            <table id="promo-table">
+              <thead>
+                <tr>
+                  <th>Identité RP</th>
+                  <th>Grade actuel</th>
+                  <th>Jours depuis promo</th>
+                  <th>Délai minimum</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody id="promo-body">
+                <tr><td colspan="5">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>🗃️ Répartition par spécialisation</summary>
+        <div class="accordion-body">
+          <p>Nombre de membres actuellement affectés à chaque spécialisation (à partir du grade CPL, voir <a href="specialisation.html">Spécialisation 501st</a>).</p>
+          <div id="spec-breakdown">Chargement...</div>
+        </div>
+      </details>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
+    <p>Site 501st &middot; Espace Officier &middot; Reproduction non-officielle basée sur le site Google Sites d'origine.</p>
+  </footer>
+
+  <script src="js/site.js?v=2"></script>
+  <script>
+(function () {
+  var CODE_HASH = "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f";
+
+  var gate = document.getElementById("gate");
+  var content = document.getElementById("officer-content");
+  var input = document.getElementById("gate-input");
+  var submit = document.getElementById("gate-submit");
+  var error = document.getElementById("gate-error");
+
+  function unlock() {
+    gate.style.display = "none";
+    content.classList.add("show");
+    window.dispatchEvent(new CustomEvent("officier-unlocked"));
+  }
+
+  async function sha256(text) {
+    var data = new TextEncoder().encode(text);
+    var hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    var bytes = Array.from(new Uint8Array(hashBuffer));
+    return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  async function tryCode(code) {
+    var normalized = code.trim().toUpperCase();
+    var hash = await sha256(normalized);
+    if (hash === CODE_HASH) {
+      window.__officerCode = normalized;
+      unlock();
+    } else {
+      error.classList.add("show");
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  submit.addEventListener("click", function () {
+    if (input.value) tryCode(input.value);
+  });
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && input.value) tryCode(input.value);
+  });
+})();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
+  authDomain: "site501st.firebaseapp.com",
+  projectId: "site501st",
+  storageBucket: "site501st.firebasestorage.app",
+  messagingSenderId: "862962282467",
+  appId: "1:862962282467:web:548b976251263394d53ad6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const effCol = collection(db, "effectif");
+
+const GRADES = ["CT","CPL","CPL-C","SGT","SGT-C","ADJ","ADJ-C","2nd-LTN","LTN","CPT-2nd","CPT","MJR","VCMD","CMD"];
+const SPECS = ["-","Soldat","Heavy","Médecin","ARF","Torrent","ARC Trooper"];
+
+// Délais minimums (en jours) à passer au grade actuel avant de pouvoir
+// prétendre au grade suivant.
+const PROMO_DELAYS = {
+  "CT": 4,
+  "CPL": 5,
+  "CPL-C": 7,
+  "SGT": 10,
+  "SGT-C": 13,
+  "ADJ": 15,
+  "ADJ-C": 17,
+  "2nd-LTN": 17,
+  "LTN": 20,
+  "CPT-2nd": 20,
+  "CPT": 22,
+  "MJR": 30,
+  "VCMD": 40
+};
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+function selectHtml(name, options, current) {
+  return '<select data-field="' + name + '">' + options.map(function (o) {
+    return '<option value="' + esc(o) + '"' + (o === current ? " selected" : "") + '>' + esc(o) + '</option>';
+  }).join("") + '</select>';
+}
+
+function officerCode() {
+  return window.__officerCode || "";
+}
+
+function showStatus(elId, msg, isError) {
+  var el = document.getElementById(elId);
+  if (!msg) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.textContent = msg;
+  el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
+}
+
+function renderRow(id, data, editing) {
+  if (editing) {
+    return '<tr data-id="' + id + '">' +
+      '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
+      '<td><input data-field="matricule" value="' + esc(data.matricule) + '"></td>' +
+      '<td><input data-field="discord" value="' + esc(data.discord) + '"></td>' +
+      '<td>' + selectHtml("grade", GRADES, data.grade) + '</td>' +
+      '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
+      '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
+      '<td class="eff-row-actions">' +
+        '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
+        '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
+      '</td></tr>';
+  }
+  return '<tr data-id="' + id + '">' +
+    '<td>' + esc(data.rpName) + '</td>' +
+    '<td>' + esc(data.matricule) + '</td>' +
+    '<td>' + esc(data.discord) + '</td>' +
+    '<td>' + esc(data.grade) + '</td>' +
+    '<td>' + esc(data.spec) + '</td>' +
+    '<td>' + esc(data.lastPromo) + '</td>' +
+    '<td class="eff-row-actions">' +
+      '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
+      '<button class="eff-icon-btn danger" data-action="delete">Supprimer</button>' +
+    '</td></tr>';
+}
+
+function daysSince(dateStr) {
+  if (!dateStr) return null;
+  var d = new Date(dateStr + "T00:00:00");
+  if (isNaN(d.getTime())) return null;
+  var now = new Date();
+  var diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+  return diff >= 0 ? diff : null;
+}
+
+function renderPromoRow(data) {
+  var days = daysSince(data.lastPromo);
+  var delay = PROMO_DELAYS[data.grade];
+  var daysCell = days === null ? "N/A" : days + " j";
+  var delayCell = delay === undefined ? "Non défini" : delay + " j";
+  var statusCell;
+  if (days === null) statusCell = "❓ Pas de date";
+  else if (delay === undefined) statusCell = "❓ Non défini";
+  else if (days >= delay) statusCell = "✅ Éligible";
+  else statusCell = "❌ Pas encore (" + (delay - days) + " j restants)";
+
+  return '<tr>' +
+    '<td>' + esc(data.rpName) + '</td>' +
+    '<td>' + esc(data.grade) + '</td>' +
+    '<td>' + daysCell + '</td>' +
+    '<td>' + delayCell + '</td>' +
+    '<td>' + statusCell + '</td>' +
+    '</tr>';
+}
+
+function renderSpecBreakdown(docs) {
+  var counts = {};
+  SPECS.forEach(function (s) { if (s !== "-") counts[s] = 0; });
+  docs.forEach(function (d) {
+    var s = d.data.spec;
+    if (s && s !== "-" && counts.hasOwnProperty(s)) counts[s]++;
+  });
+  var el = document.getElementById("spec-breakdown");
+  el.innerHTML = '<p>' + Object.keys(counts).map(function (s) {
+    return '<span class="tag tag-blue">' + esc(s) + ' : ' + counts[s] + '</span>';
+  }).join(" ") + '</p>';
+}
+
+var editingId = null;
+var latestDocs = [];
+
+function draw() {
+  var body = document.getElementById("eff-body");
+  if (!latestDocs.length) {
+    body.innerHTML = '<tr><td colspan="7">Aucun membre enregistré pour le moment.</td></tr>';
+  } else {
+    body.innerHTML = latestDocs.map(function (d) {
+      return renderRow(d.id, d.data, d.id === editingId);
+    }).join("");
+  }
+
+  var promoBody = document.getElementById("promo-body");
+  if (!latestDocs.length) {
+    promoBody.innerHTML = '<tr><td colspan="5">Aucun membre enregistré pour le moment.</td></tr>';
+  } else {
+    promoBody.innerHTML = latestDocs.map(function (d) { return renderPromoRow(d.data); }).join("");
+  }
+
+  renderSpecBreakdown(latestDocs);
+}
+
+onSnapshot(effCol, function (snap) {
+  latestDocs = [];
+  snap.forEach(function (d) { latestDocs.push({ id: d.id, data: d.data() }); });
+  latestDocs.sort(function (a, b) { return (a.data.rpName || "").localeCompare(b.data.rpName || ""); });
+  draw();
+}, function (err) {
+  showStatus("eff-status", "Impossible de charger l'effectif : " + err.message, true);
+});
+
+document.getElementById("eff-body").addEventListener("click", function (e) {
+  var btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  var tr = btn.closest("tr");
+  var id = tr.getAttribute("data-id");
+  var action = btn.getAttribute("data-action");
+
+  if (action === "edit") { editingId = id; draw(); }
+  else if (action === "cancel") { editingId = null; draw(); }
+  else if (action === "delete") {
+    if (!confirm("Supprimer ce membre de l'effectif ?")) return;
+    deleteDoc(doc(db, "effectif", id)).catch(function (err) {
+      showStatus("eff-status", "Suppression refusée : " + err.message, true);
+    });
+  } else if (action === "save") {
+    var payload = { code: officerCode() };
+    tr.querySelectorAll("[data-field]").forEach(function (el) {
+      payload[el.getAttribute("data-field")] = el.value;
+    });
+    updateDoc(doc(db, "effectif", id), payload).then(function () {
+      editingId = null;
+    }).catch(function (err) {
+      showStatus("eff-status", "Enregistrement refusé : " + err.message, true);
+    });
+  }
+});
+
+document.getElementById("eff-add-btn").addEventListener("click", function () {
+  var name = document.getElementById("eff-new-name").value.trim();
+  if (!name) { showStatus("eff-status", "L'identité RP est obligatoire.", true); return; }
+  var payload = {
+    code: officerCode(),
+    rpName: name,
+    matricule: document.getElementById("eff-new-matricule").value.trim(),
+    discord: document.getElementById("eff-new-discord").value.trim(),
+    grade: document.getElementById("eff-new-grade").value,
+    spec: document.getElementById("eff-new-spec").value,
+    lastPromo: document.getElementById("eff-new-date").value
+  };
+  addDoc(effCol, payload).then(function () {
+    showStatus("eff-status", "");
+    ["eff-new-name","eff-new-matricule","eff-new-discord","eff-new-date"].forEach(function (fid) {
+      document.getElementById(fid).value = "";
+    });
+  }).catch(function (err) {
+    showStatus("eff-status", "Ajout refusé : " + err.message, true);
+  });
+});
+</script>
+
+</body>
+</html>
