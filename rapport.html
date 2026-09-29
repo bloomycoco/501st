@@ -192,6 +192,21 @@ const effCol = collection(db, "effectif");
 const accessDocRef = doc(db, "config", "access");
 let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
+// Rang hierarchique (identique a effectif.html). A partir du grade CPT
+// (inclus) et au-dessus, exempte du quota de rapport : ces membres
+// n'apparaissent pas dans le menu de soumission.
+const GRADE_RANK = {
+  "ALPHA": 0, "EM": 1, "MR": 2,
+  "CMDM": 3, "GNL": 4, "CMD": 5, "CMDJ": 5, "VCMD": 6, "MJR": 7,
+  "CPT": 8, "CPT-2nd": 9, "LTN": 10, "2nd-LTN": 11,
+  "ADJ-C": 12, "ADJ": 13, "SGT-C": 14, "SGT": 15,
+  "CPL-C": 16, "CPL": 17, "CT": 18
+};
+function isReportExempt(grade) {
+  var rank = GRADE_RANK[grade];
+  return rank !== undefined && rank <= GRADE_RANK["CPT"];
+}
+
 function esc(s) {
   return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -297,6 +312,7 @@ onSnapshot(effCol, function (snap) {
     var data = d.data();
     var matricule = (data.matricule || "").trim();
     if (!matricule || matricule === "//" || matricule === "///") return;
+    if (isReportExempt(data.grade)) return;
     members.push({ matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" });
   });
   members.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
