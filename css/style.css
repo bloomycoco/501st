@@ -657,6 +657,11 @@ table .kama-thumb {
 
 #eff-table { min-width: 720px; }
 
+#eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid var(--border-hi); }
+#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.045); }
+#eff-table tbody tr:hover, #promo-table tbody tr:hover { background: rgba(91,124,255,0.12); }
+#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 11px 12px; }
+
 #eff-table input, #eff-table select {
   width: 100%;
   background: rgba(13,15,30,0.9);

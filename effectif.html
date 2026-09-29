@@ -272,6 +272,14 @@ const db = getFirestore(app);
 const effCol = collection(db, "effectif");
 
 const GRADES = ["CT","CPL","CPL-C","SGT","SGT-C","ADJ","ADJ-C","2nd-LTN","LTN","CPT-2nd","CPT","MJR","VCMD","CMD"];
+
+// Ordre hiérarchique du plus haut grade au plus bas (inclut les roles hors echelle standard).
+const GRADE_ORDER = ["ALPHA","EM","MR","GNL","CMDJ","CMDM","CMD","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT"];
+
+function gradeRank(g) {
+  var i = GRADE_ORDER.indexOf(g);
+  return i === -1 ? GRADE_ORDER.length : i;
+}
 const SPECS = ["-","Soldat","Heavy","Médecin","ARF","Torrent","ARC Trooper"];
 
 // Délais minimums (en jours) à passer au grade actuel avant de pouvoir
@@ -411,7 +419,10 @@ function draw() {
 onSnapshot(effCol, function (snap) {
   latestDocs = [];
   snap.forEach(function (d) { latestDocs.push({ id: d.id, data: d.data() }); });
-  latestDocs.sort(function (a, b) { return (a.data.rpName || "").localeCompare(b.data.rpName || ""); });
+  latestDocs.sort(function (a, b) {
+    var r = gradeRank(a.data.grade) - gradeRank(b.data.grade);
+    return r !== 0 ? r : (a.data.rpName || "").localeCompare(b.data.rpName || "");
+  });
   draw();
 }, function (err) {
   showStatus("eff-status", "Impossible de charger l'effectif : " + err.message, true);
