@@ -1,0 +1,452 @@
+{
+  "generatedAt": "2026-09-29T20:09:47.765Z",
+  "effectif": [
+    {
+      "id": "0VgNP1kHWokLKv1BSdIA",
+      "data": {
+        "steamId": "76561198228575380",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "cteud",
+        "matricule": "2844",
+        "code": "1119OFFC",
+        "grade": "CPL",
+        "lastPromo": "2026-09-27",
+        "spec": "Soldat",
+        "rpName": "Eud"
+      }
+    },
+    {
+      "id": "5RCKUKwiJRc686sNx4dC",
+      "data": {
+        "code": "1119OFFC",
+        "matricule": "",
+        "rpName": "A-20",
+        "discord": "mhyx.",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561198152962205",
+        "lastPromo": "",
+        "spec": "-",
+        "grade": "ALPHA"
+      }
+    },
+    {
+      "id": "6K1KWOBYlzureEnUZ65o",
+      "data": {
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-09-23",
+        "rpName": "Vex",
+        "discord": "wolfkiller4044",
+        "steamId": "76561198954430995",
+        "matricule": "7869",
+        "spec": "Torrent",
+        "grade": "SGT"
+      }
+    },
+    {
+      "id": "71siYnx4Jn6FUQRFxvkz",
+      "data": {
+        "grade": "GNL",
+        "spec": "-",
+        "rpName": "Anakin Skywalker",
+        "lastPromo": "",
+        "steamId": "",
+        "code": "1119OFFC",
+        "matricule": "",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": ""
+      }
+    },
+    {
+      "id": "86R74u3C0qSzpB067mCi",
+      "data": {
+        "lastPromo": "2026-09-26",
+        "grade": "ADJ-C",
+        "rpName": "Sina",
+        "code": "1119OFFC",
+        "spec": "ARF",
+        "matricule": "1001",
+        "steamId": "76561198311226268",
+        "discord": "notoruis",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f"
+      }
+    },
+    {
+      "id": "8G4bk6M6XuHTHfLIbsah",
+      "data": {
+        "grade": "MJR",
+        "spec": "Médecin",
+        "lastPromo": "2026-09-25",
+        "rpName": "Doc",
+        "steamId": "76561198039708459",
+        "discord": "thomas.lucy",
+        "matricule": "2296",
+        "cmdMission": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "9s6fFjIS9Iv0k1QPfCam",
+      "data": {
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "code": "1119OFFC",
+        "cmdMission": "0",
+        "reportCount": "0",
+        "grade": "CPL",
+        "matricule": "2806",
+        "rpName": "Old-Deus",
+        "spec": "Médecin",
+        "steamId": "76561198985984582",
+        "discord": "Old_Deus",
+        "lastPromo": "2026-09-29"
+      }
+    },
+    {
+      "id": "A5u7f1IluOYzt4S8ywnF",
+      "data": {
+        "grade": "ADJ-C",
+        "spec": "ARC Trooper",
+        "lastPromo": "2026-08-30",
+        "steamId": "76561198312750782",
+        "rpName": "Echo (Nobody)",
+        "discord": "volt.air",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "matricule": "1409",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "AyLCbeQvy80DLtFXN4yz",
+      "data": {
+        "rpName": "Folk",
+        "spec": "-",
+        "matricule": "????",
+        "discord": "batifolk",
+        "steamId": "76561198056604999",
+        "code": "1119OFFC",
+        "grade": "CMD",
+        "lastPromo": "2026-03-18",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f"
+      }
+    },
+    {
+      "id": "BIgbCenZ4JQQJxiW2NOL",
+      "data": {
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "grade": "EM",
+        "steamId": "76561198111795410",
+        "rpName": "Noctis",
+        "discord": "thothog",
+        "matricule": "",
+        "spec": "-",
+        "code": "1119OFFC",
+        "lastPromo": "2026-09-12"
+      }
+    },
+    {
+      "id": "C2a6VcS6rALZTkjZQ5V2",
+      "data": {
+        "matricule": "3045",
+        "grade": "CT",
+        "spec": "Soldat",
+        "steamId": "76561199865299325",
+        "rpName": "Jaeger",
+        "discord": "theojaeger",
+        "lastPromo": "2026-09-27",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "FVKtGhw29FA5urdwp3MS",
+      "data": {
+        "grade": "LTN",
+        "lastPromo": "2026-09-19",
+        "spec": "Torrent",
+        "rpName": "Kay0",
+        "matricule": "2309",
+        "code": "1119OFFC",
+        "steamId": "76561198321014679",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "suguru_goat"
+      }
+    },
+    {
+      "id": "OO9a0cjKSRaQ5nOrs293",
+      "data": {
+        "grade": "MR",
+        "matricule": "",
+        "spec": "-",
+        "steamId": "76561198799567020",
+        "code": "1119OFFC",
+        "discord": "strixlachouette",
+        "lastPromo": "2026-06-28",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "rpName": "Agolius"
+      }
+    },
+    {
+      "id": "PRIKyVddNz4BCFgBjZ3Y",
+      "data": {
+        "code": "1119OFFC",
+        "matricule": "1702",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561199830767923",
+        "discord": "𝓚𝓮𝓇𝓃𝒸ツ",
+        "grade": "CT",
+        "rpName": "Rexo",
+        "lastPromo": "2026-08-19",
+        "spec": "Soldat"
+      }
+    },
+    {
+      "id": "PZB1PZPu3wPjLbCYtzAp",
+      "data": {
+        "lastPromo": "2026-09-21",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC",
+        "rpName": "Tutu",
+        "discord": "gaz.part",
+        "steamId": "76561198420017576",
+        "matricule": "2222",
+        "spec": "Heavy",
+        "grade": "SGT"
+      }
+    },
+    {
+      "id": "PsngarGSUg4kOYnG38TM",
+      "data": {
+        "grade": "CT",
+        "code": "1119OFFC",
+        "steamId": "76561199071112903",
+        "discord": "alex7144",
+        "rpName": "White",
+        "lastPromo": "2026-09-21",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "spec": "Soldat",
+        "matricule": "7274"
+      }
+    },
+    {
+      "id": "QbZ4P5YWmh5KHQyMcYpc",
+      "data": {
+        "discord": "plordone",
+        "lastPromo": "2026-09-13",
+        "steamId": "76561198121288927",
+        "spec": "Soldat",
+        "rpName": "Amon",
+        "grade": "SGT",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "matricule": "1921",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "XFgG1cHVUzcA0CFaRJDR",
+      "data": {
+        "steamId": "76561198413841649",
+        "spec": "Soldat",
+        "grade": "CT",
+        "discord": "a07_waister",
+        "matricule": "5282",
+        "rpName": "Marco",
+        "lastPromo": "2026-09-21",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "XmqdEjU8vt7uphk5z6qr",
+      "data": {
+        "discord": "td1_34z",
+        "steamId": "76561198870125842",
+        "matricule": "4156",
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "rpName": "Lockdown",
+        "spec": "Heavy",
+        "lastPromo": "2026-09-21",
+        "grade": "SGT"
+      }
+    },
+    {
+      "id": "dhZa1IL6H60wCuPI7wxy",
+      "data": {
+        "spec": "Heavy",
+        "matricule": "4529",
+        "rpName": "Kieron",
+        "discord": ".zebi",
+        "grade": "SGT",
+        "steamId": "76561198292480975",
+        "lastPromo": "2026-09-24",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "dnwHSQJu1ACZ1msucUg7",
+      "data": {
+        "matricule": "7567",
+        "grade": "MJR",
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561199050827033",
+        "spec": "Torrent",
+        "cmdMission": 0,
+        "discord": "shaven1",
+        "lastPromo": "2026-08-31",
+        "rpName": "Rex (Kano)"
+      }
+    },
+    {
+      "id": "fX2Kh9ouIJHIbXQR7LnZ",
+      "data": {
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "ldn4ever",
+        "steamId": "76561198867428192",
+        "code": "1119OFFC",
+        "matricule": "2093",
+        "spec": "ARF",
+        "rpName": "Sergius",
+        "cmdMission": 0,
+        "grade": "CPT-2nd",
+        "lastPromo": "2026-08-31"
+      }
+    },
+    {
+      "id": "g132cWlsPafi1lULlckB",
+      "data": {
+        "grade": "CMDM",
+        "lastPromo": "2026-09-29",
+        "spec": "-",
+        "rpName": "Appo",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC",
+        "steamId": "XXXX",
+        "matricule": "1119",
+        "discord": ".blo.om."
+      }
+    },
+    {
+      "id": "gwZ4vuHtJG9WbkLmbqs4",
+      "data": {
+        "matricule": "6242",
+        "grade": "CT",
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-09-09",
+        "steamId": "76561199231310710",
+        "discord": "aentpn",
+        "spec": "Soldat",
+        "rpName": "KILLYAN"
+      }
+    },
+    {
+      "id": "jQkpmLRuQDchKKNUhdm8",
+      "data": {
+        "matricule": "",
+        "grade": "CMDJ",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "",
+        "spec": "-",
+        "rpName": "Ahsoka Tano",
+        "discord": "",
+        "code": "1119OFFC",
+        "lastPromo": ""
+      }
+    },
+    {
+      "id": "pcri1nZXZ8uT1MUqeeDp",
+      "data": {
+        "lastPromo": "2026-08-14",
+        "code": "1119OFFC",
+        "rpName": "Jacky",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "matricule": "1535",
+        "spec": "ARF",
+        "discord": "axeman8337",
+        "grade": "SGT-C",
+        "steamId": "76561199494526425"
+      }
+    },
+    {
+      "id": "vRPjYhxmB5XqNtke1Jp3",
+      "data": {
+        "matricule": "6919",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "code": "1119OFFC",
+        "discord": "nayzede",
+        "lastPromo": "2026-09-21",
+        "rpName": "PayZede",
+        "steamId": "76561199002211147",
+        "spec": "Soldat",
+        "grade": "CPL"
+      }
+    },
+    {
+      "id": "w8wp6sEKyW5oFu54nf8P",
+      "data": {
+        "discord": ".capitainerex",
+        "code": "1119OFFC",
+        "steamId": "76561199147977756",
+        "lastPromo": "2026-09-25",
+        "cmdMission": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "rpName": "Ash",
+        "matricule": "2305",
+        "spec": "Heavy",
+        "grade": "CPT"
+      }
+    },
+    {
+      "id": "x2XwLXfeO9VjcL9AC1lg",
+      "data": {
+        "grade": "ADJ",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "matricule": "9023",
+        "spec": "Médecin",
+        "steamId": "76561198751710747",
+        "lastPromo": "2026-09-01",
+        "discord": "zerty0938_64815",
+        "rpName": "Rek",
+        "code": "1119OFFC"
+      }
+    }
+  ],
+  "rapports": [
+    {
+      "id": "6RDSTWqA8BDYZJ8HuOdx",
+      "data": {
+        "submittedAt": "2026-09-29T20:00:00.000Z",
+        "reviewedAt": "2026-09-29T19:56:11.141Z",
+        "content": "Rapport de test",
+        "matricule": "CT-TEST",
+        "status": "rejected",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "reviewedBy": "Owner"
+      }
+    },
+    {
+      "id": "8bn6oyZC2gdo3JHyvv7p",
+      "data": {
+        "matricule": "CT-TEST2",
+        "content": "Test 2",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "status": "zzz"
+      }
+    },
+    {
+      "id": "M8b0oFlMhZqP4OoLltjh",
+      "data": {
+        "reviewedAt": "2026-09-29T19:56:11.649Z",
+        "status": "rejected",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "Appo",
+        "reviewedBy": "Owner",
+        "submittedAt": "2026-09-29T19:44:02.133Z",
+        "content": "Test de rapport"
+      }
+    }
+  ]
+}
