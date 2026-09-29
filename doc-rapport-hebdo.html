@@ -4,59 +4,89 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rapport Hebdomadaire - Site 501st</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9A%94%EF%B8%8F</text></svg>">
+<meta name="theme-color" content="#3F46CA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div class="layout">
-  <aside class="sidebar">
-    <div class="brand">501st Légion d'Attaque<small>Site officiel</small></div>
-    <nav>
-      <ul>
-        <li><a href="index.html">🏠 Accueil</a></li>
-      </ul>
-      <div class="section-label">Documents utiles</div>
-      <ul class="submenu">
-        <li><a href="doc-accueil-ct.html">Accueil CT</a></li>
-        <li><a href="doc-reglement.html">Règlement</a></li>
-        <li><a href="doc-securite-incendie.html">Sécurité incendie</a></li>
-        <li><a href="doc-commandement.html">Commandement</a></li>
-        <li><a href="doc-rapport-hebdo.html" class="active">Rapport Hebdomadaire</a></li>
-      </ul>
-      <div class="section-label">Codex Tactique</div>
-      <ul class="submenu">
-        <li><a href="codex-tactique.html">Codex Tactique</a></li>
-        <li><a href="codex-vehicules.html">Véhicules</a></li>
-      </ul>
-      <div class="section-label">Spécialisation 501st</div>
-      <ul class="submenu">
-        <li><a href="specialisation.html">Vue d'ensemble</a></li>
-        <li><a href="spe-soldat.html">Soldat</a></li>
-        <li><a href="spe-heavy.html">Heavy</a></li>
-        <li><a href="spe-medecin.html">Médecin</a></li>
-        <li><a href="spe-arf.html">ARF</a></li>
-        <li><a href="spe-torrent.html">Torrent</a></li>
-        <li><a href="spe-arc-trooper.html">ARC Trooper</a></li>
-      </ul>
-      <ul>
-        <li><a href="tenues.html">🧥 Tenues 501st</a></li>
-        <li><a href="bareme-promotion.html">🧾 Barème de promotion</a></li>
-        <li><a href="recrutement.html">📝 Recrutement 501st</a></li>
-      </ul>
-      <div class="section-label">Accès restreint</div>
-      <ul>
-        <li><a href="officiers.html">🔒 Espace Officier</a></li>
-      </ul>
-    </nav>
-  </aside>
-  <main>
-    <h1><span class="kicker">Documents utiles</span>🗒️ Rapport Hebdomadaire</h1>
-    <p class="subtitle">Directives pour remplir les rapports hebdomadaires obligatoires au sein de la 501st Légion d'assaut.</p>
+<body class="booting">
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo-wrap">
+      <div class="boot-ring"></div>
+      <div class="boot-ring inner"></div>
+      <img src="assets/logo/logo-501st.webp" alt="" class="boot-logo">
+    </div>
+    <div class="boot-title">501st L&#233;gion d'Attaque</div>
+    <div class="boot-status" id="bootStatus">Connexion en cours</div>
+    <div class="boot-bar"><div class="boot-bar-fill" id="bootBarFill"></div></div>
+    <div class="boot-skip">Cliquez pour passer</div>
+  </div>
 
-    <div class="card">
+  <canvas id="stars-canvas"></canvas>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-img">
+      <span class="nav-brand">501ST L&#233;GION D'ATTAQUE</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">&#127968; Accueil</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">&#128193; Documents utiles &#8964;</button>
+        <div class="dropdown-content">
+          <a href="doc-accueil-ct.html">&#128193; Accueil CT</a>
+          <a href="doc-reglement.html">&#9878;&#65039; R&#232;glement</a>
+          <a href="doc-securite-incendie.html">&#128293; S&#233;curit&#233; incendie</a>
+          <a href="doc-commandement.html">&#129513; Commandement</a>
+          <a href="doc-rapport-hebdo.html" class="active">&#128220; Rapport Hebdomadaire</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">&#9876;&#65039; Codex Tactique &#8964;</button>
+        <div class="dropdown-content">
+          <a href="codex-tactique.html">&#9876;&#65039; Codex Tactique</a>
+          <a href="codex-vehicules.html">&#128666; V&#233;hicules</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">&#128451;&#65039; Sp&#233;cialisation 501st &#8964;</button>
+        <div class="dropdown-content">
+          <a href="specialisation.html">&#128451;&#65039; Vue d'ensemble</a>
+          <a href="spe-soldat.html">Soldat</a>
+          <a href="spe-heavy.html">Heavy</a>
+          <a href="spe-medecin.html">M&#233;decin</a>
+          <a href="spe-arf.html">ARF</a>
+          <a href="spe-torrent.html">Torrent</a>
+          <a href="spe-arc-trooper.html">ARC Trooper</a>
+        </div>
+      </div>
+
+      <a href="tenues.html">&#129509; Tenues</a>
+      <a href="bareme-promotion.html">&#128231; Bar&#232;me</a>
+      <a href="recrutement.html">&#128221; Recrutement</a>
+      <a href="officiers.html">&#128274; Officier</a>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-header">
+      <div class="kicker">Documents utiles</div>
+      <h1>🗒️ Rapport Hebdomadaire</h1>
+      <div class="header-divider"></div>
+      <p class="subtitle">Directives pour remplir les rapports hebdomadaires obligatoires au sein de la 501st Légion d'assaut.</p>
+    </div>
+
+        <div class="card">
       <h2>Exigences principales</h2>
       <p>Les membres doivent soumettre un rapport par semaine dans la section dédiée avec le tag approprié. Le contenu doit être rédigé en roleplay et raconter un fait important ayant eu lieu sur le serveur : une mission, une défense de base ou un entraînement organisé.</p>
     </div>
@@ -84,10 +114,15 @@
       <p>Les absences signalées avant mercredi ou après vendredi exemptent de l'obligation de rapport.</p>
     </div>
 
-    <footer>
-      Site 501st &middot; Reproduction non-officielle basée sur le site Google Sites d'origine.
-    </footer>
-  </main>
-</div>
+    
+
+  </div>
+
+  <footer>
+    <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
+    <p>Site 501st &middot; Reproduction non-officielle bas&#233;e sur le site Google Sites d'origine.</p>
+  </footer>
+
+  <script src="js/site.js"></script>
 </body>
 </html>
