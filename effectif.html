@@ -206,7 +206,6 @@
 
   <footer>
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
-    <p>Site 501st &middot; Espace Officier &middot; Reproduction non-officielle basée sur le site Google Sites d'origine.</p>
   </footer>
 
   <script src="js/site.js?v=2"></script>
@@ -557,6 +556,7 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
     });
     updateDoc(doc(db, "effectif", id), payload).then(function () {
       editingId = null;
+      draw();
     }).catch(function (err) {
       showStatus("eff-status", "Enregistrement refusé : " + err.message, true);
     });
