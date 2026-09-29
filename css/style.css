@@ -556,6 +556,33 @@ details.accordion .accordion-body h4:first-child { margin-top: 0; }
   margin-bottom: 8px;
 }
 
+/* ─── BACKGROUND ART (filigrane décoratif) ──────────────── */
+.bg-art {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  filter: saturate(0.6);
+}
+
+.bg-art.clone {
+  right: -4%;
+  top: 90px;
+  width: 380px;
+}
+
+.bg-art.venator {
+  left: -6%;
+  bottom: 4%;
+  width: 520px;
+  transform: rotate(-6deg);
+}
+
+@media (max-width: 900px) {
+  .bg-art.clone { width: 220px; top: 70px; }
+  .bg-art.venator { width: 320px; }
+}
+
 /* ─── GUIDE GALLERY (pages PDF) ─────────────────────────── */
 .guide-gallery { display: flex; flex-direction: column; gap: 26px; margin-bottom: 24px; }
 
