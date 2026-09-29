@@ -137,6 +137,22 @@
       </div>
     </details>
 
+    <details class="accordion">
+      <summary>✅ Rapports acceptés récemment</summary>
+      <div class="accordion-body">
+        <p>Les 30 derniers rapports validés, tous membres confondus. Un officier peut encore les refuser ici si besoin.</p>
+        <div id="accepted-list">Chargement...</div>
+      </div>
+    </details>
+
+    <details class="accordion">
+      <summary>❌ Rapports refusés récemment</summary>
+      <div class="accordion-body">
+        <p>Les 30 derniers rapports refusés, tous membres confondus.</p>
+        <div id="rejected-list">Chargement...</div>
+      </div>
+    </details>
+
   </div>
 
   <footer>
@@ -200,7 +216,7 @@ function applyRoleUI() {
     loggedOut.style.display = "block";
     loggedIn.style.display = "none";
   }
-  drawPending();
+  redrawAllLists();
   if (lastSearchResults) drawSearchResults(lastSearchResults);
 }
 
@@ -344,41 +360,66 @@ async function setReportStatus(reportId, currentData, newStatus) {
 // ---------- File d'attente (rapports pending) ----------
 
 var pendingMap = {};
+var acceptedMap = {};
+var rejectedMap = {};
 
 onSnapshot(rapportsCol, function (snap) {
-  var pending = [];
+  var pending = [], accepted = [], rejected = [];
   snap.forEach(function (d) {
     var data = d.data();
-    if (data.status === "pending") pending.push({ id: d.id, data: data });
+    var item = { id: d.id, data: data };
+    if (data.status === "pending") pending.push(item);
+    else if (data.status === "accepted") accepted.push(item);
+    else if (data.status === "rejected") rejected.push(item);
   });
+
   pending.sort(function (a, b) { return (a.data.submittedAt || "").localeCompare(b.data.submittedAt || ""); });
-  pendingMap = {};
-  pending.forEach(function (p) { pendingMap[p.id] = p.data; });
-  drawPending(pending);
+  accepted.sort(function (a, b) { return (b.data.reviewedAt || b.data.submittedAt || "").localeCompare(a.data.reviewedAt || a.data.submittedAt || ""); });
+  rejected.sort(function (a, b) { return (b.data.reviewedAt || b.data.submittedAt || "").localeCompare(a.data.reviewedAt || a.data.submittedAt || ""); });
+  accepted = accepted.slice(0, 30);
+  rejected = rejected.slice(0, 30);
+
+  pendingMap = {}; pending.forEach(function (p) { pendingMap[p.id] = p.data; });
+  acceptedMap = {}; accepted.forEach(function (p) { acceptedMap[p.id] = p.data; });
+  rejectedMap = {}; rejected.forEach(function (p) { rejectedMap[p.id] = p.data; });
+
+  lastPending = pending; lastAccepted = accepted; lastRejected = rejected;
+  redrawAllLists();
 }, function (err) {
-  showStatus("pending-status", "Impossible de charger la file d'attente : " + err.message, true);
+  showStatus("pending-status", "Impossible de charger les rapports : " + err.message, true);
 });
 
-var lastPending = [];
-function drawPending(list) {
-  if (list) lastPending = list;
-  var el = document.getElementById("pending-list");
-  if (!lastPending.length) { el.innerHTML = "<p>Aucun rapport en attente.</p>"; return; }
-  el.innerHTML = lastPending.map(function (p) { return renderReportCard(p.id, p.data); }).join("");
+var lastPending = [], lastAccepted = [], lastRejected = [];
+function redrawAllLists() {
+  drawList("pending-list", lastPending, "Aucun rapport en attente.");
+  drawList("accepted-list", lastAccepted, "Aucun rapport accepté pour le moment.");
+  drawList("rejected-list", lastRejected, "Aucun rapport refusé pour le moment.");
 }
 
-document.getElementById("pending-list").addEventListener("click", function (e) {
-  var btn = e.target.closest("button[data-action]");
-  if (!btn || !isUnlocked()) return;
-  var id = btn.getAttribute("data-id");
-  var action = btn.getAttribute("data-action");
-  var data = pendingMap[id];
-  if (!data) return;
-  var newStatus = action === "accept" ? "accepted" : "rejected";
-  setReportStatus(id, data, newStatus).catch(function (err) {
-    alert("Échec : " + err.message);
+function drawList(containerId, list, emptyMsg) {
+  var el = document.getElementById(containerId);
+  if (!list.length) { el.innerHTML = "<p>" + emptyMsg + "</p>"; return; }
+  el.innerHTML = list.map(function (p) { return renderReportCard(p.id, p.data); }).join("");
+}
+
+function wireListActions(containerId, mapRef) {
+  document.getElementById(containerId).addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-action]");
+    if (!btn || !isUnlocked()) return;
+    var id = btn.getAttribute("data-id");
+    var action = btn.getAttribute("data-action");
+    var data = mapRef()[id];
+    if (!data) return;
+    var newStatus = action === "accept" ? "accepted" : "rejected";
+    setReportStatus(id, data, newStatus).catch(function (err) {
+      alert("Échec : " + err.message);
+    });
   });
-});
+}
+
+wireListActions("pending-list", function () { return pendingMap; });
+wireListActions("accepted-list", function () { return acceptedMap; });
+wireListActions("rejected-list", function () { return rejectedMap; });
 
 // ---------- Recherche par matricule ----------
 
