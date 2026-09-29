@@ -279,7 +279,6 @@
   <script>
 (function () {
   var CODE_HASH = "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f";
-  var STORAGE_KEY = "site501st_officier_unlocked";
 
   var gate = document.getElementById("gate");
   var content = document.getElementById("officer-content");
@@ -302,7 +301,6 @@
   async function tryCode(code) {
     var hash = await sha256(code.trim().toUpperCase());
     if (hash === CODE_HASH) {
-      try { localStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
       unlock();
     } else {
       error.classList.add("show");
@@ -318,10 +316,6 @@
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && input.value) tryCode(input.value);
   });
-
-  try {
-    if (localStorage.getItem(STORAGE_KEY) === "1") unlock();
-  } catch (e) {}
 })();
 </script>
 
