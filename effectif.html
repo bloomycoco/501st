@@ -137,7 +137,7 @@
             <input type="text" id="eff-new-steamid" placeholder="SteamID64">
             <input type="text" id="eff-new-discord" placeholder="Discord (pseudo ou ID)">
             <select id="eff-new-grade">
-              <option value="CT">CT</option>
+              <option value="CT" selected>CT</option>
               <option value="CPL">CPL</option>
               <option value="CPL-C">CPL-C</option>
               <option value="SGT">SGT</option>
@@ -151,6 +151,12 @@
               <option value="MJR">MJR</option>
               <option value="VCMD">VCMD</option>
               <option value="CMD">CMD</option>
+              <option value="CMDJ">CMDJ</option>
+              <option value="GNL">GNL</option>
+              <option value="CMDM">CMDM</option>
+              <option value="MR">MR</option>
+              <option value="EM">EM</option>
+              <option value="ALPHA">ALPHA</option>
             </select>
             <select id="eff-new-spec">
               <option value="-">-</option>
@@ -250,7 +256,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const effCol = collection(db, "effectif");
 
-const GRADES = ["CT","CPL","CPL-C","SGT","SGT-C","ADJ","ADJ-C","2nd-LTN","LTN","CPT-2nd","CPT","MJR","VCMD","CMD"];
+const GRADES = ["ALPHA","EM","MR","CMDM","GNL","CMD","CMDJ","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT"];
 
 // Rang hierarchique du plus haut grade au plus bas (inclut les roles hors echelle
 // standard). CMD et CMDJ partagent le meme rang (equivalents).
