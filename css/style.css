@@ -650,18 +650,24 @@ table .kama-thumb {
 }
 
 /* ─── EFFECTIF (tableau live) ───────────────────────────── */
+.content.wide { max-width: 1500px; }
+
 .eff-table-wrap {
   overflow-x: auto;
   margin: 12px 0;
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
 }
 
-#eff-table { min-width: 720px; }
+#eff-table { min-width: 1000px; font-size: 0.88rem; }
 
 #eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
 #eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
 #eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
 #eff-table tbody tr:hover, #promo-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
-#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 12px 14px; }
+#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 10px 10px; }
+
+#eff-table th:last-child, #eff-table td.eff-row-actions { white-space: nowrap; }
 
 #eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start {
   border-top: 2px solid var(--blue);
@@ -669,16 +675,17 @@ table .kama-thumb {
 
 #eff-table input, #eff-table select {
   width: 100%;
+  min-width: 70px;
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   padding: 5px 6px;
   border-radius: 3px;
 }
 
-.eff-row-actions { display: flex; gap: 6px; white-space: nowrap; }
+.eff-row-actions { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; }
 
 .eff-icon-btn {
   cursor: pointer;
@@ -686,12 +693,17 @@ table .kama-thumb {
   border: 1px solid var(--border-hi);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  padding: 4px 8px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
   border-radius: 3px;
+  width: 100%;
 }
 
 .eff-icon-btn:hover { background: var(--panel-alt); color: var(--blue); }
+
+@media (min-width: 1100px) {
+  .content.wide { padding-left: 12px; padding-right: 12px; }
+}
 .eff-icon-btn.danger:hover { color: var(--red); }
 
 .eff-form {
