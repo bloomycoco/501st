@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapports - Site 501st</title>
+<meta name="theme-color" content="#3F46CA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
+<link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body class="booting">
+
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo-wrap">
+      <div class="boot-ring"></div>
+      <div class="boot-ring inner"></div>
+      <img src="assets/logo/logo-501st.webp" alt="" class="boot-logo">
+    </div>
+    <div class="boot-title">501st Légion d'Attaque</div>
+    <div class="boot-status" id="bootStatus">Connexion en cours</div>
+    <div class="boot-bar"><div class="boot-bar-fill" id="bootBarFill"></div></div>
+    <div class="boot-skip">Cliquez pour passer</div>
+  </div>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-img">
+      <span class="nav-brand">501ST LÉGION D'ATTAQUE</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">🏠 Accueil</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">📁 Documents utiles ⌄</button>
+        <div class="dropdown-content">
+          <a href="doc-accueil-ct.html">📁 Accueil CT</a>
+          <a href="doc-reglement.html">⚖️ Règlement</a>
+          <a href="doc-securite-incendie.html">🔥 Sécurité incendie</a>
+          <a href="doc-commandement.html">🧭 Commandement</a>
+          <a href="doc-rapport-hebdo.html">📋 Rapport Hebdomadaire</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">⚔️ Codex Tactique ⌄</button>
+        <div class="dropdown-content">
+          <a href="codex-tactique.html">⚔️ Codex Tactique</a>
+          <a href="codex-vehicules.html">🚚 Véhicules</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">🗃️ Spécialisation 501st ⌄</button>
+        <div class="dropdown-content">
+          <a href="specialisation.html">🗃️ Vue d'ensemble</a>
+          <a href="spe-soldat.html">Soldat</a>
+          <a href="spe-heavy.html">Heavy</a>
+          <a href="spe-medecin.html">Médecin</a>
+          <a href="spe-arf.html">ARF</a>
+          <a href="spe-torrent.html">Torrent</a>
+          <a href="spe-arc-trooper.html">ARC Trooper</a>
+        </div>
+      </div>
+
+      <a href="tenues.html">🧥 Tenues</a>
+      <a href="bareme-promotion.html">🧾 Barème</a>
+      <a href="recrutement.html">📝 Recrutement</a>
+      <a href="officiers.html">🔒 Officier</a>
+      <a href="effectif.html">📋 Effectif</a>
+      <a href="rapport.html" class="active">🗒️ Rapport</a>
+    </div>
+  </nav>
+
+  <div class="content wide">
+
+    <div class="page-header">
+      <div class="kicker">Site 501st</div>
+      <h1>🗒️ Rapports Hebdomadaires</h1>
+      <div class="header-divider"></div>
+      <p class="subtitle">Un rapport par semaine et par membre. Voir les règles sur la page <a href="doc-rapport-hebdo.html">Rapport Hebdomadaire</a>.</p>
+    </div>
+
+    <div class="card">
+      <h2>📝 Soumettre un rapport</h2>
+      <p>Ouvert à tous, sans code. Un officier validera ou refusera ton rapport.</p>
+      <div class="eff-form">
+        <input type="text" id="rep-matricule" placeholder="Matricule (ex: CT-1004)">
+      </div>
+      <div class="eff-form" style="margin-top:10px;">
+        <textarea id="rep-content" placeholder="Contenu du rapport (RP)..." rows="5" style="flex:1 1 100%; background: rgba(13,15,30,0.9); border: 1px solid var(--border-hi); color: var(--text); font-family: var(--font-body); font-size: 0.92rem; padding: 10px; border-radius: 4px;"></textarea>
+      </div>
+      <button class="btn" id="rep-submit-btn">Soumettre le rapport</button>
+      <div id="rep-submit-status" class="notice" style="display:none;"></div>
+    </div>
+
+    <div class="card">
+      <h2>🔍 Rechercher les rapports d'un matricule</h2>
+      <div class="eff-form">
+        <input type="text" id="search-matricule" placeholder="Matricule à rechercher">
+        <button class="btn" id="search-btn">Rechercher</button>
+      </div>
+      <div id="search-results" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="card" id="auth-card">
+      <h2>🔐 Accès officier</h2>
+      <div id="auth-logged-out">
+        <p>La consultation est libre. Pour accepter ou refuser un rapport, saisis le code d'accès officier (ou owner).</p>
+        <div class="eff-form">
+          <input type="password" id="login-code" placeholder="CODE D'ACCÈS" autocomplete="off">
+          <button class="btn" id="login-btn">Déverrouiller</button>
+        </div>
+        <div id="login-error" class="notice" style="display:none;"></div>
+      </div>
+      <div id="auth-logged-in" style="display:none;">
+        <p>Accès <strong id="auth-role"></strong> activé. Modération autorisée.</p>
+        <button class="eff-icon-btn" id="logout-btn">Verrouiller</button>
+      </div>
+    </div>
+
+    <details class="accordion" open>
+      <summary>🕒 File d'attente (rapports en attente)</summary>
+      <div class="accordion-body">
+        <p>Les rapports en attente de validation par un officier.</p>
+        <div id="pending-status" class="notice" style="display:none;"></div>
+        <div id="pending-list">Chargement...</div>
+      </div>
+    </details>
+
+  </div>
+
+  <footer>
+    <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
+    <p>Site 501st &middot; Reproduction non-officielle basée sur le site Google Sites d'origine.</p>
+  </footer>
+
+  <script src="js/site.js?v=2"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, updateDoc, doc, getDoc, onSnapshot,
+  query, where, getDocs, increment
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
+  authDomain: "site501st.firebaseapp.com",
+  projectId: "site501st",
+  storageBucket: "site501st.firebasestorage.app",
+  messagingSenderId: "862962282467",
+  appId: "1:862962282467:web:548b976251263394d53ad6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const rapportsCol = collection(db, "rapports");
+const effCol = collection(db, "effectif");
+const accessDocRef = doc(db, "config", "access");
+
+const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
+
+async function sha256(text) {
+  var data = new TextEncoder().encode(text);
+  var hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  var bytes = Array.from(new Uint8Array(hashBuffer));
+  return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+}
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+var currentRole = null;
+var currentHash = null;
+
+function isUnlocked() { return currentRole !== null; }
+
+function applyRoleUI() {
+  var loggedOut = document.getElementById("auth-logged-out");
+  var loggedIn = document.getElementById("auth-logged-in");
+  var roleLabel = document.getElementById("auth-role");
+  if (currentRole) {
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "block";
+    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
+  } else {
+    loggedOut.style.display = "block";
+    loggedIn.style.display = "none";
+  }
+  drawPending();
+  if (lastSearchResults) drawSearchResults(lastSearchResults);
+}
+
+document.getElementById("login-btn").addEventListener("click", async function () {
+  var input = document.getElementById("login-code");
+  var errEl = document.getElementById("login-error");
+  var code = input.value.trim().toUpperCase();
+  if (!code) return;
+  var hash = await sha256(code);
+
+  if (hash === OWNER_HASH) {
+    currentRole = "owner"; currentHash = hash;
+    input.value = ""; errEl.style.display = "none";
+    applyRoleUI();
+    return;
+  }
+  try {
+    var snap = await getDoc(accessDocRef);
+    var officerHash = snap.exists() ? snap.data().officerCodeHash : null;
+    if (officerHash && hash === officerHash) {
+      currentRole = "officier"; currentHash = hash;
+      input.value = ""; errEl.style.display = "none";
+      applyRoleUI();
+    } else {
+      errEl.textContent = "Code incorrect.";
+      errEl.style.display = "block";
+      input.value = "";
+    }
+  } catch (e) {
+    errEl.textContent = "Erreur de vérification : " + e.message;
+    errEl.style.display = "block";
+  }
+});
+
+document.getElementById("login-code").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") document.getElementById("login-btn").click();
+});
+
+document.getElementById("logout-btn").addEventListener("click", function () {
+  currentRole = null; currentHash = null;
+  applyRoleUI();
+});
+
+function showStatus(elId, msg, isError) {
+  var el = document.getElementById(elId);
+  if (!msg) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.textContent = msg;
+  el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
+}
+
+// ---------- Soumission ----------
+
+document.getElementById("rep-submit-btn").addEventListener("click", function () {
+  var matricule = document.getElementById("rep-matricule").value.trim();
+  var content = document.getElementById("rep-content").value.trim();
+  if (!matricule) { showStatus("rep-submit-status", "Le matricule est obligatoire.", true); return; }
+  if (!content) { showStatus("rep-submit-status", "Le contenu du rapport est obligatoire.", true); return; }
+
+  addDoc(rapportsCol, {
+    matricule: matricule,
+    content: content,
+    status: "pending",
+    submittedAt: new Date().toISOString()
+  }).then(function () {
+    showStatus("rep-submit-status", "Rapport envoyé. Un officier va l'examiner.", false);
+    document.getElementById("rep-matricule").value = "";
+    document.getElementById("rep-content").value = "";
+  }).catch(function (err) {
+    showStatus("rep-submit-status", "Échec de l'envoi : " + err.message, true);
+  });
+});
+
+// ---------- Rendu d'un rapport (partagé file d'attente + recherche) ----------
+
+function statusTag(status) {
+  if (status === "accepted") return '<span class="tag tag-green">✅ Accepté</span>';
+  if (status === "rejected") return '<span class="tag tag-red">❌ Refusé</span>';
+  return '<span class="tag tag-gold">⏳ En attente</span>';
+}
+
+function formatDate(iso) {
+  if (!iso) return "";
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+}
+
+function renderReportCard(id, data) {
+  var actions = "";
+  if (isUnlocked()) {
+    if (data.status !== "accepted") {
+      actions += '<button class="eff-icon-btn" data-action="accept" data-id="' + id + '">Accepter</button>';
+    }
+    if (data.status !== "rejected") {
+      actions += '<button class="eff-icon-btn danger" data-action="reject" data-id="' + id + '">Refuser</button>';
+    }
+  }
+  return '<div class="card" style="margin-bottom:12px;">' +
+    '<p style="margin:0 0 6px;"><strong>' + esc(data.matricule) + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + '</p>' +
+    '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
+    (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
+    (actions ? '<div class="eff-row-actions" style="flex-direction:row;">' + actions + '</div>' : '') +
+    '</div>';
+}
+
+// ---------- Acceptation / refus (avec ajustement du compteur effectif) ----------
+
+async function findEffectifDocByMatricule(matricule) {
+  var q = query(effCol, where("matricule", "==", matricule));
+  var snap = await getDocs(q);
+  if (snap.empty) return null;
+  return snap.docs[0];
+}
+
+async function setReportStatus(reportId, currentData, newStatus) {
+  var wasAccepted = currentData.status === "accepted";
+  var willBeAccepted = newStatus === "accepted";
+  var delta = 0;
+  if (wasAccepted && !willBeAccepted) delta = -1;
+  if (!wasAccepted && willBeAccepted) delta = 1;
+
+  await updateDoc(doc(db, "rapports", reportId), {
+    status: newStatus,
+    codeHash: currentHash,
+    reviewedBy: currentRole === "owner" ? "Owner" : "Officier",
+    reviewedAt: new Date().toISOString()
+  });
+
+  if (delta !== 0) {
+    var effDoc = await findEffectifDocByMatricule(currentData.matricule);
+    if (effDoc) {
+      await updateDoc(doc(db, "effectif", effDoc.id), {
+        reportCount: increment(delta),
+        codeHash: currentHash
+      });
+    }
+  }
+}
+
+function wireActions(containerId, dataMap) {
+  document.getElementById(containerId).addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-action]");
+    if (!btn || !isUnlocked()) return;
+    var id = btn.getAttribute("data-id");
+    var action = btn.getAttribute("data-action");
+    var data = dataMap[id];
+    if (!data) return;
+    var newStatus = action === "accept" ? "accepted" : "rejected";
+    setReportStatus(id, data, newStatus).catch(function (err) {
+      alert("Échec : " + err.message);
+    });
+  });
+}
+
+// ---------- File d'attente (rapports pending) ----------
+
+var pendingMap = {};
+
+onSnapshot(rapportsCol, function (snap) {
+  var pending = [];
+  snap.forEach(function (d) {
+    var data = d.data();
+    if (data.status === "pending") pending.push({ id: d.id, data: data });
+  });
+  pending.sort(function (a, b) { return (a.data.submittedAt || "").localeCompare(b.data.submittedAt || ""); });
+  pendingMap = {};
+  pending.forEach(function (p) { pendingMap[p.id] = p.data; });
+  drawPending(pending);
+}, function (err) {
+  showStatus("pending-status", "Impossible de charger la file d'attente : " + err.message, true);
+});
+
+var lastPending = [];
+function drawPending(list) {
+  if (list) lastPending = list;
+  var el = document.getElementById("pending-list");
+  if (!lastPending.length) { el.innerHTML = "<p>Aucun rapport en attente.</p>"; return; }
+  el.innerHTML = lastPending.map(function (p) { return renderReportCard(p.id, p.data); }).join("");
+}
+wireActions("pending-list", pendingMap);
+
+// ---------- Recherche par matricule ----------
+
+var lastSearchResults = null;
+var searchMap = {};
+
+function drawSearchResults(results) {
+  lastSearchResults = results;
+  var el = document.getElementById("search-results");
+  if (!results.length) { el.innerHTML = "<p>Aucun rapport trouvé pour ce matricule.</p>"; return; }
+  searchMap = {};
+  results.forEach(function (r) { searchMap[r.id] = r.data; });
+  el.innerHTML = results.map(function (r) { return renderReportCard(r.id, r.data); }).join("");
+}
+
+document.getElementById("search-btn").addEventListener("click", async function () {
+  var matricule = document.getElementById("search-matricule").value.trim();
+  var el = document.getElementById("search-results");
+  if (!matricule) { el.innerHTML = ""; return; }
+  el.innerHTML = "Recherche...";
+  try {
+    var q = query(rapportsCol, where("matricule", "==", matricule));
+    var snap = await getDocs(q);
+    var results = [];
+    snap.forEach(function (d) { results.push({ id: d.id, data: d.data() }); });
+    results.sort(function (a, b) { return (b.data.submittedAt || "").localeCompare(a.data.submittedAt || ""); });
+    drawSearchResults(results);
+  } catch (e) {
+    el.innerHTML = "Erreur : " + e.message;
+  }
+});
+
+document.getElementById("search-matricule").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") document.getElementById("search-btn").click();
+});
+
+document.getElementById("search-results").addEventListener("click", function (e) {
+  var btn = e.target.closest("button[data-action]");
+  if (!btn || !isUnlocked()) return;
+  var id = btn.getAttribute("data-id");
+  var action = btn.getAttribute("data-action");
+  var data = searchMap[id];
+  if (!data) return;
+  var newStatus = action === "accept" ? "accepted" : "rejected";
+  setReportStatus(id, data, newStatus).then(function () {
+    data.status = newStatus;
+    drawSearchResults(lastSearchResults);
+  }).catch(function (err) {
+    alert("Échec : " + err.message);
+  });
+});
+</script>
+
+</body>
+</html>

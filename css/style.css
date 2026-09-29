@@ -659,7 +659,7 @@ table .kama-thumb {
   border-radius: 6px;
 }
 
-#eff-table { min-width: 1150px; font-size: 0.88rem; }
+#eff-table { min-width: 1280px; font-size: 0.88rem; }
 
 #eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
 #eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
