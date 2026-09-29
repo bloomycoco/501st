@@ -135,12 +135,13 @@
                   <th>Grade</th>
                   <th>Spécialisation</th>
                   <th>Dernière promo</th>
+                  <th>CMD Mission</th>
                   <th>Éligibilité</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="eff-body">
-                <tr><td colspan="9">Chargement de l'effectif...</td></tr>
+                <tr><td colspan="10">Chargement de l'effectif...</td></tr>
               </tbody>
             </table>
           </div>
@@ -184,6 +185,7 @@
               <option value="ARC Trooper">ARC Trooper</option>
             </select>
             <input type="date" id="eff-new-date">
+            <input type="number" step="0.5" min="0" id="eff-new-cmdmission" placeholder="CMD Mission" value="0">
             <button class="btn" id="eff-add-btn">Ajouter</button>
           </div>
           </div>
@@ -269,6 +271,16 @@ const PROMO_DELAYS = {
   "CPT": 22,
   "MJR": 30,
   "VCMD": 40
+};
+
+// Quotas de commandements de mission (CMD Flotte) requis en plus du delai,
+// pour les grades CPT-2nd a VCMD. Le compteur "cmdMission" est rempli a la
+// main par les officiers, jamais calcule automatiquement.
+const MISSION_QUOTAS = {
+  "CPT-2nd": 1.5,
+  "CPT": 3,
+  "MJR": 5,
+  "VCMD": 8
 };
 
 function esc(s) {
@@ -395,6 +407,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + selectHtml("grade", GRADES, data.grade) + '</td>' +
       '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
       '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
+      '<td><input type="number" step="0.5" min="0" data-field="cmdMission" value="' + esc(data.cmdMission || 0) + '"></td>' +
       '<td>' + eligibilityLabel(data) + '</td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
@@ -409,6 +422,7 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + esc(data.grade) + '</td>' +
     '<td>' + esc(data.spec) + '</td>' +
     '<td>' + esc(data.lastPromo) + '</td>' +
+    '<td>' + (MISSION_QUOTAS[data.grade] !== undefined ? (data.cmdMission || 0) + " / " + MISSION_QUOTAS[data.grade] : "-") + '</td>' +
     '<td>' + eligibilityLabel(data) + '</td>' +
     '<td class="eff-row-actions">' +
       (isUnlocked()
@@ -430,10 +444,26 @@ function daysSince(dateStr) {
 function eligibilityLabel(data) {
   var days = daysSince(data.lastPromo);
   var delay = PROMO_DELAYS[data.grade];
+  var quota = MISSION_QUOTAS[data.grade];
+  var missions = parseFloat(data.cmdMission) || 0;
+
   if (days === null) return "❓ Pas de date";
   if (delay === undefined) return "❓ Non défini";
-  if (days >= delay) return "✅ Éligible (" + days + "j / " + delay + "j)";
-  return "❌ " + (delay - days) + "j restants";
+
+  var daysOk = days >= delay;
+
+  if (quota === undefined) {
+    return daysOk ? "✅ Éligible (" + days + "j / " + delay + "j)" : "❌ " + (delay - days) + "j restants";
+  }
+
+  var missionsOk = missions >= quota;
+  if (daysOk && missionsOk) {
+    return "✅ Éligible (" + days + "j / " + delay + "j, " + missions + "/" + quota + " CMD)";
+  }
+  var manque = [];
+  if (!daysOk) manque.push((delay - days) + "j");
+  if (!missionsOk) manque.push((quota - missions) + " CMD mission");
+  return "❌ Manque : " + manque.join(", ");
 }
 
 function renderSpecBreakdown(docs) {
@@ -455,7 +485,7 @@ var latestDocs = [];
 function draw() {
   var body = document.getElementById("eff-body");
   if (!latestDocs.length) {
-    body.innerHTML = '<tr><td colspan="9">Aucun membre enregistré pour le moment.</td></tr>';
+    body.innerHTML = '<tr><td colspan="10">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
     var prevGrade = null;
     body.innerHTML = latestDocs.map(function (d) {
@@ -520,13 +550,15 @@ document.getElementById("eff-add-btn").addEventListener("click", function () {
     discord: document.getElementById("eff-new-discord").value.trim(),
     grade: document.getElementById("eff-new-grade").value,
     spec: document.getElementById("eff-new-spec").value,
-    lastPromo: document.getElementById("eff-new-date").value
+    lastPromo: document.getElementById("eff-new-date").value,
+    cmdMission: parseFloat(document.getElementById("eff-new-cmdmission").value) || 0
   };
   addDoc(effCol, payload).then(function () {
     showStatus("eff-status", "");
     ["eff-new-name","eff-new-matricule","eff-new-steamid","eff-new-discord","eff-new-date"].forEach(function (fid) {
       document.getElementById(fid).value = "";
     });
+    document.getElementById("eff-new-cmdmission").value = "0";
   }).catch(function (err) {
     showStatus("eff-status", "Ajout refusé : " + err.message, true);
   });
