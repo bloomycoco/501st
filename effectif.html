@@ -83,22 +83,37 @@
 
   <div class="content wide">
 
-    <div id="gate" class="gate">
-      <div class="lock-icon">🔒</div>
-      <h2>Effectif du régiment</h2>
-      <p>Section réservée au corps des officiers de la 501st. Saisissez le code d'accès régimentaire.</p>
-      <input type="password" id="gate-input" placeholder="CODE D'ACCÈS" autocomplete="off" maxlength="20">
-      <button class="btn" id="gate-submit">Déverrouiller</button>
-      <div class="error" id="gate-error">Code incorrect. Contactez votre commandement.</div>
+    <div class="page-header">
+      <div class="kicker">Site 501st</div>
+      <h1>📋 Effectif du régiment</h1>
+      <div class="header-divider"></div>
+      <p class="subtitle">Tableau en direct, visible par tous. Voir aussi les <a href="officiers.html">documents et procédures officier</a>.</p>
     </div>
 
-    <div id="officer-content" class="officer-content">
-      <div class="page-header">
-        <div class="kicker">Accès restreint</div>
-        <h1>📋 Effectif du régiment</h1>
-        <div class="header-divider"></div>
-        <p class="subtitle">Tableau en direct, modifiable par tous les officiers. Voir aussi les <a href="officiers.html">documents et procédures officier</a>.</p>
+    <div class="card" id="auth-card">
+      <h2>🔐 Accès officier</h2>
+      <div id="auth-logged-out">
+        <p>La consultation est libre. Pour ajouter, modifier ou supprimer un membre, saisis le code d'accès officier (ou owner).</p>
+        <div class="eff-form">
+          <input type="password" id="login-code" placeholder="CODE D'ACCÈS" autocomplete="off">
+          <button class="btn" id="login-btn">Déverrouiller</button>
+        </div>
+        <div id="login-error" class="notice" style="display:none;"></div>
       </div>
+      <div id="auth-logged-in" style="display:none;">
+        <p>Accès <strong id="auth-role"></strong> activé. Modification autorisée.</p>
+        <button class="eff-icon-btn" id="logout-btn">Verrouiller</button>
+      </div>
+
+      <div id="owner-panel" style="display:none;">
+        <h4>Changer le code officier (Owner uniquement)</h4>
+        <div class="eff-form">
+          <input type="text" id="owner-new-code" placeholder="Nouveau code officier">
+          <button class="btn" id="owner-update-btn">Mettre à jour</button>
+        </div>
+        <div id="owner-status" class="notice" style="display:none;"></div>
+      </div>
+    </div>
 
       <details class="accordion" open>
         <summary>📋 Liste des membres</summary>
@@ -130,6 +145,7 @@
             </table>
           </div>
 
+          <div id="eff-add-section" style="display:none;">
           <h4>Ajouter un membre</h4>
           <div class="eff-form">
             <input type="text" id="eff-new-name" placeholder="Identité RP">
@@ -170,6 +186,7 @@
             <input type="date" id="eff-new-date">
             <button class="btn" id="eff-add-btn">Ajouter</button>
           </div>
+          </div>
         </div>
       </details>
 
@@ -181,8 +198,6 @@
         </div>
       </details>
 
-    </div>
-
   </div>
 
   <footer>
@@ -191,56 +206,11 @@
   </footer>
 
   <script src="js/site.js?v=2"></script>
-  <script>
-(function () {
-  var CODE_HASH = "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f";
-
-  var gate = document.getElementById("gate");
-  var content = document.getElementById("officer-content");
-  var input = document.getElementById("gate-input");
-  var submit = document.getElementById("gate-submit");
-  var error = document.getElementById("gate-error");
-
-  function unlock() {
-    gate.style.display = "none";
-    content.classList.add("show");
-    window.dispatchEvent(new CustomEvent("officier-unlocked"));
-  }
-
-  async function sha256(text) {
-    var data = new TextEncoder().encode(text);
-    var hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    var bytes = Array.from(new Uint8Array(hashBuffer));
-    return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
-  }
-
-  async function tryCode(code) {
-    var normalized = code.trim().toUpperCase();
-    var hash = await sha256(normalized);
-    if (hash === CODE_HASH) {
-      window.__officerCode = normalized;
-      unlock();
-    } else {
-      error.classList.add("show");
-      input.value = "";
-      input.focus();
-    }
-  }
-
-  submit.addEventListener("click", function () {
-    if (input.value) tryCode(input.value);
-  });
-
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && input.value) tryCode(input.value);
-  });
-})();
-</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
-  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc
+  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -255,6 +225,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const effCol = collection(db, "effectif");
+const accessDocRef = doc(db, "config", "access");
+
+const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
+
+async function sha256(text) {
+  var data = new TextEncoder().encode(text);
+  var hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  var bytes = Array.from(new Uint8Array(hashBuffer));
+  return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+}
 
 const GRADES = ["ALPHA","EM","MR","CMDM","GNL","CMD","CMDJ","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT"];
 
@@ -303,9 +283,98 @@ function selectHtml(name, options, current) {
   }).join("") + '</select>';
 }
 
-function officerCode() {
-  return window.__officerCode || "";
+var currentRole = null;   // null | "officier" | "owner"
+var currentHash = null;
+
+function isUnlocked() {
+  return currentRole !== null;
 }
+
+function applyRoleUI() {
+  var loggedOut = document.getElementById("auth-logged-out");
+  var loggedIn = document.getElementById("auth-logged-in");
+  var roleLabel = document.getElementById("auth-role");
+  var addSection = document.getElementById("eff-add-section");
+  var ownerPanel = document.getElementById("owner-panel");
+
+  if (currentRole) {
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "block";
+    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
+    addSection.style.display = "block";
+    ownerPanel.style.display = currentRole === "owner" ? "block" : "none";
+  } else {
+    loggedOut.style.display = "block";
+    loggedIn.style.display = "none";
+    addSection.style.display = "none";
+    ownerPanel.style.display = "none";
+  }
+  draw();
+}
+
+document.getElementById("login-btn").addEventListener("click", async function () {
+  var input = document.getElementById("login-code");
+  var errEl = document.getElementById("login-error");
+  var code = input.value.trim().toUpperCase();
+  if (!code) return;
+  var hash = await sha256(code);
+
+  if (hash === OWNER_HASH) {
+    currentRole = "owner";
+    currentHash = hash;
+    input.value = "";
+    errEl.style.display = "none";
+    applyRoleUI();
+    return;
+  }
+
+  try {
+    var snap = await getDoc(accessDocRef);
+    var officerHash = snap.exists() ? snap.data().officerCodeHash : null;
+    if (officerHash && hash === officerHash) {
+      currentRole = "officier";
+      currentHash = hash;
+      input.value = "";
+      errEl.style.display = "none";
+      applyRoleUI();
+    } else {
+      errEl.textContent = "Code incorrect.";
+      errEl.style.display = "block";
+      input.value = "";
+    }
+  } catch (e) {
+    errEl.textContent = "Erreur de vérification : " + e.message;
+    errEl.style.display = "block";
+  }
+});
+
+document.getElementById("login-code").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") document.getElementById("login-btn").click();
+});
+
+document.getElementById("logout-btn").addEventListener("click", function () {
+  currentRole = null;
+  currentHash = null;
+  applyRoleUI();
+});
+
+document.getElementById("owner-update-btn").addEventListener("click", async function () {
+  var newCode = document.getElementById("owner-new-code").value.trim().toUpperCase();
+  var statusEl = document.getElementById("owner-status");
+  if (!newCode) return;
+  var newHash = await sha256(newCode);
+  try {
+    await setDoc(accessDocRef, { officerCodeHash: newHash, ownerCodeHash: OWNER_HASH });
+    statusEl.style.display = "block";
+    statusEl.style.borderLeftColor = "var(--blue)";
+    statusEl.textContent = "Code officier mis à jour. Communique-le au régiment.";
+    document.getElementById("owner-new-code").value = "";
+  } catch (e) {
+    statusEl.style.display = "block";
+    statusEl.style.borderLeftColor = "var(--red)";
+    statusEl.textContent = "Échec : " + e.message;
+  }
+});
 
 function showStatus(elId, msg, isError) {
   var el = document.getElementById(elId);
@@ -317,7 +386,7 @@ function showStatus(elId, msg, isError) {
 
 function renderRow(id, data, editing, groupStart) {
   var cls = groupStart ? ' class="grade-group-start"' : '';
-  if (editing) {
+  if (editing && isUnlocked()) {
     return '<tr data-id="' + id + '"' + cls + '>' +
       '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
       '<td><input data-field="matricule" value="' + esc(data.matricule) + '"></td>' +
@@ -342,8 +411,10 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + esc(data.lastPromo) + '</td>' +
     '<td>' + eligibilityLabel(data) + '</td>' +
     '<td class="eff-row-actions">' +
-      '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
-      '<button class="eff-icon-btn danger" data-action="delete">Supprimer</button>' +
+      (isUnlocked()
+        ? '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
+          '<button class="eff-icon-btn danger" data-action="delete">Supprimer</button>'
+        : '<span title="Connecte-toi pour modifier">🔒</span>') +
     '</td></tr>';
 }
 
@@ -412,6 +483,7 @@ onSnapshot(effCol, function (snap) {
 document.getElementById("eff-body").addEventListener("click", function (e) {
   var btn = e.target.closest("button[data-action]");
   if (!btn) return;
+  if (!isUnlocked()) return;
   var tr = btn.closest("tr");
   var id = tr.getAttribute("data-id");
   var action = btn.getAttribute("data-action");
@@ -424,7 +496,7 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
       showStatus("eff-status", "Suppression refusée : " + err.message, true);
     });
   } else if (action === "save") {
-    var payload = { code: officerCode() };
+    var payload = { codeHash: currentHash };
     tr.querySelectorAll("[data-field]").forEach(function (el) {
       payload[el.getAttribute("data-field")] = el.value;
     });
@@ -437,10 +509,11 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
 });
 
 document.getElementById("eff-add-btn").addEventListener("click", function () {
+  if (!isUnlocked()) return;
   var name = document.getElementById("eff-new-name").value.trim();
   if (!name) { showStatus("eff-status", "L'identité RP est obligatoire.", true); return; }
   var payload = {
-    code: officerCode(),
+    codeHash: currentHash,
     rpName: name,
     matricule: document.getElementById("eff-new-matricule").value.trim(),
     steamId: document.getElementById("eff-new-steamid").value.trim(),
