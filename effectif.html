@@ -107,21 +107,25 @@
 
           <div id="eff-status" class="notice" style="display:none;"></div>
 
+          <p>La colonne <strong>Éligibilité</strong> est calculée automatiquement à partir de la date de dernière promotion et des délais minimums (voir <a href="bareme-promotion.html">Barème de promotion</a>). Un ✅ signifie que le délai minimum est atteint : cela ne remplace pas les autres critères (formations, comportement, décision du corps officier).</p>
+
           <div class="eff-table-wrap">
             <table id="eff-table">
               <thead>
                 <tr>
                   <th>Identité RP</th>
                   <th>Matricule</th>
+                  <th>SteamID</th>
                   <th>Discord</th>
                   <th>Grade</th>
                   <th>Spécialisation</th>
                   <th>Dernière promo</th>
+                  <th>Éligibilité</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="eff-body">
-                <tr><td colspan="7">Chargement de l'effectif...</td></tr>
+                <tr><td colspan="9">Chargement de l'effectif...</td></tr>
               </tbody>
             </table>
           </div>
@@ -130,6 +134,7 @@
           <div class="eff-form">
             <input type="text" id="eff-new-name" placeholder="Identité RP">
             <input type="text" id="eff-new-matricule" placeholder="Matricule (ex: CT-1004)">
+            <input type="text" id="eff-new-steamid" placeholder="SteamID64">
             <input type="text" id="eff-new-discord" placeholder="Discord (pseudo ou ID)">
             <select id="eff-new-grade">
               <option value="CT">CT</option>
@@ -158,32 +163,6 @@
             </select>
             <input type="date" id="eff-new-date">
             <button class="btn" id="eff-add-btn">Ajouter</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion" open>
-        <summary>🎖️ Éligibilité à la promotion</summary>
-        <div class="accordion-body">
-          <p>Calculé automatiquement à partir de la date de dernière promotion de chaque membre et des délais minimums connus (voir <a href="bareme-promotion.html">Barème de promotion</a>). Un ✅ signifie que le délai minimum est atteint : cela ne remplace pas les autres critères (formations, comportement, décision du corps officier).</p>
-
-          <div id="promo-status" class="notice" style="display:none;"></div>
-
-          <div class="eff-table-wrap">
-            <table id="promo-table">
-              <thead>
-                <tr>
-                  <th>Identité RP</th>
-                  <th>Grade actuel</th>
-                  <th>Jours depuis promo</th>
-                  <th>Délai minimum</th>
-                  <th>Statut</th>
-                </tr>
-              </thead>
-              <tbody id="promo-body">
-                <tr><td colspan="5">Chargement...</td></tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </details>
@@ -336,10 +315,12 @@ function renderRow(id, data, editing, groupStart) {
     return '<tr data-id="' + id + '"' + cls + '>' +
       '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
       '<td><input data-field="matricule" value="' + esc(data.matricule) + '"></td>' +
+      '<td><input data-field="steamId" value="' + esc(data.steamId) + '"></td>' +
       '<td><input data-field="discord" value="' + esc(data.discord) + '"></td>' +
       '<td>' + selectHtml("grade", GRADES, data.grade) + '</td>' +
       '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
       '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
+      '<td>' + eligibilityLabel(data) + '</td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
         '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
@@ -348,10 +329,12 @@ function renderRow(id, data, editing, groupStart) {
   return '<tr data-id="' + id + '"' + cls + '>' +
     '<td>' + esc(data.rpName) + '</td>' +
     '<td>' + esc(data.matricule) + '</td>' +
+    '<td>' + esc(data.steamId) + '</td>' +
     '<td>' + esc(data.discord) + '</td>' +
     '<td>' + esc(data.grade) + '</td>' +
     '<td>' + esc(data.spec) + '</td>' +
     '<td>' + esc(data.lastPromo) + '</td>' +
+    '<td>' + eligibilityLabel(data) + '</td>' +
     '<td class="eff-row-actions">' +
       '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
       '<button class="eff-icon-btn danger" data-action="delete">Supprimer</button>' +
@@ -367,24 +350,13 @@ function daysSince(dateStr) {
   return diff >= 0 ? diff : null;
 }
 
-function renderPromoRow(data, groupStart) {
+function eligibilityLabel(data) {
   var days = daysSince(data.lastPromo);
   var delay = PROMO_DELAYS[data.grade];
-  var daysCell = days === null ? "N/A" : days + " j";
-  var delayCell = delay === undefined ? "Non défini" : delay + " j";
-  var statusCell;
-  if (days === null) statusCell = "❓ Pas de date";
-  else if (delay === undefined) statusCell = "❓ Non défini";
-  else if (days >= delay) statusCell = "✅ Éligible";
-  else statusCell = "❌ Pas encore (" + (delay - days) + " j restants)";
-
-  return '<tr' + (groupStart ? ' class="grade-group-start"' : '') + '>' +
-    '<td>' + esc(data.rpName) + '</td>' +
-    '<td>' + esc(data.grade) + '</td>' +
-    '<td>' + daysCell + '</td>' +
-    '<td>' + delayCell + '</td>' +
-    '<td>' + statusCell + '</td>' +
-    '</tr>';
+  if (days === null) return "❓ Pas de date";
+  if (delay === undefined) return "❓ Non défini";
+  if (days >= delay) return "✅ Éligible (" + days + "j / " + delay + "j)";
+  return "❌ " + (delay - days) + "j restants";
 }
 
 function renderSpecBreakdown(docs) {
@@ -406,25 +378,13 @@ var latestDocs = [];
 function draw() {
   var body = document.getElementById("eff-body");
   if (!latestDocs.length) {
-    body.innerHTML = '<tr><td colspan="7">Aucun membre enregistré pour le moment.</td></tr>';
+    body.innerHTML = '<tr><td colspan="9">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
     var prevGrade = null;
     body.innerHTML = latestDocs.map(function (d) {
       var groupStart = d.data.grade !== prevGrade;
       prevGrade = d.data.grade;
       return renderRow(d.id, d.data, d.id === editingId, groupStart);
-    }).join("");
-  }
-
-  var promoBody = document.getElementById("promo-body");
-  if (!latestDocs.length) {
-    promoBody.innerHTML = '<tr><td colspan="5">Aucun membre enregistré pour le moment.</td></tr>';
-  } else {
-    var prevGrade2 = null;
-    promoBody.innerHTML = latestDocs.map(function (d) {
-      var groupStart = d.data.grade !== prevGrade2;
-      prevGrade2 = d.data.grade;
-      return renderPromoRow(d.data, groupStart);
     }).join("");
   }
 
@@ -477,6 +437,7 @@ document.getElementById("eff-add-btn").addEventListener("click", function () {
     code: officerCode(),
     rpName: name,
     matricule: document.getElementById("eff-new-matricule").value.trim(),
+    steamId: document.getElementById("eff-new-steamid").value.trim(),
     discord: document.getElementById("eff-new-discord").value.trim(),
     grade: document.getElementById("eff-new-grade").value,
     spec: document.getElementById("eff-new-spec").value,
@@ -484,7 +445,7 @@ document.getElementById("eff-add-btn").addEventListener("click", function () {
   };
   addDoc(effCol, payload).then(function () {
     showStatus("eff-status", "");
-    ["eff-new-name","eff-new-matricule","eff-new-discord","eff-new-date"].forEach(function (fid) {
+    ["eff-new-name","eff-new-matricule","eff-new-steamid","eff-new-discord","eff-new-date"].forEach(function (fid) {
       document.getElementById(fid).value = "";
     });
   }).catch(function (err) {
