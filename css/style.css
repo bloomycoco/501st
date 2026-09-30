@@ -775,27 +775,49 @@ table .kama-thumb {
 
 .rating-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  align-items: center;
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
 
-.rating-row label { font-size: 0.82rem; color: var(--text-dim); flex: 0 0 auto; }
+.rating-scale { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
-.rating-row select {
+.rating-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-right: 4px;
+}
+
+.rating-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
-  color: var(--text);
-  font-family: var(--font-body);
-  padding: 6px 10px;
-  border-radius: 4px;
+  color: var(--text-dim);
+  border-radius: 5px;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.rating-btn:hover { border-color: var(--blue); color: var(--text); }
+
+.rating-btn.active {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dim) 100%);
+  color: #fff;
+  border-color: var(--blue);
 }
 
 .rating-row textarea {
-  flex: 1 1 100%;
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
   color: var(--text);
@@ -805,6 +827,7 @@ table .kama-thumb {
   border-radius: 4px;
   min-height: 46px;
   resize: vertical;
+  width: 100%;
 }
 
 .rec-status { margin-top: 10px; font-size: 0.88rem; }
