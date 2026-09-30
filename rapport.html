@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body class="booting">
 
@@ -161,12 +161,12 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=4"></script>
+  <script src="js/site.js?v=5"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
-  getFirestore, collection, addDoc, updateDoc, doc, getDoc, setDoc, onSnapshot,
+  getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc, onSnapshot,
   query, where, getDocs, increment
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
@@ -419,7 +419,13 @@ function renderReportCard(id, data) {
     '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
     (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
     (actionsHtml ? '<div class="eff-row-actions mod-actions" data-id="' + id + '" style="flex-direction:row;">' + actionsHtml + '</div>' : '') +
+    (currentRole === "owner" ? '<button class="eff-icon-btn danger" data-action="delete" data-id="' + id + '" style="margin-top:8px;">🗑️ Supprimer définitivement</button>' : '') +
     '</div>';
+}
+
+async function deleteReport(id) {
+  await updateDoc(doc(db, "rapports", id), { codeHash: currentHash });
+  await deleteDoc(doc(db, "rapports", id));
 }
 
 // ---------- Acceptation / refus (avec ajustement du compteur effectif) ----------
@@ -551,6 +557,12 @@ function wireListActions(containerId, mapRef) {
     var action = btn.getAttribute("data-action");
     var data = mapRef()[id];
     if (!data) return;
+    if (action === "delete") {
+      if (currentRole !== "owner") return;
+      if (!confirm("Supprimer définitivement ce rapport ? Cette action est irréversible.")) return;
+      deleteReport(id).catch(function (err) { alert("Échec : " + err.message); });
+      return;
+    }
     var newStatus = action === "accept" ? "accepted" : "rejected";
     var container = btn.closest(".mod-actions");
     if (!container) return;
@@ -604,6 +616,16 @@ document.getElementById("search-results").addEventListener("click", function (e)
   var action = btn.getAttribute("data-action");
   var data = searchMap[id];
   if (!data) return;
+  if (action === "delete") {
+    if (currentRole !== "owner") return;
+    if (!confirm("Supprimer définitivement ce rapport ? Cette action est irréversible.")) return;
+    deleteReport(id).then(function () {
+      delete searchMap[id];
+      lastSearchResults = lastSearchResults.filter(function (r) { return r.id !== id; });
+      drawSearchResults(lastSearchResults);
+    }).catch(function (err) { alert("Échec : " + err.message); });
+    return;
+  }
   var newStatus = action === "accept" ? "accepted" : "rejected";
   var container = btn.closest(".mod-actions");
   if (!container) return;
