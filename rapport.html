@@ -422,7 +422,23 @@ async function findEffectifDocByMatricule(matricule) {
   return snap.docs[0];
 }
 
-async function setReportStatus(reportId, currentData, newStatus) {
+function promptReviewerIdentity() {
+  var input = prompt("Ton matricule (pour savoir qui a modéré ce rapport) :");
+  if (input === null) return null;
+  var matricule = input.trim();
+  if (!matricule) {
+    alert("Matricule requis pour accepter ou refuser un rapport.");
+    return null;
+  }
+  var member = allMembersByMatricule[matricule] || membersByMatricule[matricule];
+  if (!member) {
+    alert("Matricule inconnu dans l'effectif. Vérifie la saisie.");
+    return null;
+  }
+  return member;
+}
+
+async function setReportStatus(reportId, currentData, newStatus, reviewer) {
   var wasAccepted = currentData.status === "accepted";
   var willBeAccepted = newStatus === "accepted";
   var delta = 0;
@@ -432,7 +448,7 @@ async function setReportStatus(reportId, currentData, newStatus) {
   await updateDoc(doc(db, "rapports", reportId), {
     status: newStatus,
     codeHash: currentHash,
-    reviewedBy: currentRole === "owner" ? "Owner" : "Officier",
+    reviewedBy: reviewer.rpName + " (" + reviewer.matricule + ")",
     reviewedAt: new Date().toISOString()
   });
 
@@ -500,8 +516,10 @@ function wireListActions(containerId, mapRef) {
     var action = btn.getAttribute("data-action");
     var data = mapRef()[id];
     if (!data) return;
+    var reviewer = promptReviewerIdentity();
+    if (!reviewer) return;
     var newStatus = action === "accept" ? "accepted" : "rejected";
-    setReportStatus(id, data, newStatus).catch(function (err) {
+    setReportStatus(id, data, newStatus, reviewer).catch(function (err) {
       alert("Échec : " + err.message);
     });
   });
@@ -553,8 +571,10 @@ document.getElementById("search-results").addEventListener("click", function (e)
   var action = btn.getAttribute("data-action");
   var data = searchMap[id];
   if (!data) return;
+  var reviewer = promptReviewerIdentity();
+  if (!reviewer) return;
   var newStatus = action === "accept" ? "accepted" : "rejected";
-  setReportStatus(id, data, newStatus).then(function () {
+  setReportStatus(id, data, newStatus, reviewer).then(function () {
     data.status = newStatus;
     drawSearchResults(lastSearchResults);
   }).catch(function (err) {
