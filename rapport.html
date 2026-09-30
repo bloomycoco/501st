@@ -161,6 +161,20 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
+  <div class="modal-overlay" id="reviewer-modal">
+    <div class="modal-box">
+      <h3>Qui modère ce rapport ?</h3>
+      <div class="eff-form">
+        <select id="reviewer-select"><option value="">-- Choisis ton nom --</option></select>
+      </div>
+      <div id="reviewer-modal-error" class="notice" style="display:none;"></div>
+      <div class="modal-actions">
+        <button class="btn" id="reviewer-confirm-btn">Confirmer</button>
+        <button class="eff-icon-btn" id="reviewer-cancel-btn">Annuler</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/site.js?v=2"></script>
 
 <script type="module">
@@ -352,6 +366,11 @@ onSnapshot(effCol, function (snap) {
     return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
   }).join("");
   if (previousSearch && allMembersByMatricule[previousSearch]) searchSel.value = previousSearch;
+
+  var reviewerSel = document.getElementById("reviewer-select");
+  reviewerSel.innerHTML = '<option value="">-- Choisis ton nom --</option>' + allMembers.map(function (m) {
+    return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
+  }).join("");
 });
 
 // ---------- Soumission ----------
@@ -422,21 +441,36 @@ async function findEffectifDocByMatricule(matricule) {
   return snap.docs[0];
 }
 
-function promptReviewerIdentity() {
-  var input = prompt("Ton matricule (pour savoir qui a modéré ce rapport) :");
-  if (input === null) return null;
-  var matricule = input.trim();
-  if (!matricule) {
-    alert("Matricule requis pour accepter ou refuser un rapport.");
-    return null;
-  }
-  var member = allMembersByMatricule[matricule] || membersByMatricule[matricule];
-  if (!member) {
-    alert("Matricule inconnu dans l'effectif. Vérifie la saisie.");
-    return null;
-  }
-  return member;
+var reviewerModal = document.getElementById("reviewer-modal");
+var reviewerSelect = document.getElementById("reviewer-select");
+var reviewerError = document.getElementById("reviewer-modal-error");
+var reviewerResolve = null;
+
+function openReviewerModal() {
+  reviewerError.style.display = "none";
+  reviewerSelect.value = "";
+  reviewerModal.classList.add("show");
+  return new Promise(function (resolve) { reviewerResolve = resolve; });
 }
+
+function closeReviewerModal(result) {
+  reviewerModal.classList.remove("show");
+  if (reviewerResolve) { reviewerResolve(result); reviewerResolve = null; }
+}
+
+document.getElementById("reviewer-confirm-btn").addEventListener("click", function () {
+  var member = allMembersByMatricule[reviewerSelect.value];
+  if (!member) {
+    reviewerError.textContent = "Choisis ton nom dans la liste.";
+    reviewerError.style.display = "block";
+    return;
+  }
+  closeReviewerModal(member);
+});
+
+document.getElementById("reviewer-cancel-btn").addEventListener("click", function () {
+  closeReviewerModal(null);
+});
 
 async function setReportStatus(reportId, currentData, newStatus, reviewer) {
   var wasAccepted = currentData.status === "accepted";
@@ -509,14 +543,14 @@ function drawList(containerId, list, emptyMsg) {
 }
 
 function wireListActions(containerId, mapRef) {
-  document.getElementById(containerId).addEventListener("click", function (e) {
+  document.getElementById(containerId).addEventListener("click", async function (e) {
     var btn = e.target.closest("button[data-action]");
     if (!btn || !isUnlocked()) return;
     var id = btn.getAttribute("data-id");
     var action = btn.getAttribute("data-action");
     var data = mapRef()[id];
     if (!data) return;
-    var reviewer = promptReviewerIdentity();
+    var reviewer = await openReviewerModal();
     if (!reviewer) return;
     var newStatus = action === "accept" ? "accepted" : "rejected";
     setReportStatus(id, data, newStatus, reviewer).catch(function (err) {
@@ -564,14 +598,14 @@ document.getElementById("search-matricule").addEventListener("change", function 
   document.getElementById("search-btn").click();
 });
 
-document.getElementById("search-results").addEventListener("click", function (e) {
+document.getElementById("search-results").addEventListener("click", async function (e) {
   var btn = e.target.closest("button[data-action]");
   if (!btn || !isUnlocked()) return;
   var id = btn.getAttribute("data-id");
   var action = btn.getAttribute("data-action");
   var data = searchMap[id];
   if (!data) return;
-  var reviewer = promptReviewerIdentity();
+  var reviewer = await openReviewerModal();
   if (!reviewer) return;
   var newStatus = action === "accept" ? "accepted" : "rejected";
   setReportStatus(id, data, newStatus, reviewer).then(function () {

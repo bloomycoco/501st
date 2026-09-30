@@ -834,6 +834,43 @@ table .kama-thumb {
 .rec-status.ok { color: #7de3a8; }
 .rec-status.err { color: var(--red); }
 
+/* ─── MODAL ─────────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 3, 10, 0.75);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--border-hi);
+  border-radius: 8px;
+  padding: 26px 28px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-box h3 {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.modal-box .eff-form { justify-content: center; margin-bottom: 16px; }
+.modal-box .eff-form select { flex: 1 1 100%; }
+
+.modal-actions { display: flex; gap: 10px; justify-content: center; }
+.modal-actions .btn { margin-top: 0; }
+
 /* ─── ACCESS GATE (officiers) ───────────────────────────── */
 .gate {
   max-width: 420px;
