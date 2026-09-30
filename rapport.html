@@ -333,10 +333,12 @@ function showStatus(elId, msg, isError) {
 
 var membersByMatricule = {};
 var allMembersByMatricule = {};
+var officersByMatricule = {};
 
 onSnapshot(effCol, function (snap) {
   var members = [];
   var allMembers = [];
+  var officers = [];
   snap.forEach(function (d) {
     var data = d.data();
     var matricule = (data.matricule || "").trim();
@@ -344,14 +346,18 @@ onSnapshot(effCol, function (snap) {
     var m = { matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" };
     allMembers.push(m);
     if (!isReportExempt(data.grade)) members.push(m);
+    else officers.push(m);
   });
   members.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
   allMembers.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
+  officers.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
 
   membersByMatricule = {};
   members.forEach(function (m) { membersByMatricule[m.matricule] = m; });
   allMembersByMatricule = {};
   allMembers.forEach(function (m) { allMembersByMatricule[m.matricule] = m; });
+  officersByMatricule = {};
+  officers.forEach(function (m) { officersByMatricule[m.matricule] = m; });
 
   var sel = document.getElementById("rep-matricule");
   var previous = sel.value;
@@ -368,7 +374,7 @@ onSnapshot(effCol, function (snap) {
   if (previousSearch && allMembersByMatricule[previousSearch]) searchSel.value = previousSearch;
 
   var reviewerSel = document.getElementById("reviewer-select");
-  reviewerSel.innerHTML = '<option value="">-- Choisis ton nom --</option>' + allMembers.map(function (m) {
+  reviewerSel.innerHTML = '<option value="">-- Choisis ton nom --</option>' + officers.map(function (m) {
     return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
   }).join("");
 });
@@ -459,7 +465,7 @@ function closeReviewerModal(result) {
 }
 
 document.getElementById("reviewer-confirm-btn").addEventListener("click", function () {
-  var member = allMembersByMatricule[reviewerSelect.value];
+  var member = officersByMatricule[reviewerSelect.value];
   if (!member) {
     reviewerError.textContent = "Choisis ton nom dans la liste.";
     reviewerError.style.display = "block";
