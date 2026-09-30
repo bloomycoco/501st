@@ -759,7 +759,7 @@ table .kama-thumb {
   align-items: center;
 }
 
-.eff-form input, .eff-form select {
+.eff-form input, .eff-form select, .eff-form textarea {
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
   color: var(--text);
@@ -770,7 +770,46 @@ table .kama-thumb {
   flex: 1 1 150px;
 }
 
+.eff-form textarea { flex: 1 1 100%; min-height: 60px; resize: vertical; }
 .eff-form .btn { margin-top: 0; flex: 0 0 auto; }
+
+.rating-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.rating-row label { font-size: 0.82rem; color: var(--text-dim); flex: 0 0 auto; }
+
+.rating-row select {
+  background: rgba(13,15,30,0.9);
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.rating-row textarea {
+  flex: 1 1 100%;
+  background: rgba(13,15,30,0.9);
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 8px 10px;
+  border-radius: 4px;
+  min-height: 46px;
+  resize: vertical;
+}
+
+.rec-status { margin-top: 10px; font-size: 0.88rem; }
+.rec-status.ok { color: #7de3a8; }
+.rec-status.err { color: var(--red); }
 
 /* ─── ACCESS GATE (officiers) ───────────────────────────── */
 .gate {

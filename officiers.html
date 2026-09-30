@@ -363,7 +363,12 @@
             <tr><th>Salle finale</th><td>4</td></tr>
           </table>
 
-          <p>Chaque thème ci-dessous se note de 1 à 5, selon le sérieux et la personnalité perçus chez le candidat : la précision technique de ses réponses compte moins que son attitude.</p>
+          <p>Chaque thème ci-dessous se note de 1 à 5, selon le sérieux et la personnalité perçus chez le candidat : la précision technique de ses réponses compte moins que son attitude. Remplis les notes au fil de l'entretien, puis envoie le formulaire à la fin : la réponse est automatiquement relayée dans le salon Discord dédié.</p>
+
+          <div class="eff-form" style="margin-bottom: 4px;">
+            <input id="rec-recruteur" placeholder="Identification recruteur (nom, matricule)">
+            <input id="rec-aspirant" placeholder="Identification CT ASP (matricule)">
+          </div>
 
           <details class="accordion sub">
             <summary>🎙️ Présentation du soldat</summary>
@@ -375,6 +380,11 @@
                 <li>Si vous deviez vous décrire en une phrase, que diriez-vous ?</li>
                 <li>Quelles sont vos motivations pour rejoindre la 501st Légion ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-presentation">Note</label>
+                <select id="rate-presentation"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-presentation" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -388,6 +398,11 @@
                 <li>Qu'attendez-vous d'un régiment comme le nôtre ?</li>
                 <li>Que pensez-vous pouvoir apporter à la 501st ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-motivation">Note</label>
+                <select id="rate-motivation"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-motivation" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -400,6 +415,11 @@
                 <li>Un clone doit-il réfléchir ou obéir ?</li>
                 <li>Qu'est-ce qui est le plus important : survivre ou accomplir la mission ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-role">Note</label>
+                <select id="rate-role"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-role" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -411,6 +431,11 @@
                 <li>Comment réagissez-vous si un officier vous corrige devant tout le monde ?</li>
                 <li>Pour vous, qu'est-ce que la discipline ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-discipline">Note</label>
+                <select id="rate-discipline"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-discipline" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -423,6 +448,11 @@
                 <li>Que faites-vous si un camarade fait une erreur ?</li>
                 <li>Êtes-vous quelqu'un qui parle beaucoup ou qui agit en silence ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-escouade">Note</label>
+                <select id="rate-escouade"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-escouade" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -435,6 +465,11 @@
                 <li>Il doit respecter les priorités, la précision et les règles d'or.</li>
                 <li>Rester en zone de tir pour le sujet suivant.</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-tir">Note</label>
+                <select id="rate-tir"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-tir" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -447,6 +482,11 @@
                 <li>Si un jour vous commandez des hommes, comment agiriez-vous ?</li>
                 <li>Préférez-vous rester soldat ou progresser dans la hiérarchie ?</li>
               </ul>
+              <div class="rating-row">
+                <label for="rate-progression">Note</label>
+                <select id="rate-progression"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-progression" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -458,9 +498,20 @@
                 <li>Pourquoi devrions-nous vous accepter ?</li>
                 <li>Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</li>
               </ul>
-              <p>Prévoir un espace d'observation libre pour toute remarque à transmettre au reste du corps officier.</p>
+              <div class="rating-row">
+                <label for="rate-fin">Note</label>
+                <select id="rate-fin"><option value="">--</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <textarea id="notes-fin" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
+
+          <h4>📨 Soumettre l'entretien</h4>
+          <div class="eff-form">
+            <textarea id="rec-observation" placeholder="Observation finale (optionnel)"></textarea>
+            <button id="rec-submit-btn" class="btn" type="button">Envoyer l'entretien</button>
+          </div>
+          <div id="rec-status" class="rec-status"></div>
 
           <h4>✅ À faire une fois l'entretien terminé</h4>
           <p>Tout manquement aux consignes ci-dessous sera sanctionné.</p>
@@ -489,7 +540,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
   loadSession, saveSession, clearSession, readAccessConfig,
   tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
@@ -508,8 +559,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const accessDocRef = doc(db, "config", "access");
+const recrutementsCol = collection(db, "recrutements");
 let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 let currentRole = null;
+let currentHash = null;
 
 var gate = document.getElementById("gate");
 var content = document.getElementById("officer-content");
@@ -517,8 +570,9 @@ var input = document.getElementById("gate-input");
 var submit = document.getElementById("gate-submit");
 var error = document.getElementById("gate-error");
 
-function unlock(role) {
+function unlock(role, hash) {
   currentRole = role;
+  currentHash = hash;
   gate.style.display = "none";
   content.classList.add("show");
   window.dispatchEvent(new CustomEvent("officier-unlocked"));
@@ -554,7 +608,7 @@ async function restoreSessionIfValid() {
     accessConfig = await readAccessConfig(getDoc, accessDocRef);
   } catch (e) { return; }
   var restored = tryRestoreSession(accessConfig);
-  if (restored) unlock(restored.role);
+  if (restored) unlock(restored.role, restored.hash);
 }
 restoreSessionIfValid();
 
@@ -565,7 +619,7 @@ async function tryCode(code) {
   var result = await verifyCode(accessConfig, code);
   if (result) {
     saveSession(result.role, result.hash, accessConfig.authEpoch);
-    unlock(result.role);
+    unlock(result.role, result.hash);
   } else {
     error.classList.add("show");
     input.value = "";
@@ -580,6 +634,74 @@ submit.addEventListener("click", function () {
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && input.value) tryCode(input.value);
 });
+
+var RECRUTEMENT_THEMES = ["presentation", "motivation", "role", "discipline", "escouade", "tir", "progression", "fin"];
+var recStatus = document.getElementById("rec-status");
+var recSubmitBtn = document.getElementById("rec-submit-btn");
+
+function setRecStatus(message, kind) {
+  recStatus.textContent = message;
+  recStatus.className = "rec-status" + (kind ? " " + kind : "");
+}
+
+async function submitRecrutement() {
+  if (!currentHash) {
+    setRecStatus("Tu dois être connecté (code officier/owner) pour envoyer un entretien.", "err");
+    return;
+  }
+  var recruteur = document.getElementById("rec-recruteur").value.trim();
+  var aspirant = document.getElementById("rec-aspirant").value.trim();
+  if (!recruteur || !aspirant) {
+    setRecStatus("Renseigne l'identification du recruteur et du CT ASP avant d'envoyer.", "err");
+    return;
+  }
+
+  var ratings = {};
+  for (var i = 0; i < RECRUTEMENT_THEMES.length; i++) {
+    var key = RECRUTEMENT_THEMES[i];
+    var noteVal = document.getElementById("rate-" + key).value;
+    if (!noteVal) {
+      setRecStatus("Renseigne une note (1-5) pour chaque thème avant d'envoyer.", "err");
+      return;
+    }
+    ratings[key] = {
+      note: Number(noteVal),
+      notes: document.getElementById("notes-" + key).value.trim()
+    };
+  }
+
+  var observation = document.getElementById("rec-observation").value.trim();
+
+  recSubmitBtn.disabled = true;
+  setRecStatus("Envoi en cours…", "");
+  try {
+    await addDoc(recrutementsCol, {
+      recruteur: recruteur,
+      aspirant: aspirant,
+      ratings: ratings,
+      observation: observation,
+      codeHash: currentHash,
+      notified: false,
+      submittedAt: new Date().toISOString()
+    });
+    setRecStatus("Entretien envoyé. Il sera relayé sur Discord d'ici quelques minutes.", "ok");
+
+    document.getElementById("rec-recruteur").value = "";
+    document.getElementById("rec-aspirant").value = "";
+    document.getElementById("rec-observation").value = "";
+    for (var j = 0; j < RECRUTEMENT_THEMES.length; j++) {
+      var k = RECRUTEMENT_THEMES[j];
+      document.getElementById("rate-" + k).value = "";
+      document.getElementById("notes-" + k).value = "";
+    }
+  } catch (e) {
+    setRecStatus("Échec de l'envoi : " + e.message, "err");
+  } finally {
+    recSubmitBtn.disabled = false;
+  }
+}
+
+recSubmitBtn.addEventListener("click", submitRecrutement);
 </script>
 
 </body>
