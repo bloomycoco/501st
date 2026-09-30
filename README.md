@@ -10,14 +10,12 @@ Site statique (HTML/CSS pur, sans dépendance) reconstitué à partir du site Go
 - `specialisation.html`, `spe-soldat.html`, `spe-heavy.html`, `spe-medecin.html`, `spe-arf.html`, `spe-torrent.html`, `spe-arc-trooper.html` : Spécialisations
 - `tenues.html` : Tenues 501st
 - `bareme-promotion.html` : Barème de promotion
-- `recrutement.html` : Recrutement
 - `officiers.html` : Espace Officier (protégé par code d'accès)
 - `css/style.css` : Feuille de style commune
 
 ## À compléter
 
 - **Effectif** : le lien vers la feuille Google Sheets d'effectif n'a pas pu être récupéré automatiquement (lien "#" dans la barre de navigation de chaque page). À renseigner manuellement.
-- **Recrutement** : le bouton du formulaire Google Forms est un lien "#" à remplacer par l'URL réelle.
 - **Guide du commandant de mission** : "501e Legion - Guide du commandant de mission-7.pdf" (page Commandement) est référencé mais pas hébergé ; à ajouter dans `assets/` et à lier, comme fait pour `assets/guide-ct/` (Guide du CT).
 - **ARF** : le contenu de cette spécialisation est dans un Google Doc privé, non récupérable automatiquement ; le texte reste à fournir.
 
