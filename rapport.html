@@ -108,7 +108,7 @@
     <div class="card">
       <h2>🔍 Rechercher les rapports d'un matricule</h2>
       <div class="eff-form">
-        <input type="text" id="search-matricule" placeholder="Matricule à rechercher">
+        <select id="search-matricule"><option value="">-- Choisis un membre --</option></select>
         <button class="btn" id="search-btn">Rechercher</button>
       </div>
       <div id="search-results" style="margin-top:14px;"></div>
@@ -318,20 +318,26 @@ function showStatus(elId, msg, isError) {
 // ---------- Menu deroulant des membres (evite les erreurs de matricule) ----------
 
 var membersByMatricule = {};
+var allMembersByMatricule = {};
 
 onSnapshot(effCol, function (snap) {
   var members = [];
+  var allMembers = [];
   snap.forEach(function (d) {
     var data = d.data();
     var matricule = (data.matricule || "").trim();
     if (!matricule || matricule === "//" || matricule === "///") return;
-    if (isReportExempt(data.grade)) return;
-    members.push({ matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" });
+    var m = { matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" };
+    allMembers.push(m);
+    if (!isReportExempt(data.grade)) members.push(m);
   });
   members.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
+  allMembers.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
 
   membersByMatricule = {};
   members.forEach(function (m) { membersByMatricule[m.matricule] = m; });
+  allMembersByMatricule = {};
+  allMembers.forEach(function (m) { allMembersByMatricule[m.matricule] = m; });
 
   var sel = document.getElementById("rep-matricule");
   var previous = sel.value;
@@ -339,6 +345,13 @@ onSnapshot(effCol, function (snap) {
     return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
   }).join("");
   if (previous && membersByMatricule[previous]) sel.value = previous;
+
+  var searchSel = document.getElementById("search-matricule");
+  var previousSearch = searchSel.value;
+  searchSel.innerHTML = '<option value="">-- Choisis un membre --</option>' + allMembers.map(function (m) {
+    return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
+  }).join("");
+  if (previousSearch && allMembersByMatricule[previousSearch]) searchSel.value = previousSearch;
 });
 
 // ---------- Soumission ----------
@@ -529,8 +542,8 @@ document.getElementById("search-btn").addEventListener("click", async function (
   }
 });
 
-document.getElementById("search-matricule").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") document.getElementById("search-btn").click();
+document.getElementById("search-matricule").addEventListener("change", function () {
+  document.getElementById("search-btn").click();
 });
 
 document.getElementById("search-results").addEventListener("click", function (e) {
