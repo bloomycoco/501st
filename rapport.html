@@ -161,20 +161,6 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <div class="modal-overlay" id="reviewer-modal">
-    <div class="modal-box">
-      <h3>Qui modère ce rapport ?</h3>
-      <div class="eff-form">
-        <select id="reviewer-select"><option value="">-- Choisis ton nom --</option></select>
-      </div>
-      <div id="reviewer-modal-error" class="notice" style="display:none;"></div>
-      <div class="modal-actions">
-        <button class="btn" id="reviewer-confirm-btn">Confirmer</button>
-        <button class="eff-icon-btn" id="reviewer-cancel-btn">Annuler</button>
-      </div>
-    </div>
-  </div>
-
   <script src="js/site.js?v=3"></script>
 
 <script type="module">
@@ -372,11 +358,6 @@ onSnapshot(effCol, function (snap) {
     return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
   }).join("");
   if (previousSearch && allMembersByMatricule[previousSearch]) searchSel.value = previousSearch;
-
-  var reviewerSel = document.getElementById("reviewer-select");
-  reviewerSel.innerHTML = '<option value="">-- Choisis ton nom --</option>' + officers.map(function (m) {
-    return '<option value="' + esc(m.matricule) + '">' + esc(m.rpName) + ' (' + esc(m.matricule) + ') - ' + esc(m.grade) + '</option>';
-  }).join("");
 });
 
 // ---------- Soumission ----------
@@ -419,22 +400,25 @@ function formatDate(iso) {
   return d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 }
 
-function renderReportCard(id, data) {
+function moderationButtonsHtml(id, data) {
   var actions = "";
-  if (isUnlocked() && !data.archived) {
-    if (data.status !== "accepted") {
-      actions += '<button class="eff-icon-btn" data-action="accept" data-id="' + id + '">Accepter</button>';
-    }
-    if (data.status !== "rejected") {
-      actions += '<button class="eff-icon-btn danger" data-action="reject" data-id="' + id + '">Refuser</button>';
-    }
+  if (data.status !== "accepted") {
+    actions += '<button class="eff-icon-btn" data-action="accept" data-id="' + id + '">Accepter</button>';
   }
+  if (data.status !== "rejected") {
+    actions += '<button class="eff-icon-btn danger" data-action="reject" data-id="' + id + '">Refuser</button>';
+  }
+  return actions;
+}
+
+function renderReportCard(id, data) {
+  var actionsHtml = (isUnlocked() && !data.archived) ? moderationButtonsHtml(id, data) : "";
   var who = data.rpName ? esc(data.rpName) + ' (' + esc(data.matricule) + ')' : esc(data.matricule);
   return '<div class="card" style="margin-bottom:12px;">' +
     '<p style="margin:0 0 6px;"><strong>' + who + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + (data.archived ? ' <span class="tag tag-purple">Archivé</span>' : '') + '</p>' +
     '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
     (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
-    (actions ? '<div class="eff-row-actions" style="flex-direction:row;">' + actions + '</div>' : '') +
+    (actionsHtml ? '<div class="eff-row-actions mod-actions" data-id="' + id + '" style="flex-direction:row;">' + actionsHtml + '</div>' : '') +
     '</div>';
 }
 
@@ -447,36 +431,47 @@ async function findEffectifDocByMatricule(matricule) {
   return snap.docs[0];
 }
 
-var reviewerModal = document.getElementById("reviewer-modal");
-var reviewerSelect = document.getElementById("reviewer-select");
-var reviewerError = document.getElementById("reviewer-modal-error");
-var reviewerResolve = null;
-
-function openReviewerModal() {
-  reviewerError.style.display = "none";
-  reviewerSelect.value = "";
-  reviewerModal.classList.add("show");
-  return new Promise(function (resolve) { reviewerResolve = resolve; });
+function officerOptionsHtml() {
+  var matricules = Object.keys(officersByMatricule).sort(function (a, b) {
+    return officersByMatricule[a].rpName.localeCompare(officersByMatricule[b].rpName);
+  });
+  return '<option value="">-- Choisis ton nom --</option>' + matricules.map(function (matricule) {
+    var m = officersByMatricule[matricule];
+    return '<option value="' + esc(matricule) + '">' + esc(m.rpName) + ' (' + esc(matricule) + ') - ' + esc(m.grade) + '</option>';
+  }).join("");
 }
 
-function closeReviewerModal(result) {
-  reviewerModal.classList.remove("show");
-  if (reviewerResolve) { reviewerResolve(result); reviewerResolve = null; }
+function resetModerationButtons(container, id, data) {
+  container.innerHTML = moderationButtonsHtml(id, data);
 }
 
-document.getElementById("reviewer-confirm-btn").addEventListener("click", function () {
-  var member = officersByMatricule[reviewerSelect.value];
-  if (!member) {
-    reviewerError.textContent = "Choisis ton nom dans la liste.";
-    reviewerError.style.display = "block";
-    return;
-  }
-  closeReviewerModal(member);
-});
+function showInlinePicker(container, id, data, newStatus, onDone) {
+  container.innerHTML =
+    '<select class="mod-reviewer-select">' + officerOptionsHtml() + '</select>' +
+    '<button class="btn" data-mod="confirm">Valider</button>' +
+    '<button class="eff-icon-btn" data-mod="cancel">Annuler</button>' +
+    '<span class="mod-inline-error" style="display:none;"></span>';
 
-document.getElementById("reviewer-cancel-btn").addEventListener("click", function () {
-  closeReviewerModal(null);
-});
+  container.querySelector('[data-mod="cancel"]').addEventListener("click", function () {
+    resetModerationButtons(container, id, data);
+  });
+
+  container.querySelector('[data-mod="confirm"]').addEventListener("click", function () {
+    var select = container.querySelector(".mod-reviewer-select");
+    var member = officersByMatricule[select.value];
+    var errEl = container.querySelector(".mod-inline-error");
+    if (!member) {
+      errEl.textContent = "Choisis ton nom dans la liste.";
+      errEl.style.display = "inline";
+      return;
+    }
+    setReportStatus(id, data, newStatus, member).then(function () {
+      if (onDone) onDone();
+    }).catch(function (err) {
+      alert("Échec : " + err.message);
+    });
+  });
+}
 
 async function setReportStatus(reportId, currentData, newStatus, reviewer) {
   var wasAccepted = currentData.status === "accepted";
@@ -549,19 +544,17 @@ function drawList(containerId, list, emptyMsg) {
 }
 
 function wireListActions(containerId, mapRef) {
-  document.getElementById(containerId).addEventListener("click", async function (e) {
+  document.getElementById(containerId).addEventListener("click", function (e) {
     var btn = e.target.closest("button[data-action]");
     if (!btn || !isUnlocked()) return;
     var id = btn.getAttribute("data-id");
     var action = btn.getAttribute("data-action");
     var data = mapRef()[id];
     if (!data) return;
-    var reviewer = await openReviewerModal();
-    if (!reviewer) return;
     var newStatus = action === "accept" ? "accepted" : "rejected";
-    setReportStatus(id, data, newStatus, reviewer).catch(function (err) {
-      alert("Échec : " + err.message);
-    });
+    var container = btn.closest(".mod-actions");
+    if (!container) return;
+    showInlinePicker(container, id, data, newStatus);
   });
 }
 
@@ -604,21 +597,19 @@ document.getElementById("search-matricule").addEventListener("change", function 
   document.getElementById("search-btn").click();
 });
 
-document.getElementById("search-results").addEventListener("click", async function (e) {
+document.getElementById("search-results").addEventListener("click", function (e) {
   var btn = e.target.closest("button[data-action]");
   if (!btn || !isUnlocked()) return;
   var id = btn.getAttribute("data-id");
   var action = btn.getAttribute("data-action");
   var data = searchMap[id];
   if (!data) return;
-  var reviewer = await openReviewerModal();
-  if (!reviewer) return;
   var newStatus = action === "accept" ? "accepted" : "rejected";
-  setReportStatus(id, data, newStatus, reviewer).then(function () {
+  var container = btn.closest(".mod-actions");
+  if (!container) return;
+  showInlinePicker(container, id, data, newStatus, function () {
     data.status = newStatus;
     drawSearchResults(lastSearchResults);
-  }).catch(function (err) {
-    alert("Échec : " + err.message);
   });
 });
 </script>
