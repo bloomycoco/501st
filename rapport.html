@@ -396,7 +396,7 @@ function formatDate(iso) {
 
 function renderReportCard(id, data) {
   var actions = "";
-  if (isUnlocked()) {
+  if (isUnlocked() && !data.archived) {
     if (data.status !== "accepted") {
       actions += '<button class="eff-icon-btn" data-action="accept" data-id="' + id + '">Accepter</button>';
     }
@@ -406,7 +406,7 @@ function renderReportCard(id, data) {
   }
   var who = data.rpName ? esc(data.rpName) + ' (' + esc(data.matricule) + ')' : esc(data.matricule);
   return '<div class="card" style="margin-bottom:12px;">' +
-    '<p style="margin:0 0 6px;"><strong>' + who + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + '</p>' +
+    '<p style="margin:0 0 6px;"><strong>' + who + '</strong> &middot; ' + formatDate(data.submittedAt) + ' &middot; ' + statusTag(data.status) + (data.archived ? ' <span class="tag tag-purple">Archivé</span>' : '') + '</p>' +
     '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
     (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
     (actions ? '<div class="eff-row-actions" style="flex-direction:row;">' + actions + '</div>' : '') +
