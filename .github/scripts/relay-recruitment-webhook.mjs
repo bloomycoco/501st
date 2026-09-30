@@ -9,15 +9,16 @@ const DB_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/data
 const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
 
 const THEMES = [
-  ["presentation", "Présentation du soldat"],
-  ["motivation", "Motivation pour rejoindre la 501st"],
-  ["role", "Vision du rôle d'un clone"],
-  ["discipline", "Discipline militaire"],
-  ["escouade", "Esprit d'escouade"],
-  ["tir", "Exercice de tir"],
-  ["progression", "Vision de sa progression"],
-  ["fin", "Questions de fin d'entretien"]
+  ["motivation", "🎯 Motivation"],
+  ["role", "🪖 Vision du rôle"],
+  ["discipline", "⚖️ Discipline"],
+  ["escouade", "🤝 Esprit d'escouade"],
+  ["tir", "🔫 Exercice de tir"],
+  ["progression", "📈 Progression"],
+  ["fin", "🏁 Fin d'entretien"]
 ];
+
+const EMBED_COLOR = 0x5b7cff;
 
 function fieldStr(fields, name) {
   return fields && fields[name] && fields[name].stringValue !== undefined ? fields[name].stringValue : "";
@@ -66,35 +67,48 @@ async function markNotified(docId) {
   if (!res.ok) throw new Error(`markNotified failed for ${docId}: ${res.status} ${await res.text()}`);
 }
 
-function buildMessage(fields) {
+function buildEmbed(fields) {
   const recruteur = fieldStr(fields, "recruteur") || "?";
   const aspirant = fieldStr(fields, "aspirant") || "?";
   const observation = fieldStr(fields, "observation");
+  const submittedAt = fieldStr(fields, "submittedAt");
   const ratings = fieldMap(fields, "ratings");
 
-  const lines = THEMES.map(([key, label]) => {
+  const embedFields = [
+    { name: "🪖 Recruteur", value: recruteur, inline: true },
+    { name: "🎖️ CT ASP", value: aspirant, inline: true }
+  ];
+
+  for (const [key, label] of THEMES) {
     const r = fieldMap(ratings, key);
     const note = fieldNum(r, "note");
     const notes = fieldStr(r, "notes");
-    return `**${label}** : ${note || "-"}/5${notes ? ` (notes : ${notes})` : ""}`;
-  });
+    embedFields.push({
+      name: label,
+      value: `${note || "-"}/5${notes ? `\n${notes}` : ""}`,
+      inline: true
+    });
+  }
 
-  let content =
-    `📝 **Nouvel entretien de recrutement CT ASP**\n` +
-    `Recruteur : **${recruteur}**\n` +
-    `CT ASP : **${aspirant}**\n\n` +
-    lines.join("\n");
+  if (observation) {
+    embedFields.push({ name: "📝 Observation finale", value: observation.slice(0, 1000), inline: false });
+  }
 
-  if (observation) content += `\n\n**Observation finale :** ${observation}`;
-  if (content.length > 1900) content = content.slice(0, 1900) + "...";
-  return content;
+  const embed = {
+    title: "📝 Nouvel entretien de recrutement CT ASP",
+    color: EMBED_COLOR,
+    fields: embedFields,
+    footer: { text: "501st Légion d'Attaque" }
+  };
+  if (submittedAt) embed.timestamp = submittedAt;
+  return embed;
 }
 
-async function postToDiscord(webhookUrl, content) {
+async function postToDiscord(webhookUrl, embed) {
   const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content })
+    body: JSON.stringify({ embeds: [embed] })
   });
   if (!res.ok) throw new Error(`Discord webhook failed: ${res.status} ${await res.text()}`);
 }
@@ -107,8 +121,8 @@ async function main() {
   console.log(`${pending.length} entretien(s) en attente de relais.`);
 
   for (const row of pending) {
-    const content = buildMessage(row.fields);
-    await postToDiscord(webhookUrl, content);
+    const embed = buildEmbed(row.fields);
+    await postToDiscord(webhookUrl, embed);
     await markNotified(row.id);
     console.log(`Relayé : ${row.id}`);
   }
