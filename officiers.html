@@ -587,7 +587,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
   loadSession, saveSession, clearSession, readAccessConfig,
   tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
@@ -702,6 +702,22 @@ function setRecStatus(message, kind) {
   recStatus.className = "rec-status" + (kind ? " " + kind : "");
 }
 
+var RELAY_WORKER_URL = "https://recrutement-501st-relay.site501st-relay-worker.workers.dev";
+
+async function triggerInstantRelay(payload) {
+  try {
+    var res = await fetch(RELAY_WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  } catch (e) {
+    console.warn("Relais instantané indisponible, le cron de secours prendra le relais :", e);
+    return false;
+  }
+}
+
 async function submitRecrutement() {
   if (!currentHash) {
     setRecStatus("Tu dois être connecté (code officier/owner) pour envoyer un entretien.", "err");
@@ -733,16 +749,32 @@ async function submitRecrutement() {
   recSubmitBtn.disabled = true;
   setRecStatus("Envoi en cours…", "");
   try {
-    await addDoc(recrutementsCol, {
+    var submittedAt = new Date().toISOString();
+    var docRef = await addDoc(recrutementsCol, {
       recruteur: recruteur,
       aspirant: aspirant,
       ratings: ratings,
       observation: observation,
       codeHash: currentHash,
       notified: false,
-      submittedAt: new Date().toISOString()
+      submittedAt: submittedAt
     });
-    setRecStatus("Entretien envoyé. Il sera relayé sur Discord d'ici quelques minutes.", "ok");
+
+    var relayed = await triggerInstantRelay({
+      recruteur: recruteur,
+      aspirant: aspirant,
+      ratings: ratings,
+      observation: observation,
+      submittedAt: submittedAt,
+      codeHash: currentHash
+    });
+
+    if (relayed) {
+      await updateDoc(docRef, { notified: true, codeHash: currentHash });
+      setRecStatus("Entretien envoyé et relayé sur Discord instantanément.", "ok");
+    } else {
+      setRecStatus("Entretien envoyé. Relais instantané indisponible, il sera relayé sous peu (cron de secours).", "ok");
+    }
 
     document.getElementById("rec-recruteur").value = "";
     document.getElementById("rec-aspirant").value = "";
