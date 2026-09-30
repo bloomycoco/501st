@@ -18,7 +18,7 @@ const GRADE_RANK = {
 
 function isReportExempt(grade) {
   const rank = GRADE_RANK[grade];
-  return rank !== undefined && rank <= GRADE_RANK.CPT;
+  return rank !== undefined && rank <= GRADE_RANK["CPT-2nd"];
 }
 
 function fieldStr(fields, name) {
@@ -59,6 +59,38 @@ async function resetReportCount(docId) {
     body: JSON.stringify(body)
   });
   if (!res.ok) throw new Error(`Reset failed for ${docId}: ${res.status} ${await res.text()}`);
+}
+
+async function findUnarchivedRejectedReports() {
+  const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:runQuery`;
+  const body = {
+    structuredQuery: {
+      from: [{ collectionId: "rapports" }],
+      where: { fieldFilter: { field: { fieldPath: "status" }, op: "EQUAL", value: { stringValue: "rejected" } } }
+    }
+  };
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`runQuery failed: ${res.status} ${await res.text()}`);
+  const rows = await res.json();
+  return rows
+    .filter((r) => r.document)
+    .map((r) => ({ id: r.document.name.split("/").pop(), fields: r.document.fields || {} }))
+    .filter((r) => !(r.fields.archived && r.fields.archived.booleanValue === true));
+}
+
+async function archiveReport(docId) {
+  const url = `${BASE}/rapports/${docId}?updateMask.fieldPaths=archived&updateMask.fieldPaths=codeHash`;
+  const body = { fields: { archived: { booleanValue: true }, codeHash: { stringValue: OWNER_HASH } } };
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`Archive failed for ${docId}: ${res.status} ${await res.text()}`);
 }
 
 async function postDiscordAlert(webhookUrl, roleId, offenders) {
@@ -117,6 +149,12 @@ async function main() {
     resetCount++;
   }
   console.log(`Compteur de rapports remis a zero pour ${resetCount} membre(s).`);
+
+  const rejectedReports = await findUnarchivedRejectedReports();
+  for (const report of rejectedReports) {
+    await archiveReport(report.id);
+  }
+  console.log(`${rejectedReports.length} rapport(s) refusé(s) archivé(s).`);
 }
 
 main().catch((err) => {

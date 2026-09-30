@@ -191,7 +191,7 @@ const effCol = collection(db, "effectif");
 const accessDocRef = doc(db, "config", "access");
 let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
-// Rang hierarchique (identique a effectif.html). A partir du grade CPT
+// Rang hierarchique (identique a effectif.html). A partir du grade CPT-2nd
 // (inclus) et au-dessus, exempte du quota de rapport : ces membres
 // n'apparaissent pas dans le menu de soumission.
 const GRADE_RANK = {
@@ -203,7 +203,7 @@ const GRADE_RANK = {
 };
 function isReportExempt(grade) {
   var rank = GRADE_RANK[grade];
-  return rank !== undefined && rank <= GRADE_RANK["CPT"];
+  return rank !== undefined && rank <= GRADE_RANK["CPT-2nd"];
 }
 
 function esc(s) {
@@ -447,7 +447,7 @@ onSnapshot(rapportsCol, function (snap) {
     var item = { id: d.id, data: data };
     if (data.status === "pending") pending.push(item);
     else if (data.status === "accepted") accepted.push(item);
-    else if (data.status === "rejected") rejected.push(item);
+    else if (data.status === "rejected" && !data.archived) rejected.push(item);
   });
 
   pending.sort(function (a, b) { return (a.data.submittedAt || "").localeCompare(b.data.submittedAt || ""); });

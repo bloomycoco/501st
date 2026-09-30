@@ -280,11 +280,11 @@ const MISSION_QUOTAS = {
   "VCMD": 8
 };
 
-// A partir du grade CPT (inclus) et au-dessus dans la hierarchie, les membres
-// sont exemptes du quota de rapport hebdomadaire.
+// A partir du grade CPT-2nd (inclus) et au-dessus dans la hierarchie, les
+// membres sont exemptes du quota de rapport hebdomadaire.
 const WEEKLY_REPORT_MIN = 1;
 function isReportExempt(grade) {
-  return gradeRank(grade) <= GRADE_RANK["CPT"];
+  return gradeRank(grade) <= GRADE_RANK["CPT-2nd"];
 }
 
 function esc(s) {
