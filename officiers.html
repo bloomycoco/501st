@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body class="booting">
 
@@ -453,26 +453,6 @@
                 <textarea id="notes-discipline_def" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
-              <h5>🎯 Exercice de tir (test pratique)</h5>
-              <ol class="clean">
-                <li>Expliquer à l'aspirant qu'il va réaliser un exercice de tir, puis l'emmener dans la zone de tir.</li>
-                <li>Se placer à gauche du stand (pour éviter que l'aspirant voie la cible à droite).</li>
-                <li>Il doit respecter les priorités, la précision et les règles d'or.</li>
-                <li>Rester en zone de tir pour le sujet suivant.</li>
-              </ol>
-              <div class="rating-row">
-                <div class="rating-scale" data-target="rate-tir">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-tir" value="">
-                </div>
-                <textarea id="notes-tir" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
               <h5>🏁 Questions de fin d'entretien</h5>
               <div class="rating-row">
                 <p class="q-text">Avez-vous quelque chose à ajouter, soldat ?</p>
@@ -501,6 +481,31 @@
                 <textarea id="notes-pret_couleurs" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
+            </div>
+          </details>
+
+          <details class="accordion sub" open>
+            <summary>🔫 Test pratique</summary>
+            <div class="accordion-body">
+              <h5>🎯 Exercice de tir</h5>
+              <ol class="clean">
+                <li>Expliquer à l'aspirant qu'il va réaliser un exercice de tir, puis l'emmener dans la zone de tir.</li>
+                <li>Se placer à gauche du stand (pour éviter que l'aspirant voie la cible à droite).</li>
+                <li>Il doit respecter les priorités, la précision et les règles d'or.</li>
+                <li>Rester en zone de tir pour le sujet suivant.</li>
+              </ol>
+              <div class="rating-row">
+                <div class="rating-scale" data-target="rate-tir">
+                  <span class="rating-label">Note</span>
+                  <button type="button" class="rating-btn" data-value="1">1</button>
+                  <button type="button" class="rating-btn" data-value="2">2</button>
+                  <button type="button" class="rating-btn" data-value="3">3</button>
+                  <button type="button" class="rating-btn" data-value="4">4</button>
+                  <button type="button" class="rating-btn" data-value="5">5</button>
+                  <input type="hidden" id="rate-tir" value="">
+                </div>
+                <textarea id="notes-tir" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
             </div>
           </details>
 
@@ -534,7 +539,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=8"></script>
+  <script src="js/site.js?v=9"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
