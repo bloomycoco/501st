@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body class="booting">
 
@@ -361,9 +361,11 @@
             <input id="rec-aspirant" placeholder="Identification CT ASP (matricule)">
           </div>
 
-          <details class="accordion sub">
-            <summary>🎙️ Présentation du soldat</summary>
+          <details class="accordion sub" open>
+            <summary>📋 Questions d'entretien</summary>
             <div class="accordion-body">
+
+              <h5>🎙️ Présentation du soldat</h5>
               <ul class="clean">
                 <li>Matricule et désignation, soldat.</li>
                 <li>Quelles sont vos motivations pour rejoindre la 501st Légion ?</li>
@@ -380,12 +382,8 @@
                 </div>
                 <textarea id="notes-presentation" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
-            </div>
-          </details>
 
-          <details class="accordion sub">
-            <summary>🎯 Motivation pour rejoindre la 501st</summary>
-            <div class="accordion-body">
+              <h5>🎯 Motivation pour rejoindre la 501st</h5>
               <ul class="clean">
                 <li>Que fait le 501st sur le champ de bataille ?</li>
               </ul>
@@ -401,12 +399,8 @@
                 </div>
                 <textarea id="notes-motivation" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
-            </div>
-          </details>
 
-          <details class="accordion sub">
-            <summary>🪖 Vision du rôle d'un clone</summary>
-            <div class="accordion-body">
+              <h5>🪖 Vision du rôle d'un clone</h5>
               <ul class="clean">
                 <li>Un clone doit-il réfléchir ou obéir ?</li>
                 <li>Qu'est-ce qui est le plus important : survivre ou accomplir la mission ?</li>
@@ -423,12 +417,8 @@
                 </div>
                 <textarea id="notes-role" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
-            </div>
-          </details>
 
-          <details class="accordion sub">
-            <summary>⚖️ Discipline militaire</summary>
-            <div class="accordion-body">
+              <h5>⚖️ Discipline militaire</h5>
               <ul class="clean">
                 <li>Que faites-vous si un ordre ne vous convient pas ?</li>
                 <li>Pour vous, qu'est-ce que la discipline ?</li>
@@ -445,12 +435,8 @@
                 </div>
                 <textarea id="notes-discipline" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
-            </div>
-          </details>
 
-          <details class="accordion sub">
-            <summary>🎯 Exercice de tir</summary>
-            <div class="accordion-body">
+              <h5>🎯 Exercice de tir</h5>
               <ul class="clean">
                 <li>Expliquer à l'aspirant qu'il va réaliser un exercice de tir, puis l'emmener dans la zone de tir.</li>
                 <li>Se placer à gauche du stand (pour éviter que l'aspirant voie la cible à droite).</li>
@@ -469,12 +455,8 @@
                 </div>
                 <textarea id="notes-tir" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
-            </div>
-          </details>
 
-          <details class="accordion sub">
-            <summary>🏁 Questions de fin d'entretien</summary>
-            <div class="accordion-body">
+              <h5>🏁 Questions de fin d'entretien</h5>
               <ul class="clean">
                 <li>Avez-vous quelque chose à ajouter, soldat ?</li>
                 <li>Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</li>
@@ -491,6 +473,7 @@
                 </div>
                 <textarea id="notes-fin" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
+
             </div>
           </details>
 
@@ -524,7 +507,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=6"></script>
+  <script src="js/site.js?v=7"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
