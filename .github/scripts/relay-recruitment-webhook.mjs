@@ -12,9 +12,7 @@ const THEMES = [
   ["motivation", "🎯 Motivation"],
   ["role", "🪖 Vision du rôle"],
   ["discipline", "⚖️ Discipline"],
-  ["escouade", "🤝 Esprit d'escouade"],
   ["tir", "🔫 Exercice de tir"],
-  ["progression", "📈 Progression"],
   ["fin", "🏁 Fin d'entretien"]
 ];
 

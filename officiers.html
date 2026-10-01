@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body class="booting">
 
@@ -366,9 +366,6 @@
             <div class="accordion-body">
               <ul class="clean">
                 <li>Matricule et désignation, soldat.</li>
-                <li>D'où venez-vous ?</li>
-                <li>Depuis combien de temps êtes-vous au service de la République ?</li>
-                <li>Si vous deviez vous décrire en une phrase, que diriez-vous ?</li>
                 <li>Quelles sont vos motivations pour rejoindre la 501st Légion ?</li>
               </ul>
               <div class="rating-row">
@@ -390,11 +387,7 @@
             <summary>🎯 Motivation pour rejoindre la 501st</summary>
             <div class="accordion-body">
               <ul class="clean">
-                <li>Pourquoi avez-vous demandé votre affectation dans la 501st ?</li>
-                <li>Que représente ce régiment pour vous ?</li>
-                <li>Pourquoi ne pas choisir un autre régiment ?</li>
-                <li>Qu'attendez-vous d'un régiment comme le nôtre ?</li>
-                <li>Que pensez-vous pouvoir apporter à la 501st ?</li>
+                <li>Que fait le 501st sur le champ de bataille ?</li>
               </ul>
               <div class="rating-row">
                 <div class="rating-scale" data-target="rate-motivation">
@@ -415,8 +408,6 @@
             <summary>🪖 Vision du rôle d'un clone</summary>
             <div class="accordion-body">
               <ul class="clean">
-                <li>Selon vous, qu'est-ce qui fait d'un clone un bon clone ?</li>
-                <li>Quel est le devoir d'un clone envers son commandement ?</li>
                 <li>Un clone doit-il réfléchir ou obéir ?</li>
                 <li>Qu'est-ce qui est le plus important : survivre ou accomplir la mission ?</li>
               </ul>
@@ -440,7 +431,6 @@
             <div class="accordion-body">
               <ul class="clean">
                 <li>Que faites-vous si un ordre ne vous convient pas ?</li>
-                <li>Comment réagissez-vous si un officier vous corrige devant tout le monde ?</li>
                 <li>Pour vous, qu'est-ce que la discipline ?</li>
               </ul>
               <div class="rating-row">
@@ -454,30 +444,6 @@
                   <input type="hidden" id="rate-discipline" value="">
                 </div>
                 <textarea id="notes-discipline" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-            </div>
-          </details>
-
-          <details class="accordion sub">
-            <summary>🤝 Esprit d'escouade</summary>
-            <div class="accordion-body">
-              <ul class="clean">
-                <li>Quel rôle aimez-vous tenir en opération ?</li>
-                <li>Préférez-vous suivre les ordres ou prendre des initiatives ?</li>
-                <li>Que faites-vous si un camarade fait une erreur ?</li>
-                <li>Êtes-vous quelqu'un qui parle beaucoup ou qui agit en silence ?</li>
-              </ul>
-              <div class="rating-row">
-                <div class="rating-scale" data-target="rate-escouade">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-escouade" value="">
-                </div>
-                <textarea id="notes-escouade" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
             </div>
           </details>
@@ -507,35 +473,10 @@
           </details>
 
           <details class="accordion sub">
-            <summary>📈 Vision de sa progression</summary>
-            <div class="accordion-body">
-              <ul class="clean">
-                <li>Souhaitez-vous évoluer au sein du régiment ?</li>
-                <li>Que représente pour vous un officier ?</li>
-                <li>Si un jour vous commandez des hommes, comment agiriez-vous ?</li>
-                <li>Préférez-vous rester soldat ou progresser dans la hiérarchie ?</li>
-              </ul>
-              <div class="rating-row">
-                <div class="rating-scale" data-target="rate-progression">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-progression" value="">
-                </div>
-                <textarea id="notes-progression" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-            </div>
-          </details>
-
-          <details class="accordion sub">
             <summary>🏁 Questions de fin d'entretien</summary>
             <div class="accordion-body">
               <ul class="clean">
                 <li>Avez-vous quelque chose à ajouter, soldat ?</li>
-                <li>Pourquoi devrions-nous vous accepter ?</li>
                 <li>Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</li>
               </ul>
               <div class="rating-row">
@@ -583,7 +524,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=5"></script>
+  <script src="js/site.js?v=6"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -682,7 +623,7 @@ input.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && input.value) tryCode(input.value);
 });
 
-var RECRUTEMENT_THEMES = ["presentation", "motivation", "role", "discipline", "escouade", "tir", "progression", "fin"];
+var RECRUTEMENT_THEMES = ["presentation", "motivation", "role", "discipline", "tir", "fin"];
 var recStatus = document.getElementById("rec-status");
 var recSubmitBtn = document.getElementById("rec-submit-btn");
 
