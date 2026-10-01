@@ -9,11 +9,15 @@ const DB_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/data
 const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
 
 const THEMES = [
-  ["motivation", "🎯 Motivation"],
-  ["role", "🪖 Vision du rôle"],
-  ["discipline", "⚖️ Discipline"],
+  ["motiv_rejoindre", "🎙️ Motivations à rejoindre"],
+  ["battlefield", "🎯 Rôle du 501st"],
+  ["reflechir_obeir", "🪖 Réfléchir ou obéir"],
+  ["survivre_mission", "🪖 Survie ou mission"],
+  ["ordre_refuse", "⚖️ Ordre refusé"],
+  ["discipline_def", "⚖️ Définition discipline"],
   ["tir", "🔫 Exercice de tir"],
-  ["fin", "🏁 Fin d'entretien"]
+  ["ajout_final", "🏁 Ajout final"],
+  ["pret_couleurs", "🏁 Prêt à porter les couleurs"]
 ];
 
 const EMBED_COLOR = 0x5b7cff;

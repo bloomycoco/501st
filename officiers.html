@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body class="booting">
 
@@ -366,74 +366,91 @@
             <div class="accordion-body">
 
               <h5>🎙️ Présentation du soldat</h5>
-              <ul class="clean">
-                <li>Matricule et désignation, soldat.</li>
-                <li>Quelles sont vos motivations pour rejoindre la 501st Légion ?</li>
-              </ul>
+              <p>Matricule et désignation, soldat.</p>
+
               <div class="rating-row">
-                <div class="rating-scale" data-target="rate-presentation">
+                <p class="q-text">Quelles sont vos motivations pour rejoindre la 501st Légion ?</p>
+                <div class="rating-scale" data-target="rate-motiv_rejoindre">
                   <span class="rating-label">Note</span>
                   <button type="button" class="rating-btn" data-value="1">1</button>
                   <button type="button" class="rating-btn" data-value="2">2</button>
                   <button type="button" class="rating-btn" data-value="3">3</button>
                   <button type="button" class="rating-btn" data-value="4">4</button>
                   <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-presentation" value="">
+                  <input type="hidden" id="rate-motiv_rejoindre" value="">
                 </div>
-                <textarea id="notes-presentation" placeholder="Notes / observations (optionnel)"></textarea>
+                <textarea id="notes-motiv_rejoindre" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
               <h5>🎯 Motivation pour rejoindre la 501st</h5>
-              <ul class="clean">
-                <li>Que fait le 501st sur le champ de bataille ?</li>
-              </ul>
               <div class="rating-row">
-                <div class="rating-scale" data-target="rate-motivation">
+                <p class="q-text">Que fait le 501st sur le champ de bataille ?</p>
+                <div class="rating-scale" data-target="rate-battlefield">
                   <span class="rating-label">Note</span>
                   <button type="button" class="rating-btn" data-value="1">1</button>
                   <button type="button" class="rating-btn" data-value="2">2</button>
                   <button type="button" class="rating-btn" data-value="3">3</button>
                   <button type="button" class="rating-btn" data-value="4">4</button>
                   <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-motivation" value="">
+                  <input type="hidden" id="rate-battlefield" value="">
                 </div>
-                <textarea id="notes-motivation" placeholder="Notes / observations (optionnel)"></textarea>
+                <textarea id="notes-battlefield" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
               <h5>🪖 Vision du rôle d'un clone</h5>
-              <ul class="clean">
-                <li>Un clone doit-il réfléchir ou obéir ?</li>
-                <li>Qu'est-ce qui est le plus important : survivre ou accomplir la mission ?</li>
-              </ul>
               <div class="rating-row">
-                <div class="rating-scale" data-target="rate-role">
+                <p class="q-text">Un clone doit-il réfléchir ou obéir ?</p>
+                <div class="rating-scale" data-target="rate-reflechir_obeir">
                   <span class="rating-label">Note</span>
                   <button type="button" class="rating-btn" data-value="1">1</button>
                   <button type="button" class="rating-btn" data-value="2">2</button>
                   <button type="button" class="rating-btn" data-value="3">3</button>
                   <button type="button" class="rating-btn" data-value="4">4</button>
                   <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-role" value="">
+                  <input type="hidden" id="rate-reflechir_obeir" value="">
                 </div>
-                <textarea id="notes-role" placeholder="Notes / observations (optionnel)"></textarea>
+                <textarea id="notes-reflechir_obeir" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
+              <div class="rating-row">
+                <p class="q-text">Qu'est-ce qui est le plus important : survivre ou accomplir la mission ?</p>
+                <div class="rating-scale" data-target="rate-survivre_mission">
+                  <span class="rating-label">Note</span>
+                  <button type="button" class="rating-btn" data-value="1">1</button>
+                  <button type="button" class="rating-btn" data-value="2">2</button>
+                  <button type="button" class="rating-btn" data-value="3">3</button>
+                  <button type="button" class="rating-btn" data-value="4">4</button>
+                  <button type="button" class="rating-btn" data-value="5">5</button>
+                  <input type="hidden" id="rate-survivre_mission" value="">
+                </div>
+                <textarea id="notes-survivre_mission" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
               <h5>⚖️ Discipline militaire</h5>
-              <ul class="clean">
-                <li>Que faites-vous si un ordre ne vous convient pas ?</li>
-                <li>Pour vous, qu'est-ce que la discipline ?</li>
-              </ul>
               <div class="rating-row">
-                <div class="rating-scale" data-target="rate-discipline">
+                <p class="q-text">Que faites-vous si un ordre ne vous convient pas ?</p>
+                <div class="rating-scale" data-target="rate-ordre_refuse">
                   <span class="rating-label">Note</span>
                   <button type="button" class="rating-btn" data-value="1">1</button>
                   <button type="button" class="rating-btn" data-value="2">2</button>
                   <button type="button" class="rating-btn" data-value="3">3</button>
                   <button type="button" class="rating-btn" data-value="4">4</button>
                   <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-discipline" value="">
+                  <input type="hidden" id="rate-ordre_refuse" value="">
                 </div>
-                <textarea id="notes-discipline" placeholder="Notes / observations (optionnel)"></textarea>
+                <textarea id="notes-ordre_refuse" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
+              <div class="rating-row">
+                <p class="q-text">Pour vous, qu'est-ce que la discipline ?</p>
+                <div class="rating-scale" data-target="rate-discipline_def">
+                  <span class="rating-label">Note</span>
+                  <button type="button" class="rating-btn" data-value="1">1</button>
+                  <button type="button" class="rating-btn" data-value="2">2</button>
+                  <button type="button" class="rating-btn" data-value="3">3</button>
+                  <button type="button" class="rating-btn" data-value="4">4</button>
+                  <button type="button" class="rating-btn" data-value="5">5</button>
+                  <input type="hidden" id="rate-discipline_def" value="">
+                </div>
+                <textarea id="notes-discipline_def" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
               <h5>🎯 Exercice de tir (test pratique)</h5>
@@ -457,21 +474,31 @@
               </div>
 
               <h5>🏁 Questions de fin d'entretien</h5>
-              <ul class="clean">
-                <li>Avez-vous quelque chose à ajouter, soldat ?</li>
-                <li>Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</li>
-              </ul>
               <div class="rating-row">
-                <div class="rating-scale" data-target="rate-fin">
+                <p class="q-text">Avez-vous quelque chose à ajouter, soldat ?</p>
+                <div class="rating-scale" data-target="rate-ajout_final">
                   <span class="rating-label">Note</span>
                   <button type="button" class="rating-btn" data-value="1">1</button>
                   <button type="button" class="rating-btn" data-value="2">2</button>
                   <button type="button" class="rating-btn" data-value="3">3</button>
                   <button type="button" class="rating-btn" data-value="4">4</button>
                   <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-fin" value="">
+                  <input type="hidden" id="rate-ajout_final" value="">
                 </div>
-                <textarea id="notes-fin" placeholder="Notes / observations (optionnel)"></textarea>
+                <textarea id="notes-ajout_final" placeholder="Notes / observations (optionnel)"></textarea>
+              </div>
+              <div class="rating-row">
+                <p class="q-text">Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</p>
+                <div class="rating-scale" data-target="rate-pret_couleurs">
+                  <span class="rating-label">Note</span>
+                  <button type="button" class="rating-btn" data-value="1">1</button>
+                  <button type="button" class="rating-btn" data-value="2">2</button>
+                  <button type="button" class="rating-btn" data-value="3">3</button>
+                  <button type="button" class="rating-btn" data-value="4">4</button>
+                  <button type="button" class="rating-btn" data-value="5">5</button>
+                  <input type="hidden" id="rate-pret_couleurs" value="">
+                </div>
+                <textarea id="notes-pret_couleurs" placeholder="Notes / observations (optionnel)"></textarea>
               </div>
 
             </div>
@@ -507,7 +534,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=7"></script>
+  <script src="js/site.js?v=8"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -606,7 +633,7 @@ input.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && input.value) tryCode(input.value);
 });
 
-var RECRUTEMENT_THEMES = ["presentation", "motivation", "role", "discipline", "tir", "fin"];
+var RECRUTEMENT_THEMES = ["motiv_rejoindre", "battlefield", "reflechir_obeir", "survivre_mission", "ordre_refuse", "discipline_def", "tir", "ajout_final", "pret_couleurs"];
 var recStatus = document.getElementById("rec-status");
 var recSubmitBtn = document.getElementById("rec-submit-btn");
 

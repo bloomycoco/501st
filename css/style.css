@@ -782,6 +782,8 @@ table .kama-thumb {
   border-top: 1px solid var(--border);
 }
 
+.rating-row .q-text { color: var(--text); font-size: 0.92rem; margin: 0; }
+
 .rating-scale { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
 .rating-label {
