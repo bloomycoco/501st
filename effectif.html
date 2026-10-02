@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=17">
+<link rel="stylesheet" href="css/style.css?v=18">
 </head>
 <body class="booting">
 
@@ -214,7 +214,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=17"></script>
+  <script src="js/site.js?v=18"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -587,12 +587,18 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
 
     var previous = latestDocs.find(function (d) { return d.id === id; });
     var previousBlame = previous ? (parseInt(previous.data.blame, 10) || 0) : 0;
+    var grade = payload.grade || (previous ? previous.data.grade : "");
+    var blameThreshold = grade === "CT" ? 2 : 3;
 
     updateDoc(doc(db, "effectif", id), payload).then(function () {
       editingId = null;
       draw();
-      if (payload.blame >= 3 && previousBlame < 3) {
-        notifyBlame3(payload.rpName || previous.data.rpName, payload.matricule || previous.data.matricule);
+      if (payload.blame >= blameThreshold && previousBlame < blameThreshold) {
+        notifyBlame(
+          payload.rpName || previous.data.rpName,
+          payload.matricule || previous.data.matricule,
+          payload.blame
+        );
       }
     }).catch(function (err) {
       showStatus("eff-status", "Enregistrement refusé : " + err.message, true);
@@ -600,11 +606,11 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
   }
 });
 
-function notifyBlame3(rpName, matricule) {
+function notifyBlame(rpName, matricule, count) {
   fetch("https://recrutement-501st-relay.site501st-relay-worker.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ kind: "blame3", rpName: rpName, matricule: matricule, codeHash: currentHash })
+    body: JSON.stringify({ kind: "blame3", rpName: rpName, matricule: matricule, count: count, codeHash: currentHash })
   }).catch(function (e) {
     console.warn("Notification de blâme indisponible :", e);
   });
