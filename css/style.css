@@ -883,14 +883,19 @@ table .kama-thumb {
 }
 
 .chip-dropdown summary {
+  display: block;
   cursor: pointer;
   list-style: none;
   padding: 7px 10px;
+  font-family: var(--font-body);
+  font-weight: 400;
   font-size: 0.8rem;
+  line-height: 1.3;
   color: var(--text);
 }
 
 .chip-dropdown summary::-webkit-details-marker { display: none; }
+.chip-dropdown summary::marker { content: ""; }
 .chip-dropdown summary::after { content: " \25be"; color: var(--blue); }
 .chip-dropdown[open] summary::after { content: " \25b4"; }
 
