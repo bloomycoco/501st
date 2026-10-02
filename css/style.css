@@ -875,6 +875,46 @@ table .kama-thumb {
   border-color: var(--blue);
 }
 
+.chip-dropdown {
+  background: rgba(13,15,30,0.9);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  max-width: 260px;
+}
+
+.chip-dropdown summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 7px 10px;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.chip-dropdown summary::-webkit-details-marker { display: none; }
+.chip-dropdown summary::after { content: " \25be"; color: var(--blue); }
+.chip-dropdown[open] summary::after { content: " \25b4"; }
+
+.chip-dropdown-body {
+  padding: 8px 10px 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.chip-dropdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.chip-dropdown-row .chip-toggle { padding: 3px 10px; font-size: 0.74rem; flex-shrink: 0; }
+
 /* ─── ACCESS GATE (officiers) ───────────────────────────── */
 .gate {
   max-width: 420px;

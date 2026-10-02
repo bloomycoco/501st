@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=12">
+<link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body class="booting">
 
@@ -202,7 +202,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=12"></script>
+  <script src="js/site.js?v=13"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -365,6 +365,21 @@ function chipGroupHtml(groupName, options, selected) {
   }).join("") + '</div>';
 }
 
+function medalsDropdownHtml(selected) {
+  selected = selected || [];
+  var rows = MEDALS.map(function (m) {
+    var active = selected.indexOf(m) !== -1;
+    return '<div class="chip-dropdown-row">' +
+      '<span>' + esc(m) + '</span>' +
+      '<button type="button" class="chip-toggle' + (active ? ' active' : '') + '" data-chip="' + esc(m) + '">' + (active ? '✅ Oui' : '❌ Non') + '</button>' +
+      '</div>';
+  }).join("");
+  return '<details class="chip-dropdown" data-group="medailles">' +
+    '<summary>Médailles (<span class="chip-dropdown-count">' + selected.length + '</span>)</summary>' +
+    '<div class="chip-dropdown-body">' + rows + '</div>' +
+    '</details>';
+}
+
 function boolChipHtml(groupName, value, labelOn, labelOff) {
   return '<button type="button" class="chip-toggle' + (value ? ' active' : '') + '" data-bool="' + groupName + '">' + (value ? labelOn : labelOff) + '</button>';
 }
@@ -381,7 +396,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + esc(data.rpName) + '</td>' +
       '<td>' + esc(data.matricule) + '</td>' +
       '<td>' + esc(data.grade) + '</td>' +
-      '<td>' + chipGroupHtml("medailles", MEDALS, data.medailles) + '</td>' +
+      '<td>' + medalsDropdownHtml(data.medailles) + '</td>' +
       '<td>' + chipGroupHtml("formations", FORMATIONS, data.formations) + '</td>' +
       '<td>' + boolChipHtml("formateur", !!data.formateur, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("kama", !!data.kama, "✅ Oui", "❌ Non") + '</td>' +
@@ -439,7 +454,16 @@ onSnapshot(effCol, function (snap) {
 document.getElementById("qual-body").addEventListener("click", function (e) {
   var chip = e.target.closest(".chip-toggle");
   if (chip) {
-    chip.classList.toggle("active");
+    var nowActive = !chip.classList.contains("active");
+    chip.classList.toggle("active", nowActive);
+    if (chip.hasAttribute("data-bool") || chip.closest(".chip-dropdown-row")) {
+      chip.textContent = nowActive ? "✅ Oui" : "❌ Non";
+    }
+    var dropdown = chip.closest(".chip-dropdown");
+    if (dropdown) {
+      var countEl = dropdown.querySelector(".chip-dropdown-count");
+      if (countEl) countEl.textContent = dropdown.querySelectorAll(".chip-toggle.active").length;
+    }
     return;
   }
 
@@ -454,7 +478,7 @@ document.getElementById("qual-body").addEventListener("click", function (e) {
   else if (action === "cancel") { editingId = null; draw(); }
   else if (action === "save") {
     var payload = { codeHash: currentHash };
-    tr.querySelectorAll(".chip-group").forEach(function (group) {
+    tr.querySelectorAll("[data-group]").forEach(function (group) {
       var groupName = group.getAttribute("data-group");
       var values = [];
       group.querySelectorAll(".chip-toggle.active").forEach(function (c) {
