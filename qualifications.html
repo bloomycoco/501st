@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body class="booting">
 
@@ -144,13 +144,65 @@
       </div>
     </details>
 
+    <details class="accordion">
+      <summary>🎖️ Détail des médailles</summary>
+      <div class="accordion-body">
+        <p>Un membre peut recevoir plusieurs médailles. Voici à quoi correspond chacune.</p>
+
+        <h4>Survivant</h4>
+        <p>Pour les unités ayant survécu à de nombreuses batailles, représentant la devise régimentaire.</p>
+
+        <h4>Tireur d'Élite</h4>
+        <p>Pour les unités démontrant une capacité à atteindre n'importe quelle cible.</p>
+
+        <h4>Soldat d'Élite</h4>
+        <p>Récompense les membres qui savent impliquer et discerner dans leur comportement durant les opérations, la dignité et la qualité.</p>
+
+        <h4>Vétéran</h4>
+        <p>Attribuée après plus de 5 mois de présence continue.</p>
+
+        <h4>Honneur</h4>
+        <p>Pour comportement exemplaire en base et en mission.</p>
+
+        <h4>Excellence</h4>
+        <p>Pour les membres honorant le régiment et prouvant quotidiennement leur mérite auprès des officiers supérieurs.</p>
+
+        <h4>Commandement</h4>
+        <p>Réservée aux officiers ayant démontré des qualités exceptionnelles de leader.</p>
+
+        <h4>Premier Rempart</h4>
+        <p><strong>Thème :</strong> tenir la première ligne.</p>
+        <p><strong>Décernée pour :</strong> avoir maintenu une position sous une forte pression ennemie, permettant au reste de la légion de se réorganiser ou de progresser.</p>
+
+        <h4>Feu de Ligne</h4>
+        <p><strong>Thème :</strong> combat intense.</p>
+        <p><strong>Décernée pour :</strong> avoir combattu dans des conditions extrêmement difficiles tout en continuant à remplir son objectif.</p>
+
+        <h4>Lead de Fer</h4>
+        <p><strong>Thème :</strong> leadership.</p>
+        <p><strong>Décernée pour :</strong> un officier ou sous-officier ayant brillamment dirigé ses hommes dans une situation critique et permis la réussite de l'opération.</p>
+
+        <h4>Croix de l'Urgence</h4>
+        <p><strong>Thème :</strong> réaction immédiate.</p>
+        <p><strong>Décernée pour :</strong> avoir répondu rapidement à une menace imprévue et évité une catastrophe pour la 501st ou une autre unité.</p>
+
+        <h4>Légionnaire</h4>
+        <p><strong>Thème :</strong> excellence individuelle.</p>
+        <p><strong>Décernée pour :</strong> un clone ayant démontré à plusieurs reprises une conduite exemplaire, une grande efficacité au combat et une fidélité irréprochable à la 501st.</p>
+
+        <h4>Croix de Fraternité</h4>
+        <p><strong>Thème :</strong> esprit de corps.</p>
+        <p><strong>Décernée pour :</strong> avoir sauvé, protégé ou soutenu plusieurs frères d'armes au péril de sa propre vie.</p>
+      </div>
+    </details>
+
   </div>
 
   <footer>
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=11"></script>
+  <script src="js/site.js?v=12"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -189,7 +241,10 @@ function gradeRank(g) {
   return GRADE_RANK.hasOwnProperty(g) ? GRADE_RANK[g] : 99;
 }
 
-const MEDALS = ["Survivant", "Tireur d'Élite", "Soldat d'Élite", "Vétéran", "Honneur", "Excellence", "Commandement"];
+const MEDALS = [
+  "Survivant", "Tireur d'Élite", "Soldat d'Élite", "Vétéran", "Honneur", "Excellence", "Commandement",
+  "Premier Rempart", "Feu de Ligne", "Lead de Fer", "Croix de l'Urgence", "Légionnaire", "Croix de Fraternité"
+];
 const FORMATIONS = ["TX-130", "AT-RT", "BARC Speeder", "AT-AP"];
 
 function esc(s) {
