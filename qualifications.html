@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Qualifications - Site 501st</title>
+<meta name="theme-color" content="#3F46CA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
+<link rel="stylesheet" href="css/style.css?v=11">
+</head>
+<body class="booting">
+
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo-wrap">
+      <div class="boot-ring"></div>
+      <div class="boot-ring inner"></div>
+      <img src="assets/logo/logo-501st.webp" alt="" class="boot-logo">
+    </div>
+    <div class="boot-title">501st Légion d'Attaque</div>
+    <div class="boot-status" id="bootStatus">Connexion en cours</div>
+    <div class="boot-bar"><div class="boot-bar-fill" id="bootBarFill"></div></div>
+    <div class="boot-skip">Cliquez pour passer</div>
+  </div>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-img">
+      <span class="nav-brand">501ST LÉGION D'ATTAQUE</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">🏠 Accueil</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">📁 Documents utiles ⌄</button>
+        <div class="dropdown-content">
+          <a href="doc-accueil-ct.html">📁 Accueil CT</a>
+          <a href="doc-reglement.html">⚖️ Règlement</a>
+          <a href="doc-securite-incendie.html">🔥 Sécurité incendie</a>
+          <a href="doc-commandement.html">🧭 Commandement</a>
+          <a href="doc-rapport-hebdo.html">📋 Rapport Hebdomadaire</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">⚔️ Codex Tactique ⌄</button>
+        <div class="dropdown-content">
+          <a href="codex-tactique.html">⚔️ Codex Tactique</a>
+          <a href="codex-vehicules.html">🚚 Véhicules</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">🗃️ Spécialisation 501st ⌄</button>
+        <div class="dropdown-content">
+          <a href="specialisation.html">🗃️ Vue d'ensemble</a>
+          <a href="spe-soldat.html">Soldat</a>
+          <a href="spe-heavy.html">Heavy</a>
+          <a href="spe-medecin.html">Médecin</a>
+          <a href="spe-arf.html">ARF</a>
+          <a href="spe-torrent.html">Torrent</a>
+          <a href="spe-arc-trooper.html">ARC Trooper</a>
+        </div>
+      </div>
+
+      <a href="tenues.html">🧥 Tenues</a>
+      <a href="bareme-promotion.html">🧾 Barème</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">🔒 Officier ⌄</button>
+        <div class="dropdown-content">
+          <a href="officiers.html">🔒 Officier</a>
+          <a href="qualifications.html" class="active">🎖️ Qualifications</a>
+        </div>
+      </div>
+
+      <a href="effectif.html">📋 Effectif</a>
+      <a href="rapport.html">🗒️ Rapport</a>
+    </div>
+  </nav>
+
+  <div class="content wide">
+
+    <div class="page-header">
+      <div class="kicker">Site 501st</div>
+      <h1>🎖️ Qualifications</h1>
+      <div class="header-divider"></div>
+      <p class="subtitle">Médailles régimentaires, formations, statut formateur, kama et affiliation 332nd. Liste en direct, basée sur l'<a href="effectif.html">Effectif</a> : ajoute un membre là-bas et il apparaît automatiquement ici.</p>
+    </div>
+
+    <div class="card" id="auth-card">
+      <h2>🔐 Accès officier</h2>
+      <div id="auth-logged-out">
+        <p>La consultation est libre. Pour modifier les qualifications d'un membre, saisis le code d'accès officier (ou owner).</p>
+        <div class="eff-form">
+          <input type="password" id="login-code" placeholder="CODE D'ACCÈS" autocomplete="off">
+          <button class="btn" id="login-btn">Déverrouiller</button>
+        </div>
+        <div id="login-error" class="notice" style="display:none;"></div>
+      </div>
+      <div id="auth-logged-in" style="display:none;">
+        <p>Accès <strong id="auth-role"></strong> activé. Modification autorisée.</p>
+        <button class="eff-icon-btn" id="logout-btn">Verrouiller</button>
+      </div>
+    </div>
+
+    <details class="accordion" open>
+      <summary>🎖️ Liste des qualifications</summary>
+      <div class="accordion-body">
+        <p>Les changements sont visibles immédiatement par tout le monde, sans recharger la page. Pour ajouter/retirer un membre, rends-toi sur l'<a href="effectif.html">Effectif</a>.</p>
+
+        <div id="qual-status" class="notice" style="display:none;"></div>
+
+        <div class="eff-table-wrap">
+          <table id="qual-table">
+            <thead>
+              <tr>
+                <th>Identité RP</th>
+                <th>Matricule</th>
+                <th>Grade</th>
+                <th>Médailles</th>
+                <th>Formations</th>
+                <th>Formateur</th>
+                <th>Kama</th>
+                <th>332nd</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="qual-body">
+              <tr><td colspan="9">Chargement...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+  <footer>
+    <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
+  </footer>
+
+  <script src="js/site.js?v=11"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getFirestore, collection, onSnapshot, updateDoc, doc, getDoc, setDoc
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {
+  saveSession, clearSession, readAccessConfig,
+  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
+  mountOwnerBackupButton, downloadFullBackup
+} from "./js/auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
+  authDomain: "site501st.firebaseapp.com",
+  projectId: "site501st",
+  storageBucket: "site501st.firebasestorage.app",
+  messagingSenderId: "862962282467",
+  appId: "1:862962282467:web:548b976251263394d53ad6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const effCol = collection(db, "effectif");
+const accessDocRef = doc(db, "config", "access");
+let accessConfig = { officerCodeHash: null, authEpoch: "1" };
+
+const GRADE_RANK = {
+  "ALPHA": 0, "EM": 1, "MR": 2,
+  "CMDM": 3, "GNL": 4, "CMD": 5, "CMDJ": 5, "VCMD": 6, "MJR": 7,
+  "CPT": 8, "CPT-2nd": 9, "LTN": 10, "2nd-LTN": 11,
+  "ADJ-C": 12, "ADJ": 13, "SGT-C": 14, "SGT": 15,
+  "CPL-C": 16, "CPL": 17, "CT": 18
+};
+function gradeRank(g) {
+  return GRADE_RANK.hasOwnProperty(g) ? GRADE_RANK[g] : 99;
+}
+
+const MEDALS = ["Survivant", "Tireur d'Élite", "Soldat d'Élite", "Vétéran", "Honneur", "Excellence", "Commandement"];
+const FORMATIONS = ["TX-130", "AT-RT", "BARC Speeder", "AT-AP"];
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+var currentRole = null;
+var currentHash = null;
+
+function isUnlocked() { return currentRole !== null; }
+
+function applyRoleUI() {
+  var loggedOut = document.getElementById("auth-logged-out");
+  var loggedIn = document.getElementById("auth-logged-in");
+  var roleLabel = document.getElementById("auth-role");
+
+  if (currentRole) {
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "block";
+    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
+    if (currentRole === "owner") {
+      mountOwnerResetButton(handleOwnerReset);
+      mountOwnerBackupButton(handleOwnerBackup);
+    }
+  } else {
+    loggedOut.style.display = "block";
+    loggedIn.style.display = "none";
+    var fab = document.getElementById("owner-reset-fab");
+    if (fab) fab.remove();
+    var fab2 = document.getElementById("owner-backup-fab");
+    if (fab2) fab2.remove();
+  }
+  draw();
+}
+
+async function handleOwnerReset() {
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html, qualifications.html) ? Chacun devra ressaisir le code.")) return;
+  try {
+    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
+    currentRole = null;
+    currentHash = null;
+    applyRoleUI();
+    alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
+  } catch (e) {
+    alert("Échec : " + e.message);
+  }
+}
+
+async function handleOwnerBackup() {
+  try {
+    var backup = await downloadFullBackup("site501st");
+    alert("Sauvegarde téléchargée : " + backup.effectif.length + " membre(s), " + backup.rapports.length + " rapport(s).");
+  } catch (e) {
+    alert("Échec de la sauvegarde : " + e.message);
+  }
+}
+
+async function restoreSessionIfValid() {
+  try {
+    accessConfig = await readAccessConfig(getDoc, accessDocRef);
+  } catch (e) { return; }
+  var restored = tryRestoreSession(accessConfig);
+  if (restored) {
+    currentRole = restored.role;
+    currentHash = restored.hash;
+    applyRoleUI();
+  }
+}
+restoreSessionIfValid();
+
+document.getElementById("login-btn").addEventListener("click", async function () {
+  var input = document.getElementById("login-code");
+  var errEl = document.getElementById("login-error");
+  var code = input.value.trim().toUpperCase();
+  if (!code) return;
+
+  var result = await verifyCode(accessConfig, code);
+  if (result) {
+    currentRole = result.role;
+    currentHash = result.hash;
+    saveSession(result.role, result.hash, accessConfig.authEpoch);
+    input.value = "";
+    errEl.style.display = "none";
+    applyRoleUI();
+  } else {
+    errEl.textContent = "Code incorrect.";
+    errEl.style.display = "block";
+    input.value = "";
+  }
+});
+
+document.getElementById("login-code").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") document.getElementById("login-btn").click();
+});
+
+document.getElementById("logout-btn").addEventListener("click", function () {
+  currentRole = null;
+  currentHash = null;
+  clearSession();
+  applyRoleUI();
+});
+
+function showStatus(elId, msg, isError) {
+  var el = document.getElementById(elId);
+  if (!msg) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.textContent = msg;
+  el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
+}
+
+function chipGroupHtml(groupName, options, selected) {
+  selected = selected || [];
+  return '<div class="chip-group" data-group="' + groupName + '">' + options.map(function (o) {
+    var active = selected.indexOf(o) !== -1;
+    return '<button type="button" class="chip-toggle' + (active ? ' active' : '') + '" data-chip="' + esc(o) + '">' + esc(o) + '</button>';
+  }).join("") + '</div>';
+}
+
+function boolChipHtml(groupName, value, labelOn, labelOff) {
+  return '<button type="button" class="chip-toggle' + (value ? ' active' : '') + '" data-bool="' + groupName + '">' + (value ? labelOn : labelOff) + '</button>';
+}
+
+function tagListHtml(values, cls) {
+  if (!values || !values.length) return '<span style="color:var(--text-dim);">-</span>';
+  return values.map(function (v) { return '<span class="tag ' + cls + '">' + esc(v) + '</span>'; }).join(" ");
+}
+
+function renderRow(id, data, editing, groupStart) {
+  var cls = groupStart ? ' class="grade-group-start"' : '';
+  if (editing && isUnlocked()) {
+    return '<tr data-id="' + id + '"' + cls + '>' +
+      '<td>' + esc(data.rpName) + '</td>' +
+      '<td>' + esc(data.matricule) + '</td>' +
+      '<td>' + esc(data.grade) + '</td>' +
+      '<td>' + chipGroupHtml("medailles", MEDALS, data.medailles) + '</td>' +
+      '<td>' + chipGroupHtml("formations", FORMATIONS, data.formations) + '</td>' +
+      '<td>' + boolChipHtml("formateur", !!data.formateur, "✅ Oui", "❌ Non") + '</td>' +
+      '<td>' + boolChipHtml("kama", !!data.kama, "✅ Oui", "❌ Non") + '</td>' +
+      '<td>' + boolChipHtml("groupe332", !!data.groupe332, "✅ Oui", "❌ Non") + '</td>' +
+      '<td class="eff-row-actions">' +
+        '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
+        '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
+      '</td></tr>';
+  }
+  return '<tr data-id="' + id + '"' + cls + '>' +
+    '<td>' + esc(data.rpName) + '</td>' +
+    '<td>' + esc(data.matricule) + '</td>' +
+    '<td>' + esc(data.grade) + '</td>' +
+    '<td>' + tagListHtml(data.medailles, "tag-gold") + '</td>' +
+    '<td>' + tagListHtml(data.formations, "tag-blue") + '</td>' +
+    '<td>' + (data.formateur ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
+    '<td>' + (data.kama ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
+    '<td>' + (data.groupe332 ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
+    '<td class="eff-row-actions">' +
+      (isUnlocked()
+        ? '<button class="eff-icon-btn" data-action="edit">Modifier</button>'
+        : '<span title="Connecte-toi pour modifier">🔒</span>') +
+    '</td></tr>';
+}
+
+var editingId = null;
+var latestDocs = [];
+
+function draw() {
+  var body = document.getElementById("qual-body");
+  if (!latestDocs.length) {
+    body.innerHTML = '<tr><td colspan="9">Aucun membre enregistré pour le moment.</td></tr>';
+    return;
+  }
+  var prevGrade = null;
+  body.innerHTML = latestDocs.map(function (d) {
+    var groupStart = d.data.grade !== prevGrade;
+    prevGrade = d.data.grade;
+    return renderRow(d.id, d.data, d.id === editingId, groupStart);
+  }).join("");
+}
+
+onSnapshot(effCol, function (snap) {
+  latestDocs = [];
+  snap.forEach(function (d) { latestDocs.push({ id: d.id, data: d.data() }); });
+  latestDocs.sort(function (a, b) {
+    var r = gradeRank(a.data.grade) - gradeRank(b.data.grade);
+    return r !== 0 ? r : (a.data.rpName || "").localeCompare(b.data.rpName || "");
+  });
+  draw();
+}, function (err) {
+  showStatus("qual-status", "Impossible de charger les qualifications : " + err.message, true);
+});
+
+document.getElementById("qual-body").addEventListener("click", function (e) {
+  var chip = e.target.closest(".chip-toggle");
+  if (chip) {
+    chip.classList.toggle("active");
+    return;
+  }
+
+  var btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  if (!isUnlocked()) return;
+  var tr = btn.closest("tr");
+  var id = tr.getAttribute("data-id");
+  var action = btn.getAttribute("data-action");
+
+  if (action === "edit") { editingId = id; draw(); }
+  else if (action === "cancel") { editingId = null; draw(); }
+  else if (action === "save") {
+    var payload = { codeHash: currentHash };
+    tr.querySelectorAll(".chip-group").forEach(function (group) {
+      var groupName = group.getAttribute("data-group");
+      var values = [];
+      group.querySelectorAll(".chip-toggle.active").forEach(function (c) {
+        values.push(c.getAttribute("data-chip"));
+      });
+      payload[groupName] = values;
+    });
+    tr.querySelectorAll("[data-bool]").forEach(function (c) {
+      payload[c.getAttribute("data-bool")] = c.classList.contains("active");
+    });
+    updateDoc(doc(db, "effectif", id), payload).then(function () {
+      editingId = null;
+      draw();
+    }).catch(function (err) {
+      showStatus("qual-status", "Enregistrement refusé : " + err.message, true);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

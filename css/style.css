@@ -705,17 +705,17 @@ table .kama-thumb {
   border-radius: 6px;
 }
 
-#eff-table { min-width: 1280px; font-size: 0.88rem; }
+#eff-table, #qual-table { min-width: 1280px; font-size: 0.88rem; }
 
-#eff-table tbody tr, #promo-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
-#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
-#eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
-#eff-table tbody tr:hover, #promo-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
-#eff-table td, #eff-table th, #promo-table td, #promo-table th { padding: 10px 10px; }
+#eff-table tbody tr, #promo-table tbody tr, #qual-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
+#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd), #qual-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
+#eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even), #qual-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
+#eff-table tbody tr:hover, #promo-table tbody tr:hover, #qual-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
+#eff-table td, #eff-table th, #promo-table td, #promo-table th, #qual-table td, #qual-table th { padding: 10px 10px; }
 
-#eff-table th:last-child, #eff-table td.eff-row-actions { white-space: nowrap; }
+#eff-table th:last-child, #eff-table td.eff-row-actions, #qual-table th:last-child, #qual-table td.eff-row-actions { white-space: nowrap; }
 
-#eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start {
+#eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start, #qual-table tbody tr.grade-group-start {
   border-top: 2px solid var(--blue);
 }
 
@@ -850,6 +850,30 @@ table .kama-thumb {
 }
 
 .mod-inline-error { color: var(--red); font-size: 0.8rem; }
+
+/* ─── CHIP TOGGLES (qualifications) ────────────────────────── */
+.chip-group { display: flex; flex-wrap: wrap; gap: 6px; max-width: 220px; }
+
+.chip-toggle {
+  padding: 5px 11px;
+  background: rgba(13,15,30,0.9);
+  border: 1px solid var(--border-hi);
+  color: var(--text-dim);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.chip-toggle:hover { border-color: var(--blue); color: var(--text); }
+
+.chip-toggle.active {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dim) 100%);
+  color: #fff;
+  border-color: var(--blue);
+}
 
 /* ─── ACCESS GATE (officiers) ───────────────────────────── */
 .gate {
