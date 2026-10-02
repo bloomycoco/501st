@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=20">
+<link rel="stylesheet" href="css/style.css?v=21">
 </head>
 <body class="booting">
 
@@ -246,7 +246,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=20"></script>
+  <script src="js/site.js?v=21"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -474,7 +474,7 @@ function renderReserveRow(id, data, editing) {
       '<td>' + selectHtml("grade", GRADES, data.grade) + '</td>' +
       '<td>' + selectHtml("ancienGrade", GRADES, data.ancienGrade) + '</td>' +
       '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
-      '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
+      '<td><input type="date" data-field="ancienDernierePromo" value="' + esc(data.ancienDernierePromo) + '"></td>' +
       '<td><input type="number" step="1" min="0" max="3" data-field="blame" value="' + blame + '"></td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
@@ -489,7 +489,7 @@ function renderReserveRow(id, data, editing) {
     '<td><strong class="reserve-highlight">' + esc(data.grade) + '</strong></td>' +
     '<td><strong class="reserve-highlight">' + esc(data.ancienGrade || "-") + '</strong></td>' +
     '<td>' + esc(data.spec) + '</td>' +
-    '<td>' + esc(data.lastPromo) + '</td>' +
+    '<td>' + esc(data.ancienDernierePromo || "-") + '</td>' +
     '<td><strong class="reserve-highlight">' + blame + ' / 3</strong></td>' +
     '<td class="eff-row-actions">' +
       (isUnlocked()
@@ -681,6 +681,7 @@ function handleTableClick(e) {
 
     if (payload.grade === "Réserviste" && previous && previous.data.grade !== "Réserviste") {
       payload.ancienGrade = previous.data.grade;
+      payload.ancienDernierePromo = previous.data.lastPromo || "";
     }
 
     updateDoc(doc(db, "effectif", id), payload).then(function () {
