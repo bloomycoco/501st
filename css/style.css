@@ -719,6 +719,14 @@ table .kama-thumb {
   border-top: 2px solid var(--blue);
 }
 
+#eff-table tbody tr.blame-row-2 td {
+  background: rgba(216, 167, 67, 0.28) !important;
+}
+
+#eff-table tbody tr.blame-row-3 td {
+  background: rgba(225, 57, 67, 0.32) !important;
+}
+
 #eff-table input, #eff-table select {
   width: 100%;
   min-width: 70px;

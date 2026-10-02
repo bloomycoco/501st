@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="stylesheet" href="css/style.css?v=17">
 </head>
 <body class="booting">
 
@@ -144,11 +144,12 @@
                   <th>CMD Mission</th>
                   <th>Rapports (sem.)</th>
                   <th>Éligibilité</th>
+                  <th>Blâme</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="eff-body">
-                <tr><td colspan="11">Chargement de l'effectif...</td></tr>
+                <tr><td colspan="12">Chargement de l'effectif...</td></tr>
               </tbody>
             </table>
           </div>
@@ -213,7 +214,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=16"></script>
+  <script src="js/site.js?v=17"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -437,7 +438,13 @@ function showStatus(elId, msg, isError) {
 }
 
 function renderRow(id, data, editing, groupStart) {
-  var cls = groupStart ? ' class="grade-group-start"' : '';
+  var blame = parseInt(data.blame, 10) || 0;
+  var classes = [];
+  if (groupStart) classes.push("grade-group-start");
+  if (blame >= 3) classes.push("blame-row-3");
+  else if (blame === 2) classes.push("blame-row-2");
+  var cls = classes.length ? ' class="' + classes.join(" ") + '"' : '';
+
   if (editing && isUnlocked()) {
     return '<tr data-id="' + id + '"' + cls + '>' +
       '<td><input data-field="rpName" value="' + esc(data.rpName) + '"></td>' +
@@ -450,6 +457,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td><input type="number" step="0.5" min="0" data-field="cmdMission" value="' + esc(data.cmdMission || 0) + '"></td>' +
       '<td>' + (isReportExempt(data.grade) ? "Exempté" : '<input type="number" step="1" min="0" data-field="reportCount" value="' + esc(data.reportCount || 0) + '">') + '</td>' +
       '<td>' + eligibilityLabel(data) + '</td>' +
+      '<td><input type="number" step="1" min="0" max="3" data-field="blame" value="' + blame + '"></td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
         '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
@@ -466,6 +474,7 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + (MISSION_QUOTAS[data.grade] !== undefined ? (data.cmdMission || 0) + " / " + MISSION_QUOTAS[data.grade] : "-") + '</td>' +
     '<td>' + (isReportExempt(data.grade) ? "Exempté" : (data.reportCount || 0) + " / " + WEEKLY_REPORT_MIN) + '</td>' +
     '<td>' + eligibilityLabel(data) + '</td>' +
+    '<td>' + blame + ' / 3</td>' +
     '<td class="eff-row-actions">' +
       (isUnlocked()
         ? '<button class="eff-icon-btn" data-action="edit">Modifier</button>' +
@@ -527,7 +536,7 @@ var latestDocs = [];
 function draw() {
   var body = document.getElementById("eff-body");
   if (!latestDocs.length) {
-    body.innerHTML = '<tr><td colspan="11">Aucun membre enregistré pour le moment.</td></tr>';
+    body.innerHTML = '<tr><td colspan="12">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
     var prevGrade = null;
     body.innerHTML = latestDocs.map(function (d) {
@@ -572,14 +581,34 @@ document.getElementById("eff-body").addEventListener("click", function (e) {
     tr.querySelectorAll("[data-field]").forEach(function (el) {
       payload[el.getAttribute("data-field")] = el.value;
     });
+    if (payload.hasOwnProperty("blame")) payload.blame = parseInt(payload.blame, 10) || 0;
+    if (payload.hasOwnProperty("cmdMission")) payload.cmdMission = parseFloat(payload.cmdMission) || 0;
+    if (payload.hasOwnProperty("reportCount")) payload.reportCount = parseInt(payload.reportCount, 10) || 0;
+
+    var previous = latestDocs.find(function (d) { return d.id === id; });
+    var previousBlame = previous ? (parseInt(previous.data.blame, 10) || 0) : 0;
+
     updateDoc(doc(db, "effectif", id), payload).then(function () {
       editingId = null;
       draw();
+      if (payload.blame >= 3 && previousBlame < 3) {
+        notifyBlame3(payload.rpName || previous.data.rpName, payload.matricule || previous.data.matricule);
+      }
     }).catch(function (err) {
       showStatus("eff-status", "Enregistrement refusé : " + err.message, true);
     });
   }
 });
+
+function notifyBlame3(rpName, matricule) {
+  fetch("https://recrutement-501st-relay.site501st-relay-worker.workers.dev", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kind: "blame3", rpName: rpName, matricule: matricule, codeHash: currentHash })
+  }).catch(function (e) {
+    console.warn("Notification de blâme indisponible :", e);
+  });
+}
 
 document.getElementById("eff-add-btn").addEventListener("click", function () {
   if (!isUnlocked()) return;
