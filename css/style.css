@@ -705,29 +705,31 @@ table .kama-thumb {
   border-radius: 6px;
 }
 
-#eff-table, #qual-table { min-width: 1280px; font-size: 0.88rem; }
+#eff-table, #qual-table, #reserve-table { min-width: 1280px; font-size: 0.88rem; }
 
-#eff-table tbody tr, #promo-table tbody tr, #qual-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
-#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd), #qual-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
-#eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even), #qual-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
-#eff-table tbody tr:hover, #promo-table tbody tr:hover, #qual-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
-#eff-table td, #eff-table th, #promo-table td, #promo-table th, #qual-table td, #qual-table th { padding: 10px 10px; }
+#eff-table tbody tr, #promo-table tbody tr, #qual-table tbody tr, #reserve-table tbody tr { border-bottom: 1px solid rgba(91,124,255,0.15); }
+#eff-table tbody tr:nth-child(odd), #promo-table tbody tr:nth-child(odd), #qual-table tbody tr:nth-child(odd), #reserve-table tbody tr:nth-child(odd) { background: rgba(91,124,255,0.09); }
+#eff-table tbody tr:nth-child(even), #promo-table tbody tr:nth-child(even), #qual-table tbody tr:nth-child(even), #reserve-table tbody tr:nth-child(even) { background: rgba(5,6,13,0.55); }
+#eff-table tbody tr:hover, #promo-table tbody tr:hover, #qual-table tbody tr:hover, #reserve-table tbody tr:hover { background: rgba(91,124,255,0.22) !important; }
+#eff-table td, #eff-table th, #promo-table td, #promo-table th, #qual-table td, #qual-table th, #reserve-table td, #reserve-table th { padding: 10px 10px; }
 
-#eff-table th:last-child, #eff-table td.eff-row-actions, #qual-table th:last-child, #qual-table td.eff-row-actions { white-space: nowrap; }
+#eff-table th:last-child, #eff-table td.eff-row-actions, #qual-table th:last-child, #qual-table td.eff-row-actions, #reserve-table th:last-child, #reserve-table td.eff-row-actions { white-space: nowrap; }
 
 #eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start, #qual-table tbody tr.grade-group-start {
   border-top: 2px solid var(--blue);
 }
 
-#eff-table tbody tr.blame-row-2 td {
+#eff-table tbody tr.blame-row-2 td, #reserve-table tbody tr.blame-row-2 td {
   background: rgba(216, 167, 67, 0.28) !important;
 }
 
-#eff-table tbody tr.blame-row-3 td {
+#eff-table tbody tr.blame-row-3 td, #reserve-table tbody tr.blame-row-3 td {
   background: rgba(225, 57, 67, 0.32) !important;
 }
 
-#eff-table input, #eff-table select {
+.reserve-highlight { font-size: 1.05em; color: var(--text); }
+
+#eff-table input, #eff-table select, #reserve-table input, #reserve-table select {
   width: 100%;
   min-width: 70px;
   background: rgba(13,15,30,0.9);
