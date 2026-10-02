@@ -876,20 +876,21 @@ table .kama-thumb {
 }
 
 .chip-dropdown {
+  position: relative;
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
   border-radius: 6px;
-  max-width: 260px;
+  width: 170px;
 }
 
-.chip-dropdown summary {
+details.chip-dropdown summary {
   display: block;
   cursor: pointer;
   list-style: none;
-  padding: 7px 10px;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 0.8rem;
+  padding: 5px 9px;
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: 0.76rem !important;
   line-height: 1.3;
   color: var(--text);
 }
@@ -900,8 +901,17 @@ table .kama-thumb {
 .chip-dropdown[open] summary::after { content: " \25b4"; }
 
 .chip-dropdown-body {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  width: 230px;
+  margin-top: 2px;
   padding: 8px 10px 10px;
-  border-top: 1px solid var(--border);
+  background: rgba(8,9,20,0.98);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.55);
   display: flex;
   flex-direction: column;
   gap: 6px;
