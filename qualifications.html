@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/style.css?v=16">
 </head>
 <body class="booting">
 
@@ -181,7 +181,7 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=15"></script>
+  <script src="js/site.js?v=16"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -333,25 +333,17 @@ function showStatus(elId, msg, isError) {
   el.style.borderLeftColor = isError ? "var(--red)" : "var(--blue)";
 }
 
-function chipGroupHtml(groupName, options, selected) {
+function dropdownChipsHtml(label, groupName, options, selected) {
   selected = selected || [];
-  return '<div class="chip-group" data-group="' + groupName + '">' + options.map(function (o) {
+  var rows = options.map(function (o) {
     var active = selected.indexOf(o) !== -1;
-    return '<button type="button" class="chip-toggle' + (active ? ' active' : '') + '" data-chip="' + esc(o) + '">' + esc(o) + '</button>';
-  }).join("") + '</div>';
-}
-
-function medalsDropdownHtml(selected) {
-  selected = selected || [];
-  var rows = MEDALS.map(function (m) {
-    var active = selected.indexOf(m) !== -1;
     return '<div class="chip-dropdown-row">' +
-      '<span>' + esc(m) + '</span>' +
-      '<button type="button" class="chip-toggle' + (active ? ' active' : '') + '" data-chip="' + esc(m) + '">' + (active ? '✅ Oui' : '❌ Non') + '</button>' +
+      '<span>' + esc(o) + '</span>' +
+      '<button type="button" class="chip-toggle' + (active ? ' active' : '') + '" data-chip="' + esc(o) + '">' + (active ? '✅ Oui' : '❌ Non') + '</button>' +
       '</div>';
   }).join("");
-  return '<details class="chip-dropdown" data-group="medailles">' +
-    '<summary>Médailles (<span class="chip-dropdown-count">' + selected.length + '</span>)</summary>' +
+  return '<details class="chip-dropdown" data-group="' + groupName + '">' +
+    '<summary>' + esc(label) + ' (<span class="chip-dropdown-count">' + selected.length + '</span>)</summary>' +
     '<div class="chip-dropdown-body">' + rows + '</div>' +
     '</details>';
 }
@@ -372,8 +364,8 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + esc(data.rpName) + '</td>' +
       '<td>' + esc(data.matricule) + '</td>' +
       '<td>' + esc(data.grade) + '</td>' +
-      '<td>' + medalsDropdownHtml(data.medailles) + '</td>' +
-      '<td>' + chipGroupHtml("formations", FORMATIONS, data.formations) + '</td>' +
+      '<td>' + dropdownChipsHtml("Médailles", "medailles", MEDALS, data.medailles) + '</td>' +
+      '<td>' + dropdownChipsHtml("Formations", "formations", FORMATIONS, data.formations) + '</td>' +
       '<td>' + boolChipHtml("formateur", !!data.formateur, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("kama", !!data.kama, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("groupe332", !!data.groupe332, "✅ Oui", "❌ Non") + '</td>' +

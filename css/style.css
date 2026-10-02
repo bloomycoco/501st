@@ -852,8 +852,6 @@ table .kama-thumb {
 .mod-inline-error { color: var(--red); font-size: 0.8rem; }
 
 /* ─── CHIP TOGGLES (qualifications) ────────────────────────── */
-.chip-group { display: flex; flex-wrap: wrap; gap: 6px; max-width: 280px; }
-
 .chip-toggle {
   padding: 5px 11px;
   background: rgba(13,15,30,0.9);
