@@ -148,6 +148,7 @@
                   <th>Spécialisation</th>
                   <th>Dernière promo</th>
                   <th>CMD Mission</th>
+                  <th>Leads</th>
                   <th>Rapports (sem.)</th>
                   <th>Éligibilité</th>
                   <th>Blâme</th>
@@ -155,7 +156,7 @@
                 </tr>
               </thead>
               <tbody id="eff-body">
-                <tr><td colspan="12">Chargement de l'effectif...</td></tr>
+                <tr><td colspan="13">Chargement de l'effectif...</td></tr>
               </tbody>
             </table>
           </div>
@@ -316,6 +317,18 @@ const MISSION_QUOTAS = {
   "MJR": 5,
   "VCMD": 8
 };
+
+// Grade suivant dans la progression (CT → CPL → … → LTN → CPT-2nd).
+const NEXT_GRADE = {
+  "CT": "CPL", "CPL": "CPL-C", "CPL-C": "SGT", "SGT": "SGT-C", "SGT-C": "ADJ",
+  "ADJ": "ADJ-C", "ADJ-C": "2nd-LTN", "2nd-LTN": "LTN", "LTN": "CPT-2nd"
+};
+// Leads requis pour être promu au grade indiqué.
+const LEAD_QUOTAS = { "SGT": 2, "SGT-C": 3, "ADJ": 4, "ADJ-C": 5, "2nd-LTN": 4, "LTN": 3 };
+function leadQuotaFor(grade) {
+  var next = NEXT_GRADE[grade];
+  return next ? LEAD_QUOTAS[next] : undefined;
+}
 
 // A partir du grade CPT-2nd (inclus) et au-dessus dans la hierarchie, les
 // membres sont exemptes du quota de rapport hebdomadaire.
@@ -511,6 +524,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + selectHtml("spec", SPECS, data.spec) + '</td>' +
       '<td><input type="date" data-field="lastPromo" value="' + esc(data.lastPromo) + '"></td>' +
       '<td><input type="number" step="0.5" min="0" data-field="cmdMission" value="' + esc(data.cmdMission || 0) + '"></td>' +
+      '<td><input type="number" step="1" min="0" data-field="leads" value="' + esc(data.leads || 0) + '"></td>' +
       '<td>' + (isReportExempt(data.grade) ? "Exempté" : '<input type="number" step="1" min="0" data-field="reportCount" value="' + esc(data.reportCount || 0) + '">') + '</td>' +
       '<td>' + eligibilityLabel(data) + '</td>' +
       '<td><input type="number" step="1" min="0" max="3" data-field="blame" value="' + blame + '"></td>' +
@@ -528,6 +542,7 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + esc(data.spec) + '</td>' +
     '<td>' + esc(data.lastPromo) + '</td>' +
     '<td>' + (MISSION_QUOTAS[data.grade] !== undefined ? (data.cmdMission || 0) + " / " + MISSION_QUOTAS[data.grade] : "-") + '</td>' +
+    '<td>' + (leadQuotaFor(data.grade) !== undefined ? (data.leads || 0) + " / " + leadQuotaFor(data.grade) : "-") + '</td>' +
     '<td>' + (isReportExempt(data.grade) ? "Exempté" : (data.reportCount || 0) + " / " + WEEKLY_REPORT_MIN) + '</td>' +
     '<td>' + eligibilityLabel(data) + '</td>' +
     '<td>' + blame + ' / 3</td>' +
@@ -553,23 +568,25 @@ function eligibilityLabel(data) {
   var delay = PROMO_DELAYS[data.grade];
   var quota = MISSION_QUOTAS[data.grade];
   var missions = parseFloat(data.cmdMission) || 0;
+  var leads = parseInt(data.leads, 10) || 0;
+  var leadQuota = leadQuotaFor(data.grade);
 
   if (days === null) return "❓ Pas de date";
   if (delay === undefined) return "❓ Non défini";
 
   var daysOk = days >= delay;
+  var leadsOk = leadQuota === undefined || leads >= leadQuota;
+  var missionsOk = quota === undefined || missions >= quota;
+  var leadsTxt = leadQuota === undefined ? "" : ", " + leads + "/" + leadQuota + " leads";
+  var missionsTxt = quota === undefined ? "" : ", " + missions + "/" + quota + " CMD";
 
-  if (quota === undefined) {
-    return daysOk ? "✅ Éligible (" + days + "j / " + delay + "j)" : "❌ " + (delay - days) + "j restants";
-  }
-
-  var missionsOk = missions >= quota;
-  if (daysOk && missionsOk) {
-    return "✅ Éligible (" + days + "j / " + delay + "j, " + missions + "/" + quota + " CMD)";
+  if (daysOk && missionsOk && leadsOk) {
+    return "✅ Éligible (" + days + "j / " + delay + "j" + missionsTxt + leadsTxt + ")";
   }
   var manque = [];
   if (!daysOk) manque.push((delay - days) + "j");
   if (!missionsOk) manque.push((quota - missions) + " CMD mission");
+  if (!leadsOk) manque.push((leadQuota - leads) + " lead(s)");
   return "❌ Manque : " + manque.join(", ");
 }
 
@@ -594,7 +611,7 @@ var reserveDocs = [];
 function draw() {
   var body = document.getElementById("eff-body");
   if (!activeDocs.length) {
-    body.innerHTML = '<tr><td colspan="12">Aucun membre enregistré pour le moment.</td></tr>';
+    body.innerHTML = '<tr><td colspan="13">Aucun membre enregistré pour le moment.</td></tr>';
   } else {
     var prevGrade = null;
     body.innerHTML = activeDocs.map(function (d) {
