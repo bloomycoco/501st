@@ -101,7 +101,7 @@
       <div class="kicker">Site 501st</div>
       <h1>🎖️ Qualifications</h1>
       <div class="header-divider"></div>
-      <p class="subtitle">Médailles régimentaires, formations, statut formateur, kama et affiliation 332nd. Liste en direct, basée sur l'<a href="effectif.html">Effectif</a> : ajoute un membre là-bas et il apparaît automatiquement ici.</p>
+      <p class="subtitle">Médailles régimentaires, formations, statut recruteur, lead, kama, médecin et affiliation 332nd. Liste en direct, basée sur l'<a href="effectif.html">Effectif</a> : ajoute un membre là-bas et il apparaît automatiquement ici.</p>
     </div>
 
     <div class="card" id="auth-card">
@@ -136,15 +136,16 @@
                 <th>Grade</th>
                 <th>Médailles</th>
                 <th>Formations</th>
-                <th>Formateur</th>
+                <th>Recruteur</th>
                 <th>Kama</th>
                 <th>332nd</th>
                 <th>Médecin</th>
+                <th>Lead</th>
                 <th></th>
               </tr>
             </thead>
             <tbody id="qual-body">
-              <tr><td colspan="9">Chargement...</td></tr>
+              <tr><td colspan="11">Chargement...</td></tr>
             </tbody>
           </table>
         </div>
@@ -358,6 +359,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + boolChipHtml("kama", !!data.kama, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("groupe332", !!data.groupe332, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("medecin", !!data.medecin, "✅ Oui", "❌ Non") + '</td>' +
+      '<td>' + boolChipHtml("lead", !!data.lead, "✅ Oui", "❌ Non") + '</td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
         '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
@@ -373,6 +375,7 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + (data.kama ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td>' + (data.groupe332 ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td>' + (data.medecin ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
+    '<td>' + (data.lead ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td class="eff-row-actions">' +
       (isUnlocked()
         ? '<button class="eff-icon-btn" data-action="edit">Modifier</button>'
@@ -386,7 +389,7 @@ var latestDocs = [];
 function draw() {
   var body = document.getElementById("qual-body");
   if (!latestDocs.length) {
-    body.innerHTML = '<tr><td colspan="9">Aucun membre enregistré pour le moment.</td></tr>';
+    body.innerHTML = '<tr><td colspan="11">Aucun membre enregistré pour le moment.</td></tr>';
     return;
   }
   var prevGrade = null;
