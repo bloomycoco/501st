@@ -287,6 +287,8 @@
 
           <h4>📨 Soumettre l'entretien</h4>
           <div class="eff-form">
+            <input id="rec-steamid" placeholder="SteamID de la personne (obligatoire)">
+            <input id="rec-discordid" placeholder="Discord ID de la personne (obligatoire)">
             <textarea id="rec-observation" placeholder="Observation finale (optionnel)"></textarea>
             <button id="rec-submit-btn" class="btn" type="button">Envoyer l'entretien</button>
           </div>
@@ -384,6 +386,13 @@ async function submitRecrutement() {
     return;
   }
 
+  var steamId = document.getElementById("rec-steamid").value.trim();
+  var discordId = document.getElementById("rec-discordid").value.trim();
+  if (!steamId || !discordId) {
+    setRecStatus("Renseigne le SteamID et le Discord ID de la personne avant d'envoyer.", "err");
+    return;
+  }
+
   var ratings = {};
   for (var i = 0; i < RECRUTEMENT_THEMES.length; i++) {
     var key = RECRUTEMENT_THEMES[i];
@@ -403,11 +412,13 @@ async function submitRecrutement() {
   recSubmitBtn.disabled = true;
   setRecStatus("Envoi en cours…", "");
   try {
-    await callServer("/recruitment", { recruteur: recruteur, aspirant: aspirant, ratings: ratings, observation: observation });
+    await callServer("/recruitment", { recruteur: recruteur, aspirant: aspirant, steamId: steamId, discordId: discordId, ratings: ratings, observation: observation });
     setRecStatus("Entretien envoyé et relayé sur Discord.", "ok");
 
     document.getElementById("rec-recruteur").value = "";
     document.getElementById("rec-aspirant").value = "";
+    document.getElementById("rec-steamid").value = "";
+    document.getElementById("rec-discordid").value = "";
     document.getElementById("rec-observation").value = "";
     for (var j = 0; j < RECRUTEMENT_THEMES.length; j++) {
       var k = RECRUTEMENT_THEMES[j];

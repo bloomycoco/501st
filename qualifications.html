@@ -139,6 +139,7 @@
                 <th>Formateur</th>
                 <th>Kama</th>
                 <th>332nd</th>
+                <th>Médecin</th>
                 <th></th>
               </tr>
             </thead>
@@ -356,6 +357,7 @@ function renderRow(id, data, editing, groupStart) {
       '<td>' + boolChipHtml("formateur", !!data.formateur, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("kama", !!data.kama, "✅ Oui", "❌ Non") + '</td>' +
       '<td>' + boolChipHtml("groupe332", !!data.groupe332, "✅ Oui", "❌ Non") + '</td>' +
+      '<td>' + boolChipHtml("medecin", !!data.medecin, "✅ Oui", "❌ Non") + '</td>' +
       '<td class="eff-row-actions">' +
         '<button class="eff-icon-btn" data-action="save">Enregistrer</button>' +
         '<button class="eff-icon-btn" data-action="cancel">Annuler</button>' +
@@ -370,6 +372,7 @@ function renderRow(id, data, editing, groupStart) {
     '<td>' + (data.formateur ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td>' + (data.kama ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td>' + (data.groupe332 ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
+    '<td>' + (data.medecin ? '<span class="tag tag-green">✅ Oui</span>' : '❌') + '</td>' +
     '<td class="eff-row-actions">' +
       (isUnlocked()
         ? '<button class="eff-icon-btn" data-action="edit">Modifier</button>'
