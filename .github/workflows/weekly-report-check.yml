@@ -2,8 +2,8 @@ name: Weekly report quota check
 
 on:
   schedule:
-    # Tous les lundis a 07:00 UTC (~08-09h en France selon heure d'ete/hiver)
-    - cron: "0 7 * * 1"
+    # Tous les lundis a 15:00 heure de Paris (13:00 UTC en heure d'ete, 14:00 UTC en hiver)
+    - cron: "0 13 * * 1"
   workflow_dispatch: {}
 
 jobs:
