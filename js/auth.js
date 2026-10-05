@@ -77,7 +77,7 @@ export async function resetAllSessions(setDocFn, accessDocRef, currentOfficerCod
     officerCodeHash: currentOfficerCodeHash || null,
     ownerCodeHash: OWNER_HASH,
     authEpoch: newEpoch
-  });
+  }, { merge: true });
   clearSession();
   return newEpoch;
 }

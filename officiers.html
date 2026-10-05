@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=23">
+<link rel="stylesheet" href="css/style.css?v=24">
 </head>
 <body class="booting">
 
@@ -74,7 +74,13 @@
       </div>
 
       <a href="tenues.html">🧥 Tenues</a>
-      <a href="bareme-promotion.html">🧾 Barème</a>
+      <div class="dropdown">
+        <button class="dropbtn">🧾 Barème ⌄</button>
+        <div class="dropdown-content">
+          <a href="bareme-promotion.html">🧾 Barème</a>
+          <a href="entretien-ct-asp.html">📝 Entretien CT ASP</a>
+        </div>
+      </div>
       <div class="dropdown">
         <button class="dropbtn">🔒 Officier ⌄</button>
         <div class="dropdown-content">
@@ -337,200 +343,7 @@
         </div>
       </details>
 
-      <details class="accordion">
-        <summary>📝 Recrutement : Entretien CT ASP</summary>
-        <div class="accordion-body">
-          <p>Test d'entretien optionnel permettant à un officier au grade de Capitaine en Second (CPT-2nd) d'évaluer un CT ASP ayant déjà effectué une ou plusieurs missions avec la 501st et ayant pu être observé par le corps officier. Le but est de valider une impression sur la personnalité et le sérieux du postulant, plutôt que d'évaluer ses connaissances.</p>
 
-          <h4>⚠️ Consignes préliminaires</h4>
-          <ul class="clean">
-            <li>Durée à prévoir : entre 10 et 15 minutes.</li>
-            <li>Vérifier que le CT ASP possède un matricule correct (format : CT ASP 0000 Alias).</li>
-            <li><strong>La forme est plus importante que le fond</strong> : on recherche prioritairement un profil adéquat aux valeurs régimentaires ; les compétences pourront être améliorées ensuite grâce à nos enseignements.</li>
-            <li>Ce test n'est pas obligatoire : seul un officier au grade de CPT-2nd peut décider de le réaliser, et doit le mener lui-même. S'il estime ne pas avoir le temps, si aucun membre du régiment au grade requis n'est disponible, ou si l'aspirant n'a pas laissé une très bonne impression, le recrutement doit se faire de la manière standard.</li>
-            <li>Les compétences et connaissances ne sont pas des prérequis : ne pas savoir répondre n'est pas un échec. L'échec, c'est de mal faire comprendre qu'on ne sait pas.</li>
-            <li>Si l'aspirant répond à plusieurs questions en même temps via une seule réponse, les questions redondantes peuvent être annulées.</li>
-          </ul>
-
-          <h4>🔢 Codes des portes (bâtiment de recrutement)</h4>
-          <table>
-            <tr><th>Porte principale</th><td>0</td></tr>
-            <tr><th>Bureau (porte à droite)</th><td>2</td></tr>
-            <tr><th>Salle de tir (porte en face)</th><td>1</td></tr>
-            <tr><th>Salle finale</th><td>4</td></tr>
-          </table>
-
-          <p>Chaque thème ci-dessous se note de 1 à 5, selon le sérieux et la personnalité perçus chez le candidat : la précision technique de ses réponses compte moins que son attitude. Remplis les notes au fil de l'entretien, puis envoie le formulaire à la fin : la réponse est automatiquement relayée dans le salon Discord dédié.</p>
-
-          <div class="eff-form" style="margin-bottom: 4px;">
-            <input id="rec-recruteur" placeholder="Identification recruteur (nom, matricule)">
-            <input id="rec-aspirant" placeholder="Identification CT ASP (matricule)">
-          </div>
-
-          <details class="accordion sub" open>
-            <summary>📋 Questions recrutement</summary>
-            <div class="accordion-body">
-
-              <p>Matricule et désignation, soldat.</p>
-
-              <div class="rating-row">
-                <p class="q-text">Quelles sont vos motivations pour rejoindre la 501st Légion ?</p>
-                <div class="rating-scale" data-target="rate-motiv_rejoindre">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-motiv_rejoindre" value="">
-                </div>
-                <textarea id="notes-motiv_rejoindre" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
-              <div class="rating-row">
-                <p class="q-text">Que fait la 501st sur le champ de bataille ?</p>
-                <div class="rating-scale" data-target="rate-battlefield">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-battlefield" value="">
-                </div>
-                <textarea id="notes-battlefield" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
-              <div class="rating-row">
-                <p class="q-text">Un clone doit-il réfléchir ou obéir ?</p>
-                <div class="rating-scale" data-target="rate-reflechir_obeir">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-reflechir_obeir" value="">
-                </div>
-                <textarea id="notes-reflechir_obeir" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-              <div class="rating-row">
-                <p class="q-text">Qu'est-ce qui est le plus important : survivre ou accomplir la mission ? (Réponse : Accomplir la mission)</p>
-                <div class="rating-scale" data-target="rate-survivre_mission">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-survivre_mission" value="">
-                </div>
-                <textarea id="notes-survivre_mission" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
-              <div class="rating-row">
-                <p class="q-text">Que faites-vous si un ordre ne vous convient pas ?</p>
-                <div class="rating-scale" data-target="rate-ordre_refuse">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-ordre_refuse" value="">
-                </div>
-                <textarea id="notes-ordre_refuse" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-              <div class="rating-row">
-                <p class="q-text">Pour vous, qu'est-ce que la discipline ?</p>
-                <div class="rating-scale" data-target="rate-discipline_def">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-discipline_def" value="">
-                </div>
-                <textarea id="notes-discipline_def" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
-              <div class="rating-row">
-                <p class="q-text">Avez-vous quelque chose à ajouter, soldat ?</p>
-                <div class="rating-scale" data-target="rate-ajout_final">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-ajout_final" value="">
-                </div>
-                <textarea id="notes-ajout_final" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-              <div class="rating-row">
-                <p class="q-text">Pensez-vous avoir été à la hauteur de nos attentes, et êtes-vous prêt à porter les couleurs du régiment ?</p>
-                <div class="rating-scale" data-target="rate-pret_couleurs">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-pret_couleurs" value="">
-                </div>
-                <textarea id="notes-pret_couleurs" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-
-            </div>
-          </details>
-
-          <details class="accordion sub" open>
-            <summary>🔫 Test pratique</summary>
-            <div class="accordion-body">
-              <h5>🎯 Exercice de tir</h5>
-              <ol class="clean">
-                <li>Expliquer à l'aspirant qu'il va réaliser un exercice de tir, puis l'emmener dans la zone de tir.</li>
-                <li>Se placer à gauche du stand (pour éviter que l'aspirant voie la cible à droite).</li>
-                <li>Il doit respecter les priorités, la précision et les règles d'or.</li>
-                <li>Rester en zone de tir pour le sujet suivant.</li>
-              </ol>
-              <div class="rating-row">
-                <div class="rating-scale" data-target="rate-tir">
-                  <span class="rating-label">Note</span>
-                  <button type="button" class="rating-btn" data-value="1">1</button>
-                  <button type="button" class="rating-btn" data-value="2">2</button>
-                  <button type="button" class="rating-btn" data-value="3">3</button>
-                  <button type="button" class="rating-btn" data-value="4">4</button>
-                  <button type="button" class="rating-btn" data-value="5">5</button>
-                  <input type="hidden" id="rate-tir" value="">
-                </div>
-                <textarea id="notes-tir" placeholder="Notes / observations (optionnel)"></textarea>
-              </div>
-            </div>
-          </details>
-
-          <h4>📨 Soumettre l'entretien</h4>
-          <div class="eff-form">
-            <textarea id="rec-observation" placeholder="Observation finale (optionnel)"></textarea>
-            <button id="rec-submit-btn" class="btn" type="button">Envoyer l'entretien</button>
-          </div>
-          <div id="rec-status" class="rec-status"></div>
-
-          <h4>✅ À faire une fois l'entretien terminé</h4>
-          <p>Tout manquement aux consignes ci-dessous sera sanctionné.</p>
-          <ol class="clean">
-            <li>Aller en vocal Discord avec le CT ASP.</li>
-            <li>Aller à l'armurerie pour la tenue CT 501st (WL) et lui faire prendre son job.</li>
-            <li>Lui expliquer son nom RP et vérifier qu'il le respecte bien (501st CT Matricule Nom).</li>
-            <li>Lui faire faire sa demande de grade Discord.</li>
-            <li>Lui envoyer par MP le lien vers le manuel du CT.</li>
-            <li>Lui expliquer ses erreurs à l'oral ou par écrit en MP.</li>
-            <li>Noter dans #rapport, avec le tag #Rapport Recrutement, le recrutement avec les SteamID64 et SteamID32, son Discord et des commentaires.</li>
-            <li>Lui expliquer le fonctionnement des canaux Discord 501st, ainsi que le fonctionnement et les attentes des rapports.</li>
-          </ol>
-        </div>
-      </details>
 
     </div>
 
@@ -540,11 +353,11 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=23"></script>
+  <script src="js/site.js?v=24"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import {
   loadSession, saveSession, clearSession, readAccessConfig,
   tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
@@ -563,7 +376,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const accessDocRef = doc(db, "config", "access");
-const recrutementsCol = collection(db, "recrutements");
 let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 let currentRole = null;
 let currentHash = null;
@@ -639,117 +451,6 @@ input.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && input.value) tryCode(input.value);
 });
 
-var RECRUTEMENT_THEMES = ["motiv_rejoindre", "battlefield", "reflechir_obeir", "survivre_mission", "ordre_refuse", "discipline_def", "tir", "ajout_final", "pret_couleurs"];
-var recStatus = document.getElementById("rec-status");
-var recSubmitBtn = document.getElementById("rec-submit-btn");
-
-document.querySelectorAll(".rating-scale").forEach(function (scale) {
-  var targetInput = document.getElementById(scale.dataset.target);
-  scale.querySelectorAll(".rating-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      targetInput.value = btn.dataset.value;
-      scale.querySelectorAll(".rating-btn").forEach(function (b) { b.classList.remove("active"); });
-      btn.classList.add("active");
-    });
-  });
-});
-
-function setRecStatus(message, kind) {
-  recStatus.textContent = message;
-  recStatus.className = "rec-status" + (kind ? " " + kind : "");
-}
-
-var RELAY_WORKER_URL = "https://recrutement-501st-relay.site501st-relay-worker.workers.dev";
-
-async function triggerInstantRelay(payload) {
-  try {
-    var res = await fetch(RELAY_WORKER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    return res.ok;
-  } catch (e) {
-    console.warn("Relais instantané indisponible, le cron de secours prendra le relais :", e);
-    return false;
-  }
-}
-
-async function submitRecrutement() {
-  if (!currentHash) {
-    setRecStatus("Tu dois être connecté (code officier/owner) pour envoyer un entretien.", "err");
-    return;
-  }
-  var recruteur = document.getElementById("rec-recruteur").value.trim();
-  var aspirant = document.getElementById("rec-aspirant").value.trim();
-  if (!recruteur || !aspirant) {
-    setRecStatus("Renseigne l'identification du recruteur et du CT ASP avant d'envoyer.", "err");
-    return;
-  }
-
-  var ratings = {};
-  for (var i = 0; i < RECRUTEMENT_THEMES.length; i++) {
-    var key = RECRUTEMENT_THEMES[i];
-    var noteVal = document.getElementById("rate-" + key).value;
-    if (!noteVal) {
-      setRecStatus("Renseigne une note (1-5) pour chaque thème avant d'envoyer.", "err");
-      return;
-    }
-    ratings[key] = {
-      note: Number(noteVal),
-      notes: document.getElementById("notes-" + key).value.trim()
-    };
-  }
-
-  var observation = document.getElementById("rec-observation").value.trim();
-
-  recSubmitBtn.disabled = true;
-  setRecStatus("Envoi en cours…", "");
-  try {
-    var submittedAt = new Date().toISOString();
-    var docRef = await addDoc(recrutementsCol, {
-      recruteur: recruteur,
-      aspirant: aspirant,
-      ratings: ratings,
-      observation: observation,
-      codeHash: currentHash,
-      notified: false,
-      submittedAt: submittedAt
-    });
-
-    var relayed = await triggerInstantRelay({
-      recruteur: recruteur,
-      aspirant: aspirant,
-      ratings: ratings,
-      observation: observation,
-      submittedAt: submittedAt,
-      codeHash: currentHash
-    });
-
-    if (relayed) {
-      await updateDoc(docRef, { notified: true, codeHash: currentHash });
-      setRecStatus("Entretien envoyé et relayé sur Discord instantanément.", "ok");
-    } else {
-      setRecStatus("Entretien envoyé. Relais instantané indisponible, il sera relayé sous peu (cron de secours).", "ok");
-    }
-
-    document.getElementById("rec-recruteur").value = "";
-    document.getElementById("rec-aspirant").value = "";
-    document.getElementById("rec-observation").value = "";
-    for (var j = 0; j < RECRUTEMENT_THEMES.length; j++) {
-      var k = RECRUTEMENT_THEMES[j];
-      document.getElementById("rate-" + k).value = "";
-      document.getElementById("notes-" + k).value = "";
-      document.querySelectorAll('.rating-scale[data-target="rate-' + k + '"] .rating-btn').forEach(function (b) { b.classList.remove("active"); });
-    }
-  } catch (e) {
-    setRecStatus("Échec de l'envoi : " + e.message, "err");
-  } finally {
-    recSubmitBtn.disabled = false;
-  }
-}
-
-recSubmitBtn.addEventListener("click", submitRecrutement);
 </script>
 
 </body>
