@@ -727,7 +727,8 @@ table .kama-thumb {
 #eff-table { min-width: 0; }
 #eff-table td { padding: 10px 8px; }
 #eff-table td input[type="date"] { font-size: 0.75rem; padding: 5px 3px; }
-#eff-table td.eff-row-actions { white-space: normal; }
+#eff-table td.eff-row-actions { white-space: normal; padding: 6px 4px; }
+#eff-table td.eff-row-actions .eff-icon-btn { font-size: 0.62rem; padding: 3px 4px; letter-spacing: 0.02em; }
 
 #eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start, #qual-table tbody tr.grade-group-start {
   border-top: 2px solid var(--blue);
