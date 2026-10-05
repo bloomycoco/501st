@@ -318,16 +318,10 @@ const MISSION_QUOTAS = {
   "VCMD": 8
 };
 
-// Grade suivant dans la progression (CT → CPL → … → LTN → CPT-2nd).
-const NEXT_GRADE = {
-  "CT": "CPL", "CPL": "CPL-C", "CPL-C": "SGT", "SGT": "SGT-C", "SGT-C": "ADJ",
-  "ADJ": "ADJ-C", "ADJ-C": "2nd-LTN", "2nd-LTN": "LTN", "LTN": "CPT-2nd"
-};
-// Leads requis pour être promu au grade indiqué.
+// Leads requis à partir du grade indiqué (à partir de SGT inclus).
 const LEAD_QUOTAS = { "SGT": 2, "SGT-C": 3, "ADJ": 4, "ADJ-C": 5, "2nd-LTN": 4, "LTN": 3 };
 function leadQuotaFor(grade) {
-  var next = NEXT_GRADE[grade];
-  return next ? LEAD_QUOTAS[next] : undefined;
+  return LEAD_QUOTAS[grade];
 }
 
 // A partir du grade CPT-2nd (inclus) et au-dessus dans la hierarchie, les
