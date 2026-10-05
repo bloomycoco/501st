@@ -724,12 +724,7 @@ table .kama-thumb {
 
 #eff-table th:last-child, #eff-table td.eff-row-actions, #qual-table th:last-child, #qual-table td.eff-row-actions, #reserve-table th:last-child, #reserve-table td.eff-row-actions { white-space: nowrap; }
 
-#eff-table th:last-child, #eff-table td.eff-row-actions, #reserve-table th:last-child, #reserve-table td.eff-row-actions {
-  position: sticky;
-  right: 0;
-  background: #0D1020;
-  box-shadow: -6px 0 8px -6px rgba(0,0,0,0.6);
-}
+#eff-table { min-width: 0; }
 
 #eff-table tbody tr.grade-group-start, #promo-table tbody tr.grade-group-start, #qual-table tbody tr.grade-group-start {
   border-top: 2px solid var(--blue);
@@ -747,7 +742,8 @@ table .kama-thumb {
 
 #eff-table input, #eff-table select, #reserve-table input, #reserve-table select {
   width: 100%;
-  min-width: 70px;
+  min-width: 0;
+  max-width: 100%;
   background: rgba(13,15,30,0.9);
   border: 1px solid var(--border-hi);
   color: var(--text);
