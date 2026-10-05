@@ -1,0 +1,687 @@
+{
+  "generatedAt": "2026-10-04T09:16:03.158Z",
+  "effectif": [
+    {
+      "id": "0VgNP1kHWokLKv1BSdIA",
+      "data": {
+        "discord": "cteud",
+        "lastPromo": "2026-10-02",
+        "spec": "Soldat",
+        "blame": 0,
+        "cmdMission": 0,
+        "rpName": "Eud",
+        "steamId": "76561198228575380",
+        "reportCount": 0,
+        "matricule": "2844",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "grade": "CPL-C",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "5RCKUKwiJRc686sNx4dC",
+      "data": {
+        "code": "1119OFFC",
+        "groupe332": false,
+        "matricule": "",
+        "spec": "-",
+        "formations": [],
+        "reportCount": 0,
+        "grade": "ALPHA",
+        "rpName": "A-20",
+        "medailles": [],
+        "lastPromo": "",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "discord": "mhyx.",
+        "kama": false,
+        "formateur": false,
+        "steamId": "76561198152962205"
+      }
+    },
+    {
+      "id": "6K1KWOBYlzureEnUZ65o",
+      "data": {
+        "steamId": "76561198954430995",
+        "formateur": true,
+        "spec": "Torrent",
+        "discord": "wolfkiller4044",
+        "blame": 0,
+        "lastPromo": "2026-09-23",
+        "rpName": "Vex",
+        "code": "1119OFFC",
+        "reportCount": 0,
+        "medailles": [],
+        "cmdMission": 0.5,
+        "matricule": "7869",
+        "groupe332": false,
+        "grade": "SGT",
+        "kama": false,
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f"
+      }
+    },
+    {
+      "id": "71siYnx4Jn6FUQRFxvkz",
+      "data": {
+        "grade": "GNL",
+        "code": "1119OFFC",
+        "rpName": "Anakin Skywalker",
+        "lastPromo": "",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "discord": "",
+        "reportCount": 0,
+        "spec": "-",
+        "steamId": "",
+        "matricule": ""
+      }
+    },
+    {
+      "id": "81O99XIqlsd0GZvY3Hog",
+      "data": {
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-09-28",
+        "cmdMission": 0,
+        "rpName": "Sugar",
+        "discord": "maerofff",
+        "spec": "Soldat",
+        "grade": "LTN",
+        "matricule": "3943",
+        "steamId": "76561199489313725"
+      }
+    },
+    {
+      "id": "86R74u3C0qSzpB067mCi",
+      "data": {
+        "formateur": true,
+        "spec": "ARF",
+        "medailles": [],
+        "code": "1119OFFC",
+        "lastPromo": "2026-09-26",
+        "rpName": "Sina",
+        "groupe332": false,
+        "matricule": "1001",
+        "steamId": "76561198311226268",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "notoruis",
+        "kama": false,
+        "reportCount": 0,
+        "grade": "ADJ-C",
+        "formations": [
+          "TX-130",
+          "AT-RT"
+        ]
+      }
+    },
+    {
+      "id": "9s6fFjIS9Iv0k1QPfCam",
+      "data": {
+        "steamId": "76561198985984582",
+        "lastPromo": "2026-09-29",
+        "discord": "Old_Deus",
+        "spec": "Médecin",
+        "code": "1119OFFC",
+        "matricule": "2806",
+        "grade": "CPL",
+        "rpName": "Old-Deus",
+        "reportCount": 0,
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "cmdMission": "0"
+      }
+    },
+    {
+      "id": "A5u7f1IluOYzt4S8ywnF",
+      "data": {
+        "grade": "2nd-LTN",
+        "lastPromo": "2026-10-03",
+        "medailles": [],
+        "kama": true,
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "BARC Speeder",
+          "AT-AP"
+        ],
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "formateur": true,
+        "reportCount": 0,
+        "discord": "volt.air",
+        "rpName": "Echo (Nobody)",
+        "code": "1119OFFC",
+        "steamId": "76561198312750782",
+        "spec": "ARC Trooper",
+        "cmdMission": 0,
+        "matricule": "1409",
+        "groupe332": false,
+        "blame": 0
+      }
+    },
+    {
+      "id": "BIgbCenZ4JQQJxiW2NOL",
+      "data": {
+        "spec": "-",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "",
+        "steamId": "76561198111795410",
+        "reportCount": 0,
+        "rpName": "Noctis",
+        "discord": "thothog",
+        "lastPromo": "2026-09-12",
+        "code": "1119OFFC",
+        "grade": "EM"
+      }
+    },
+    {
+      "id": "C2a6VcS6rALZTkjZQ5V2",
+      "data": {
+        "code": "1119OFFC",
+        "rpName": "Jaeger",
+        "reportCount": 0,
+        "lastPromo": "2026-09-27",
+        "discord": "theojaeger",
+        "grade": "CT",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "3045",
+        "spec": "Soldat",
+        "steamId": "76561199865299325"
+      }
+    },
+    {
+      "id": "FVKtGhw29FA5urdwp3MS",
+      "data": {
+        "groupe332": false,
+        "matricule": "2309",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "blame": 1,
+        "kama": true,
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "reportCount": "0",
+        "grade": "CPT-2nd",
+        "formateur": true,
+        "code": "1119OFFC",
+        "cmdMission": 1,
+        "steamId": "76561198321014679",
+        "medailles": [],
+        "rpName": "Kay0",
+        "lastPromo": "2026-09-30",
+        "spec": "Torrent",
+        "discord": "suguru_goat"
+      }
+    },
+    {
+      "id": "NJNQPmAvOUr3RcVXRcpz",
+      "data": {
+        "rpName": "Eli",
+        "grade": "CT",
+        "matricule": "2267",
+        "groupe332": false,
+        "formations": [
+          "TX-130"
+        ],
+        "kama": false,
+        "discord": "bucherobot",
+        "lastPromo": "2026-09-28",
+        "steamId": "76561198354378582",
+        "medailles": [],
+        "cmdMission": 0,
+        "spec": "Soldat",
+        "formateur": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f"
+      }
+    },
+    {
+      "id": "OO9a0cjKSRaQ5nOrs293",
+      "data": {
+        "lastPromo": "2026-06-28",
+        "discord": "strixlachouette",
+        "rpName": "Agolius",
+        "spec": "-",
+        "steamId": "76561198799567020",
+        "reportCount": 0,
+        "code": "1119OFFC",
+        "matricule": "",
+        "grade": "MR",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6"
+      }
+    },
+    {
+      "id": "PZB1PZPu3wPjLbCYtzAp",
+      "data": {
+        "kama": false,
+        "matricule": "2222",
+        "rpName": "Tutu",
+        "formations": [
+          "TX-130",
+          "AT-AP"
+        ],
+        "groupe332": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-09-30",
+        "spec": "Heavy",
+        "medailles": [],
+        "grade": "SGT-C",
+        "steamId": "76561198420017576",
+        "reportCount": "0",
+        "formateur": true,
+        "cmdMission": "0",
+        "code": "1119OFFC",
+        "discord": "gaz.part"
+      }
+    },
+    {
+      "id": "PsngarGSUg4kOYnG38TM",
+      "data": {
+        "spec": "Soldat",
+        "rpName": "White",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "discord": "alex7144",
+        "lastPromo": "2026-09-21",
+        "steamId": "76561199071112903",
+        "grade": "CT",
+        "matricule": "7274",
+        "code": "1119OFFC",
+        "reportCount": 1
+      }
+    },
+    {
+      "id": "QbZ4P5YWmh5KHQyMcYpc",
+      "data": {
+        "formations": [
+          "TX-130"
+        ],
+        "medailles": [],
+        "lastPromo": "2026-10-01",
+        "code": "1119OFFC",
+        "spec": "Soldat",
+        "grade": "SGT-C",
+        "formateur": false,
+        "rpName": "Amon",
+        "reportCount": "0",
+        "cmdMission": "0",
+        "kama": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561198121288927",
+        "discord": "plordone",
+        "groupe332": false,
+        "matricule": "1921"
+      }
+    },
+    {
+      "id": "XmqdEjU8vt7uphk5z6qr",
+      "data": {
+        "reportCount": 0,
+        "formateur": true,
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "spec": "Heavy",
+        "grade": "SGT",
+        "medailles": [],
+        "lastPromo": "2026-09-21",
+        "rpName": "Lockdown",
+        "formations": [
+          "TX-130",
+          "AT-AP"
+        ],
+        "groupe332": false,
+        "matricule": "4156",
+        "kama": false,
+        "steamId": "76561198870125842",
+        "discord": "td1_34z"
+      }
+    },
+    {
+      "id": "dhZa1IL6H60wCuPI7wxy",
+      "data": {
+        "matricule": "4529",
+        "spec": "Heavy",
+        "groupe332": false,
+        "code": "1119OFFC",
+        "reportCount": 0,
+        "rpName": "Kieron",
+        "steamId": "76561198292480975",
+        "formations": [
+          "TX-130",
+          "AT-AP"
+        ],
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "grade": "SGT",
+        "kama": false,
+        "formateur": false,
+        "discord": ".zebi",
+        "lastPromo": "2026-09-24",
+        "medailles": []
+      }
+    },
+    {
+      "id": "dnwHSQJu1ACZ1msucUg7",
+      "data": {
+        "grade": "LTN",
+        "rpName": "Kano",
+        "cmdMission": "0",
+        "code": "1119OFFC",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "reportCount": 0,
+        "lastPromo": "2026-08-31",
+        "discord": "shaven1",
+        "steamId": "76561199050827033",
+        "spec": "Torrent",
+        "matricule": "7567"
+      }
+    },
+    {
+      "id": "fX2Kh9ouIJHIbXQR7LnZ",
+      "data": {
+        "code": "1119OFFC",
+        "cmdMission": 0,
+        "reportCount": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "groupe332": false,
+        "matricule": "2093",
+        "spec": "ARF",
+        "grade": "CPT-2nd",
+        "rpName": "Sergius",
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "medailles": [],
+        "lastPromo": "2026-08-31",
+        "discord": "ldn4ever",
+        "formateur": true,
+        "kama": false,
+        "steamId": "76561198867428192"
+      }
+    },
+    {
+      "id": "g132cWlsPafi1lULlckB",
+      "data": {
+        "reportCount": 0,
+        "formateur": false,
+        "formations": [],
+        "grade": "CMDM",
+        "kama": false,
+        "lastPromo": "2026-09-29",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "medailles": [],
+        "discord": ".blo.om.",
+        "code": "1119OFFC",
+        "matricule": "1119",
+        "groupe332": false,
+        "blame": 0,
+        "steamId": "XXXX",
+        "rpName": "Appo",
+        "spec": "-",
+        "cmdMission": 0
+      }
+    },
+    {
+      "id": "gwZ4vuHtJG9WbkLmbqs4",
+      "data": {
+        "reportCount": 0,
+        "rpName": "KILLYAN",
+        "spec": "Soldat",
+        "discord": "aentpn",
+        "steamId": "76561199231310710",
+        "lastPromo": "2026-09-09",
+        "grade": "CT",
+        "matricule": "6242",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "jQkpmLRuQDchKKNUhdm8",
+      "data": {
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "",
+        "spec": "-",
+        "reportCount": 0,
+        "steamId": "",
+        "code": "1119OFFC",
+        "lastPromo": "",
+        "rpName": "Ahsoka Tano",
+        "grade": "CMDJ",
+        "discord": ""
+      }
+    },
+    {
+      "id": "pcri1nZXZ8uT1MUqeeDp",
+      "data": {
+        "formateur": true,
+        "rpName": "Jacky",
+        "kama": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-08-14",
+        "medailles": [],
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "discord": "axeman8337",
+        "matricule": "1535",
+        "groupe332": false,
+        "reportCount": 0,
+        "steamId": "76561199494526425",
+        "spec": "ARF",
+        "code": "1119OFFC",
+        "grade": "SGT-C"
+      }
+    },
+    {
+      "id": "sdxkNmjqbACqVs8Oj52u",
+      "data": {
+        "steamId": "76561199163737975",
+        "discord": "766029857397407744",
+        "matricule": "1111",
+        "cmdMission": 0,
+        "spec": "Soldat",
+        "grade": "CT",
+        "lastPromo": "2026-10-04",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "rpName": "Magnus"
+      }
+    },
+    {
+      "id": "tBBN60cBeTTppeiSEkDC",
+      "data": {
+        "spec": "Médecin",
+        "groupe332": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561199567367802",
+        "matricule": "1939",
+        "discord": "fraisesucree__",
+        "cmdMission": "0",
+        "rpName": "Hawck",
+        "grade": "CPL-C",
+        "kama": false,
+        "medailles": [],
+        "lastPromo": "2026-09-30",
+        "reportCount": "0",
+        "formateur": false,
+        "formations": [
+          "TX-130"
+        ]
+      }
+    },
+    {
+      "id": "vU0J8ZlaVTjpuSCtW7RN",
+      "data": {
+        "blame": 0,
+        "lastPromo": "",
+        "ancienGrade": "ADJ",
+        "rpName": "test",
+        "spec": "Soldat",
+        "reportCount": 0,
+        "cmdMission": 0,
+        "discord": "test",
+        "matricule": "test",
+        "grade": "Réserviste",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "steamId": "test"
+      }
+    },
+    {
+      "id": "w8wp6sEKyW5oFu54nf8P",
+      "data": {
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "BARC Speeder",
+          "AT-AP"
+        ],
+        "medailles": [],
+        "lastPromo": "2026-09-25",
+        "kama": true,
+        "steamId": "76561199147977756",
+        "reportCount": 0,
+        "discord": ".capitainerex",
+        "formateur": true,
+        "cmdMission": "1",
+        "spec": "Heavy",
+        "code": "1119OFFC",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "rpName": "Ash",
+        "grade": "CPT",
+        "groupe332": false,
+        "matricule": "2305"
+      }
+    },
+    {
+      "id": "x2XwLXfeO9VjcL9AC1lg",
+      "data": {
+        "spec": "Médecin",
+        "steamId": "76561198751710747",
+        "discord": "zerty0938_64815",
+        "cmdMission": "0",
+        "matricule": "9023",
+        "code": "1119OFFC",
+        "groupe332": false,
+        "kama": false,
+        "lastPromo": "2026-09-30",
+        "reportCount": "0",
+        "medailles": [],
+        "rpName": "Rek",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "grade": "ADJ-C",
+        "formateur": false
+      }
+    },
+    {
+      "id": "xdEr98haBbPloT1yztPC",
+      "data": {
+        "steamId": "76561198289940795",
+        "discord": "roni_26.",
+        "formateur": true,
+        "spec": "Torrent",
+        "lastPromo": "2026-09-09",
+        "cmdMission": 0,
+        "medailles": [],
+        "grade": "ADJ-C",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "matricule": "2605",
+        "groupe332": false,
+        "formations": [],
+        "rpName": "Slash",
+        "kama": false
+      }
+    },
+    {
+      "id": "zfVqLt9LPMnF8mDhmvpz",
+      "data": {
+        "discord": "luminasiaa",
+        "rpName": "Freeze",
+        "cmdMission": 0,
+        "formateur": false,
+        "steamId": "76561198269782596",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "grade": "CPL",
+        "spec": "Médecin",
+        "lastPromo": "2026-10-02",
+        "medailles": [],
+        "reportCount": 0,
+        "formations": [
+          "TX-130"
+        ],
+        "blame": 0,
+        "matricule": "6362",
+        "groupe332": false,
+        "kama": false
+      }
+    }
+  ],
+  "rapports": [
+    {
+      "id": "6RDSTWqA8BDYZJ8HuOdx",
+      "data": {
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "archived": true,
+        "reviewedBy": "Owner",
+        "content": "Rapport de test",
+        "status": "rejected",
+        "reviewedAt": "2026-09-29T19:56:11.141Z",
+        "matricule": "CT-TEST",
+        "submittedAt": "2026-09-29T20:00:00.000Z"
+      }
+    },
+    {
+      "id": "8bn6oyZC2gdo3JHyvv7p",
+      "data": {
+        "content": "Test 2",
+        "matricule": "CT-TEST2",
+        "status": "zzz",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6"
+      }
+    },
+    {
+      "id": "M8b0oFlMhZqP4OoLltjh",
+      "data": {
+        "matricule": "Appo",
+        "status": "rejected",
+        "reviewedAt": "2026-09-29T19:56:11.649Z",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "content": "Test de rapport",
+        "archived": true,
+        "submittedAt": "2026-09-29T19:44:02.133Z",
+        "reviewedBy": "Owner"
+      }
+    },
+    {
+      "id": "Sst0VVBvwRaZHlIw37jC",
+      "data": {
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "7274",
+        "reviewedBy": "Appo (1119)",
+        "submittedAt": "2026-09-30T18:07:49.488Z",
+        "rpName": "White",
+        "content": "test",
+        "reviewedAt": "2026-09-30T18:09:03.154Z",
+        "status": "rejected"
+      }
+    },
+    {
+      "id": "iaoiYm8ZZ4d803uNnHjU",
+      "data": {
+        "status": "rejected",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "submittedAt": "2026-09-30T12:35:27.575Z",
+        "rpName": "Jaeger",
+        "reviewedBy": "Owner",
+        "archived": true,
+        "content": "TEST",
+        "reviewedAt": "2026-09-30T12:37:05.646Z",
+        "matricule": "3045"
+      }
+    }
+  ]
+}
