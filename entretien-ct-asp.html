@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body class="booting">
 
@@ -314,74 +314,47 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=24"></script>
+  <script src="js/site.js?v=25"></script>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getFirestore, doc, getDoc, collection, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { sha256, OWNER_HASH } from "./js/auth.js";
+import { login, currentRole as checkRole, clearSession, callServer } from "./js/auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
-  authDomain: "site501st.firebaseapp.com",
-  projectId: "site501st",
-  storageBucket: "site501st.firebasestorage.app",
-  messagingSenderId: "862962282467",
-  appId: "1:862962282467:web:548b976251263394d53ad6"
-};
+var gate = document.getElementById("gate");
+var content = document.getElementById("entretien-content");
+var input = document.getElementById("gate-input");
+var submitGate = document.getElementById("gate-submit");
+var gateError = document.getElementById("gate-error");
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const accessDocRef = doc(db, "config", "access");
-const recrutementsCol = collection(db, "recrutements");
-const INSTRU_KEY = "site501st_instructeur";
-let currentHash = null;
-
-async function loadInstructeurHash() {
-  var snap = await getDoc(accessDocRef);
-  var data = snap.exists() ? snap.data() : {};
-  return data.instructeurCodeHash || null;
+function unlock() {
+  gate.style.display = "none";
+  content.style.display = "block";
 }
 
-async function isAllowedHash(hash) {
-  if (hash === OWNER_HASH) return true;
-  var instructeur = await loadInstructeurHash();
-  return !!instructeur && hash === instructeur;
+async function restoreSession() {
+  var role = await checkRole();
+  if (role === "instructeur" || role === "owner") unlock();
 }
+restoreSession();
 
-function unlock(hash) {
-  currentHash = hash;
-  document.getElementById("gate").style.display = "none";
-  document.getElementById("entretien-content").style.display = "block";
-}
-
-async function tryCode(raw) {
-  var hash = await sha256(raw.trim().toUpperCase());
-  var errEl = document.getElementById("gate-error");
-  if (await isAllowedHash(hash)) {
-    try { localStorage.setItem(INSTRU_KEY, hash); } catch (e) {}
-    errEl.style.display = "none";
-    unlock(hash);
+async function tryCode(code) {
+  var session = await login(code);
+  if (session && (session.role === "instructeur" || session.role === "owner")) {
+    gateError.style.display = "none";
+    unlock();
   } else {
-    errEl.style.display = "block";
-    document.getElementById("gate-input").value = "";
+    gateError.style.display = "block";
+    input.value = "";
+    input.focus();
   }
 }
 
-document.getElementById("gate-submit").addEventListener("click", function () {
-  var v = document.getElementById("gate-input").value;
-  if (v) tryCode(v);
+submitGate.addEventListener("click", function () {
+  if (input.value) tryCode(input.value.trim());
 });
 
-document.getElementById("gate-input").addEventListener("keydown", function (e) {
-  if (e.key === "Enter" && this.value) tryCode(this.value);
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && input.value) tryCode(input.value.trim());
 });
-
-(async function restoreSession() {
-  var saved = null;
-  try { saved = localStorage.getItem(INSTRU_KEY); } catch (e) {}
-  if (saved && await isAllowedHash(saved)) unlock(saved);
-})();
 
 var RECRUTEMENT_THEMES = ["motiv_rejoindre", "battlefield", "reflechir_obeir", "survivre_mission", "ordre_refuse", "discipline_def", "tir", "ajout_final", "pret_couleurs"];
 var recStatus = document.getElementById("rec-status");
@@ -403,27 +376,7 @@ function setRecStatus(message, kind) {
   recStatus.className = "rec-status" + (kind ? " " + kind : "");
 }
 
-var RELAY_WORKER_URL = "https://recrutement-501st-relay.site501st-relay-worker.workers.dev";
-
-async function triggerInstantRelay(payload) {
-  try {
-    var res = await fetch(RELAY_WORKER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    return res.ok;
-  } catch (e) {
-    console.warn("Relais instantané indisponible, le cron de secours prendra le relais :", e);
-    return false;
-  }
-}
-
 async function submitRecrutement() {
-  if (!currentHash) {
-    setRecStatus("Tu dois être connecté (code instructeur) pour envoyer un entretien.", "err");
-    return;
-  }
   var recruteur = document.getElementById("rec-recruteur").value.trim();
   var aspirant = document.getElementById("rec-aspirant").value.trim();
   if (!recruteur || !aspirant) {
@@ -450,32 +403,8 @@ async function submitRecrutement() {
   recSubmitBtn.disabled = true;
   setRecStatus("Envoi en cours…", "");
   try {
-    var submittedAt = new Date().toISOString();
-    var docRef = await addDoc(recrutementsCol, {
-      recruteur: recruteur,
-      aspirant: aspirant,
-      ratings: ratings,
-      observation: observation,
-      codeHash: currentHash,
-      notified: false,
-      submittedAt: submittedAt
-    });
-
-    var relayed = await triggerInstantRelay({
-      recruteur: recruteur,
-      aspirant: aspirant,
-      ratings: ratings,
-      observation: observation,
-      submittedAt: submittedAt,
-      codeHash: currentHash
-    });
-
-    if (relayed) {
-      await updateDoc(docRef, { notified: true, codeHash: currentHash });
-      setRecStatus("Entretien envoyé et relayé sur Discord instantanément.", "ok");
-    } else {
-      setRecStatus("Entretien envoyé. Relais instantané indisponible, il sera relayé sous peu (cron de secours).", "ok");
-    }
+    await callServer("/recruitment", { recruteur: recruteur, aspirant: aspirant, ratings: ratings, observation: observation });
+    setRecStatus("Entretien envoyé et relayé sur Discord.", "ok");
 
     document.getElementById("rec-recruteur").value = "";
     document.getElementById("rec-aspirant").value = "";

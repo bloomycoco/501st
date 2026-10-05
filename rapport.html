@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body class="booting">
 
@@ -173,19 +173,12 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=24"></script>
+  <script src="js/site.js?v=25"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc, onSnapshot,
-  query, where, getDocs, increment
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import {
-  OWNER_HASH, loadSession, saveSession, clearSession, readAccessConfig,
-  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
-  mountOwnerBackupButton, downloadFullBackup
-} from "./js/auth.js";
+import { getFirestore, collection, onSnapshot, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { login, currentRole as checkRole, clearSession, callServer, submitPublic, mountOwnerResetButton, mountOwnerBackupButton, downloadFullBackup } from "./js/auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
@@ -200,8 +193,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const rapportsCol = collection(db, "rapports");
 const effCol = collection(db, "effectif");
-const accessDocRef = doc(db, "config", "access");
-let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
 // Rang hierarchique (identique a effectif.html). A partir du grade CPT-2nd
 // (inclus) et au-dessus, exempte du quota de rapport : ces membres
@@ -224,20 +215,21 @@ function esc(s) {
   });
 }
 
-var currentRole = null;
-var currentHash = null;
+var currentRoleName = null;
 
-function isUnlocked() { return currentRole !== null; }
+function isUnlocked() {
+  return currentRoleName === "officier" || currentRoleName === "owner";
+}
 
 function applyRoleUI() {
   var loggedOut = document.getElementById("auth-logged-out");
   var loggedIn = document.getElementById("auth-logged-in");
   var roleLabel = document.getElementById("auth-role");
-  if (currentRole) {
+  if (isUnlocked()) {
     loggedOut.style.display = "none";
     loggedIn.style.display = "block";
-    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
-    if (currentRole === "owner") {
+    roleLabel.textContent = currentRoleName === "owner" ? "Owner" : "Officier";
+    if (currentRoleName === "owner") {
       mountOwnerResetButton(handleOwnerReset);
       mountOwnerBackupButton(handleOwnerBackup);
     }
@@ -254,13 +246,13 @@ function applyRoleUI() {
 }
 
 async function handleOwnerReset() {
-  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html) ? Chacun devra ressaisir le code.")) return;
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE ? Chacun devra ressaisir son code.")) return;
   try {
-    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
-    currentRole = null;
-    currentHash = null;
+    await callServer("/reset-sessions", {});
+    clearSession();
+    currentRoleName = null;
     applyRoleUI();
-    alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
+    alert("Accès réinitialisés. Tout le monde doit ressaisir son code.");
   } catch (e) {
     alert("Échec : " + e.message);
   }
@@ -275,37 +267,26 @@ async function handleOwnerBackup() {
   }
 }
 
-async function restoreSessionIfValid() {
-  try {
-    accessConfig = await readAccessConfig(getDoc, accessDocRef);
-  } catch (e) { return; }
-  var restored = tryRestoreSession(accessConfig);
-  if (restored) {
-    currentRole = restored.role;
-    currentHash = restored.hash;
-    applyRoleUI();
-  }
+async function restoreSession() {
+  currentRoleName = await checkRole();
+  applyRoleUI();
 }
-restoreSessionIfValid();
+restoreSession();
 
 document.getElementById("login-btn").addEventListener("click", async function () {
   var input = document.getElementById("login-code");
   var errEl = document.getElementById("login-error");
-  var code = input.value.trim().toUpperCase();
+  var code = input.value.trim();
   if (!code) return;
-
-  var result = await verifyCode(accessConfig, code);
-  if (result) {
-    currentRole = result.role;
-    currentHash = result.hash;
-    saveSession(result.role, result.hash, accessConfig.authEpoch);
-    input.value = "";
+  var session = await login(code);
+  input.value = "";
+  if (session && (session.role === "officier" || session.role === "owner")) {
+    currentRoleName = session.role;
     errEl.style.display = "none";
     applyRoleUI();
   } else {
-    errEl.textContent = "Code incorrect.";
+    errEl.textContent = session ? "Ce code n'a pas accès à la modération." : "Code incorrect.";
     errEl.style.display = "block";
-    input.value = "";
   }
 });
 
@@ -314,7 +295,7 @@ document.getElementById("login-code").addEventListener("keydown", function (e) {
 });
 
 document.getElementById("logout-btn").addEventListener("click", function () {
-  currentRole = null; currentHash = null;
+  currentRoleName = null;
   clearSession();
   applyRoleUI();
 });
@@ -343,8 +324,8 @@ onSnapshot(effCol, function (snap) {
     if (!matricule || matricule === "//" || matricule === "///") return;
     var m = { matricule: matricule, rpName: data.rpName || "", grade: data.grade || "" };
     allMembers.push(m);
-    if (!isReportExempt(data.grade)) members.push(m);
-    else officers.push(m);
+    if (!isReportExempt(data.grade) && data.grade !== "Réserviste") members.push(m);
+    else if (isReportExempt(data.grade)) officers.push(m);
   });
   members.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
   allMembers.sort(function (a, b) { return a.rpName.localeCompare(b.rpName); });
@@ -372,29 +353,21 @@ onSnapshot(effCol, function (snap) {
   if (previousSearch && allMembersByMatricule[previousSearch]) searchSel.value = previousSearch;
 });
 
-// ---------- Soumission ----------
+// ---------- Soumission (publique, validée par le serveur) ----------
 
-document.getElementById("rep-submit-btn").addEventListener("click", function () {
+document.getElementById("rep-submit-btn").addEventListener("click", async function () {
   var matricule = document.getElementById("rep-matricule").value.trim();
   var content = document.getElementById("rep-content").value.trim();
   if (!matricule) { showStatus("rep-submit-status", "Choisis ton nom dans la liste.", true); return; }
   if (!content) { showStatus("rep-submit-status", "Le contenu du rapport est obligatoire.", true); return; }
-
-  var member = membersByMatricule[matricule];
-
-  addDoc(rapportsCol, {
-    matricule: matricule,
-    rpName: member ? member.rpName : "",
-    content: content,
-    status: "pending",
-    submittedAt: new Date().toISOString()
-  }).then(function () {
+  try {
+    await submitPublic("/submit-report", { matricule: matricule, content: content });
     showStatus("rep-submit-status", "Rapport envoyé. Un officier va l'examiner.", false);
     document.getElementById("rep-matricule").value = "";
     document.getElementById("rep-content").value = "";
-  }).catch(function (err) {
+  } catch (err) {
     showStatus("rep-submit-status", "Échec de l'envoi : " + err.message, true);
-  });
+  }
 });
 
 // ---------- Rendu d'un rapport (partagé file d'attente + recherche) ----------
@@ -431,23 +404,15 @@ function renderReportCard(id, data) {
     '<p style="white-space:pre-wrap; margin:0 0 10px;">' + esc(data.content) + '</p>' +
     (data.reviewedBy ? '<p style="color:var(--text-dim); font-size:0.85rem; margin:0 0 10px;">Traité par ' + esc(data.reviewedBy) + ' le ' + formatDate(data.reviewedAt) + '</p>' : '') +
     (actionsHtml ? '<div class="eff-row-actions mod-actions" data-id="' + id + '" style="flex-direction:row;">' + actionsHtml + '</div>' : '') +
-    (currentRole === "owner" ? '<button class="eff-icon-btn danger" data-action="delete" data-id="' + id + '" style="margin-top:8px;">🗑️ Supprimer définitivement</button>' : '') +
+    (currentRoleName === "owner" ? '<button class="eff-icon-btn danger" data-action="delete" data-id="' + id + '" style="margin-top:8px;">🗑️ Supprimer définitivement</button>' : '') +
     '</div>';
 }
 
 async function deleteReport(id) {
-  await updateDoc(doc(db, "rapports", id), { codeHash: currentHash });
-  await deleteDoc(doc(db, "rapports", id));
+  await callServer("/report-delete", { id: id });
 }
 
-// ---------- Acceptation / refus (avec ajustement du compteur effectif) ----------
-
-async function findEffectifDocByMatricule(matricule) {
-  var q = query(effCol, where("matricule", "==", matricule));
-  var snap = await getDocs(q);
-  if (snap.empty) return null;
-  return snap.docs[0];
-}
+// ---------- Acceptation / refus (le serveur ajuste le compteur) ----------
 
 function officerOptionsHtml() {
   var matricules = Object.keys(officersByMatricule).sort(function (a, b) {
@@ -483,37 +448,16 @@ function showInlinePicker(container, id, data, newStatus, onDone) {
       errEl.style.display = "inline";
       return;
     }
-    setReportStatus(id, data, newStatus, member).then(function () {
+    callServer("/report-status", {
+      id: id,
+      status: newStatus,
+      reviewer: { rpName: member.rpName, matricule: member.matricule }
+    }).then(function () {
       if (onDone) onDone();
     }).catch(function (err) {
       alert("Échec : " + err.message);
     });
   });
-}
-
-async function setReportStatus(reportId, currentData, newStatus, reviewer) {
-  var wasAccepted = currentData.status === "accepted";
-  var willBeAccepted = newStatus === "accepted";
-  var delta = 0;
-  if (wasAccepted && !willBeAccepted) delta = -1;
-  if (!wasAccepted && willBeAccepted) delta = 1;
-
-  await updateDoc(doc(db, "rapports", reportId), {
-    status: newStatus,
-    codeHash: currentHash,
-    reviewedBy: reviewer.rpName + " (" + reviewer.matricule + ")",
-    reviewedAt: new Date().toISOString()
-  });
-
-  if (delta !== 0) {
-    var effDoc = await findEffectifDocByMatricule(currentData.matricule);
-    if (effDoc) {
-      await updateDoc(doc(db, "effectif", effDoc.id), {
-        reportCount: increment(delta),
-        codeHash: currentHash
-      });
-    }
-  }
 }
 
 // ---------- File d'attente (rapports pending) ----------
@@ -570,7 +514,7 @@ function wireListActions(containerId, mapRef) {
     var data = mapRef()[id];
     if (!data) return;
     if (action === "delete") {
-      if (currentRole !== "owner") return;
+      if (currentRoleName !== "owner") return;
       if (!confirm("Supprimer définitivement ce rapport ? Cette action est irréversible.")) return;
       deleteReport(id).catch(function (err) { alert("Échec : " + err.message); });
       return;
@@ -629,7 +573,7 @@ document.getElementById("search-results").addEventListener("click", function (e)
   var data = searchMap[id];
   if (!data) return;
   if (action === "delete") {
-    if (currentRole !== "owner") return;
+    if (currentRoleName !== "owner") return;
     if (!confirm("Supprimer définitivement ce rapport ? Cette action est irréversible.")) return;
     deleteReport(id).then(function () {
       delete searchMap[id];

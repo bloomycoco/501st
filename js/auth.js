@@ -1,88 +1,87 @@
-// Authentification par code partagee entre officiers.html, effectif.html et
-// rapport.html : verification du code (officier/owner), persistance locale
-// (pour ne pas ressaisir le code a chaque page/rechargement), et reset global
-// par epoch (le bouton Owner invalide instantanement toutes les sessions
-// deja ouvertes, partout, sans toucher au code lui-meme).
+// Session et appels serveur partagés par les pages du site.
+// Les codes ne sont jamais vérifiés dans le navigateur : on envoie le code
+// au serveur (/login), qui renvoie un jeton signé. Toutes les écritures
+// passent par le serveur avec ce jeton.
 
-const STORAGE_KEY = "site501st_auth";
+export const API = "https://recrutement-501st-relay.site501st-relay-worker.workers.dev";
+const SESSION_KEY = "site501st_session";
 
-export const OWNER_HASH = "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6";
-
-export async function sha256(text) {
-  var data = new TextEncoder().encode(text);
-  var hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  var bytes = Array.from(new Uint8Array(hashBuffer));
-  return bytes.map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+export function getSession() {
+  try {
+    var raw = localStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
 }
 
-export function loadSession() {
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    var parsed = JSON.parse(raw);
-    if (parsed && parsed.role && parsed.hash && parsed.epoch != null) return parsed;
-  } catch (e) {}
-  return null;
-}
-
-export function saveSession(role, hash, epoch) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ role: role, hash: hash, epoch: epoch }));
-  } catch (e) {}
+function setSession(session) {
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) {}
 }
 
 export function clearSession() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
 }
 
-// Lit config/access (officerCodeHash + authEpoch). Cree le champ authEpoch a
-// la volee (valeur "1") s'il n'existe pas encore, sans ecrire (juste une valeur
-// par defaut cote client) pour rester compatible avec les documents existants.
-export async function readAccessConfig(getDocFn, accessDocRef) {
-  var snap = await getDocFn(accessDocRef);
-  var data = snap.exists() ? snap.data() : {};
-  return {
-    officerCodeHash: data.officerCodeHash || null,
-    authEpoch: data.authEpoch != null ? String(data.authEpoch) : "1"
-  };
+export async function login(code) {
+  var res = await fetch(API + "/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ code: code })
+  });
+  if (!res.ok) return null;
+  var session = await res.json();
+  setSession(session);
+  return session;
 }
 
-// Tente de restaurer une session persistee si son epoch correspond toujours
-// a l'epoch courant en base. Renvoie {role, hash} ou null.
-export function tryRestoreSession(config) {
-  var saved = loadSession();
-  if (!saved) return null;
-  if (String(saved.epoch) !== String(config.authEpoch)) return null;
-  if (saved.hash === OWNER_HASH) return { role: "owner", hash: saved.hash };
-  if (config.officerCodeHash && saved.hash === config.officerCodeHash) return { role: "officier", hash: saved.hash };
-  return null;
+// Renvoie le rôle ("owner", "officier", "instructeur") si la session est
+// encore valide côté serveur, sinon null (et la session locale est effacée).
+export async function currentRole() {
+  var session = getSession();
+  if (!session || !session.token) return null;
+  var res = await fetch(API + "/whoami", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token: session.token })
+  });
+  if (!res.ok) {
+    clearSession();
+    return null;
+  }
+  var data = await res.json();
+  return data.role;
 }
 
-// Verifie un code saisi contre le hash Owner (fixe) ou le hash Officier
-// (dynamique, lu dans config/access). Renvoie {role, hash} ou null.
-export async function verifyCode(config, code) {
-  var normalized = code.trim().toUpperCase();
-  var hash = await sha256(normalized);
-  if (hash === OWNER_HASH) return { role: "owner", hash: hash };
-  if (config.officerCodeHash && hash === config.officerCodeHash) return { role: "officier", hash: hash };
-  return null;
+export async function callServer(path, body) {
+  var session = getSession();
+  var res = await fetch(API + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.assign({}, body, { token: session ? session.token : null }))
+  });
+  var text = await res.text();
+  var data = null;
+  try { data = JSON.parse(text); } catch (e) {}
+  if (!res.ok) {
+    if (res.status === 401) clearSession();
+    throw new Error((data && data.error) || text || ("Erreur " + res.status));
+  }
+  return data;
 }
 
-// Bouton Owner "Reinitialiser les acces" : change authEpoch, ce qui invalide
-// toutes les sessions persistees (y compris celle d'Owner) sur tous les
-// appareils, sans changer le code officier lui-meme.
-export async function resetAllSessions(setDocFn, accessDocRef, currentOfficerCodeHash) {
-  var newEpoch = String(Date.now());
-  await setDocFn(accessDocRef, {
-    officerCodeHash: currentOfficerCodeHash || null,
-    ownerCodeHash: OWNER_HASH,
-    authEpoch: newEpoch
-  }, { merge: true });
-  clearSession();
-  return newEpoch;
+export async function submitPublic(path, body) {
+  var res = await fetch(API + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  var data = await res.json().catch(function () { return null; });
+  if (!res.ok) throw new Error((data && data.error) || ("Erreur " + res.status));
+  return data;
 }
 
-// Petit bouton flottant en bas a droite, visible uniquement pour Owner.
+// Petit bouton flottant en bas à droite, visible uniquement pour Owner.
 export function mountOwnerResetButton(onClick) {
   if (document.getElementById("owner-reset-fab")) return document.getElementById("owner-reset-fab");
   var btn = document.createElement("button");
@@ -96,9 +95,6 @@ export function mountOwnerResetButton(onClick) {
   return btn;
 }
 
-// Second bouton flottant (a cote du reset), telecharge une sauvegarde JSON
-// complete (effectif + rapports + config) directement sur l'appareil de
-// l'utilisateur. Rien n'est envoye a un service tiers.
 export function mountOwnerBackupButton(onClick) {
   if (document.getElementById("owner-backup-fab")) return document.getElementById("owner-backup-fab");
   var btn = document.createElement("button");
@@ -146,17 +142,11 @@ async function fetchCollectionPlain(projectId, collectionName) {
   return out;
 }
 
-// Construit une sauvegarde JSON complete (effectif + rapports) et la
-// declenche en telechargement dans le navigateur. Aucune donnee n'est
-// envoyee ailleurs que sur l'appareil de la personne qui clique.
+// Sauvegarde JSON complète (lecture publique), téléchargée sur l'appareil.
 export async function downloadFullBackup(projectId) {
   var effectif = await fetchCollectionPlain(projectId, "effectif");
   var rapports = await fetchCollectionPlain(projectId, "rapports");
-  var backup = {
-    generatedAt: new Date().toISOString(),
-    effectif: effectif,
-    rapports: rapports
-  };
+  var backup = { generatedAt: new Date().toISOString(), effectif: effectif, rapports: rapports };
   var blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");

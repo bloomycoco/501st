@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body class="booting">
 
@@ -252,18 +252,12 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=24"></script>
+  <script src="js/site.js?v=25"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import {
-  OWNER_HASH, sha256, loadSession, saveSession, clearSession, readAccessConfig,
-  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
-  mountOwnerBackupButton, downloadFullBackup
-} from "./js/auth.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { login, currentRole as checkRole, clearSession, callServer, mountOwnerResetButton, mountOwnerBackupButton, downloadFullBackup } from "./js/auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
@@ -277,8 +271,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const effCol = collection(db, "effectif");
-const accessDocRef = doc(db, "config", "access");
-let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
 const GRADES = ["ALPHA","EM","MR","CMDM","GNL","CMD","CMDJ","VCMD","MJR","CPT","CPT-2nd","LTN","2nd-LTN","ADJ-C","ADJ","SGT-C","SGT","CPL-C","CPL","CT","Réserviste"];
 
@@ -344,11 +336,10 @@ function selectHtml(name, options, current) {
   }).join("") + '</select>';
 }
 
-var currentRole = null;   // null | "officier" | "owner"
-var currentHash = null;
+var currentRoleName = null;
 
 function isUnlocked() {
-  return currentRole !== null;
+  return currentRoleName === "officier" || currentRoleName === "owner";
 }
 
 function applyRoleUI() {
@@ -358,13 +349,13 @@ function applyRoleUI() {
   var addSection = document.getElementById("eff-add-section");
   var ownerPanel = document.getElementById("owner-panel");
 
-  if (currentRole) {
+  if (isUnlocked()) {
     loggedOut.style.display = "none";
     loggedIn.style.display = "block";
-    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
+    roleLabel.textContent = currentRoleName === "owner" ? "Owner" : "Officier";
     addSection.style.display = "block";
-    ownerPanel.style.display = currentRole === "owner" ? "block" : "none";
-    if (currentRole === "owner") {
+    ownerPanel.style.display = currentRoleName === "owner" ? "block" : "none";
+    if (currentRoleName === "owner") {
       mountOwnerResetButton(handleOwnerReset);
       mountOwnerBackupButton(handleOwnerBackup);
     }
@@ -382,13 +373,13 @@ function applyRoleUI() {
 }
 
 async function handleOwnerReset() {
-  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html) ? Chacun devra ressaisir le code.")) return;
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers, owner, instructeurs) ? Chacun devra ressaisir son code.")) return;
   try {
-    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
-    currentRole = null;
-    currentHash = null;
+    await callServer("/reset-sessions", {});
+    clearSession();
+    currentRoleName = null;
     applyRoleUI();
-    alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
+    alert("Accès réinitialisés. Tout le monde doit ressaisir son code.");
   } catch (e) {
     alert("Échec : " + e.message);
   }
@@ -403,37 +394,26 @@ async function handleOwnerBackup() {
   }
 }
 
-async function restoreSessionIfValid() {
-  try {
-    accessConfig = await readAccessConfig(getDoc, accessDocRef);
-  } catch (e) { return; }
-  var restored = tryRestoreSession(accessConfig);
-  if (restored) {
-    currentRole = restored.role;
-    currentHash = restored.hash;
-    applyRoleUI();
-  }
+async function restoreSession() {
+  currentRoleName = await checkRole();
+  applyRoleUI();
 }
-restoreSessionIfValid();
+restoreSession();
 
 document.getElementById("login-btn").addEventListener("click", async function () {
   var input = document.getElementById("login-code");
   var errEl = document.getElementById("login-error");
-  var code = input.value.trim().toUpperCase();
+  var code = input.value.trim();
   if (!code) return;
-
-  var result = await verifyCode(accessConfig, code);
-  if (result) {
-    currentRole = result.role;
-    currentHash = result.hash;
-    saveSession(result.role, result.hash, accessConfig.authEpoch);
-    input.value = "";
+  var session = await login(code);
+  input.value = "";
+  if (session && (session.role === "officier" || session.role === "owner")) {
+    currentRoleName = session.role;
     errEl.style.display = "none";
     applyRoleUI();
   } else {
-    errEl.textContent = "Code incorrect.";
+    errEl.textContent = session ? "Ce code n'a pas accès à l'effectif." : "Code incorrect.";
     errEl.style.display = "block";
-    input.value = "";
   }
 });
 
@@ -442,24 +422,24 @@ document.getElementById("login-code").addEventListener("keydown", function (e) {
 });
 
 document.getElementById("logout-btn").addEventListener("click", function () {
-  currentRole = null;
-  currentHash = null;
+  currentRoleName = null;
   clearSession();
   applyRoleUI();
 });
 
 document.getElementById("owner-update-btn").addEventListener("click", async function () {
-  var newCode = document.getElementById("owner-new-code").value.trim().toUpperCase();
+  var newCode = document.getElementById("owner-new-code").value.trim();
   var statusEl = document.getElementById("owner-status");
   if (!newCode) return;
-  var newHash = await sha256(newCode);
   try {
-    await setDoc(accessDocRef, { officerCodeHash: newHash, ownerCodeHash: OWNER_HASH, authEpoch: accessConfig.authEpoch }, { merge: true });
-    accessConfig.officerCodeHash = newHash;
+    await callServer("/set-code", { which: "officier", code: newCode });
     statusEl.style.display = "block";
     statusEl.style.borderLeftColor = "var(--blue)";
-    statusEl.textContent = "Code officier mis à jour. Communique-le au régiment.";
+    statusEl.textContent = "Code officier mis à jour. Toutes les sessions sont fermées : il faut se reconnecter.";
     document.getElementById("owner-new-code").value = "";
+    clearSession();
+    currentRoleName = null;
+    applyRoleUI();
   } catch (e) {
     statusEl.style.display = "block";
     statusEl.style.borderLeftColor = "var(--red)";
@@ -656,10 +636,9 @@ onSnapshot(effCol, function (snap) {
   showStatus("eff-status", "Impossible de charger l'effectif : " + err.message, true);
 });
 
-function handleTableClick(e) {
+async function handleTableClick(e) {
   var btn = e.target.closest("button[data-action]");
-  if (!btn) return;
-  if (!isUnlocked()) return;
+  if (!btn || !isUnlocked()) return;
   var tr = btn.closest("tr");
   var id = tr.getAttribute("data-id");
   var action = btn.getAttribute("data-action");
@@ -668,63 +647,34 @@ function handleTableClick(e) {
   else if (action === "cancel") { editingId = null; draw(); }
   else if (action === "delete") {
     if (!confirm("Supprimer ce membre de l'effectif ?")) return;
-    deleteDoc(doc(db, "effectif", id)).catch(function (err) {
+    try {
+      await callServer("/effectif", { action: "delete", id: id });
+    } catch (err) {
       showStatus("eff-status", "Suppression refusée : " + err.message, true);
-    });
-  } else if (action === "save") {
-    var payload = { codeHash: currentHash };
-    tr.querySelectorAll("[data-field]").forEach(function (el) {
-      payload[el.getAttribute("data-field")] = el.value;
-    });
-    if (payload.hasOwnProperty("blame")) payload.blame = parseInt(payload.blame, 10) || 0;
-    if (payload.hasOwnProperty("cmdMission")) payload.cmdMission = parseFloat(payload.cmdMission) || 0;
-    if (payload.hasOwnProperty("reportCount")) payload.reportCount = parseInt(payload.reportCount, 10) || 0;
-
-    var previous = latestDocs.find(function (d) { return d.id === id; });
-    var previousBlame = previous ? (parseInt(previous.data.blame, 10) || 0) : 0;
-    var grade = payload.grade || (previous ? previous.data.grade : "");
-    var blameThreshold = grade === "CT" ? 2 : 3;
-
-    if (payload.grade === "Réserviste" && previous && previous.data.grade !== "Réserviste") {
-      payload.ancienGrade = previous.data.grade;
-      payload.ancienDernierePromo = previous.data.lastPromo || "";
     }
-
-    updateDoc(doc(db, "effectif", id), payload).then(function () {
+  } else if (action === "save") {
+    var data = {};
+    tr.querySelectorAll("[data-field]").forEach(function (el) {
+      data[el.getAttribute("data-field")] = el.value;
+    });
+    try {
+      await callServer("/effectif", { action: "update", id: id, data: data });
       editingId = null;
       draw();
-      if (payload.blame >= blameThreshold && previousBlame < blameThreshold) {
-        notifyBlame(
-          payload.rpName || previous.data.rpName,
-          payload.matricule || previous.data.matricule,
-          payload.blame
-        );
-      }
-    }).catch(function (err) {
+    } catch (err) {
       showStatus("eff-status", "Enregistrement refusé : " + err.message, true);
-    });
+    }
   }
 }
 
 document.getElementById("eff-body").addEventListener("click", handleTableClick);
 document.getElementById("reserve-body").addEventListener("click", handleTableClick);
 
-function notifyBlame(rpName, matricule, count) {
-  fetch("https://recrutement-501st-relay.site501st-relay-worker.workers.dev", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ kind: "blame3", rpName: rpName, matricule: matricule, count: count, codeHash: currentHash })
-  }).catch(function (e) {
-    console.warn("Notification de blâme indisponible :", e);
-  });
-}
-
-document.getElementById("eff-add-btn").addEventListener("click", function () {
+document.getElementById("eff-add-btn").addEventListener("click", async function () {
   if (!isUnlocked()) return;
   var name = document.getElementById("eff-new-name").value.trim();
   if (!name) { showStatus("eff-status", "L'identité RP est obligatoire.", true); return; }
-  var payload = {
-    codeHash: currentHash,
+  var data = {
     rpName: name,
     matricule: document.getElementById("eff-new-matricule").value.trim(),
     steamId: document.getElementById("eff-new-steamid").value.trim(),
@@ -734,16 +684,18 @@ document.getElementById("eff-add-btn").addEventListener("click", function () {
     lastPromo: document.getElementById("eff-new-date").value,
     cmdMission: parseFloat(document.getElementById("eff-new-cmdmission").value) || 0
   };
-  addDoc(effCol, payload).then(function () {
+  try {
+    await callServer("/effectif", { action: "create", data: data });
     showStatus("eff-status", "");
     ["eff-new-name","eff-new-matricule","eff-new-steamid","eff-new-discord","eff-new-date"].forEach(function (fid) {
       document.getElementById(fid).value = "";
     });
     document.getElementById("eff-new-cmdmission").value = "0";
-  }).catch(function (err) {
+  } catch (err) {
     showStatus("eff-status", "Ajout refusé : " + err.message, true);
-  });
+  }
 });
+
 </script>
 
 </body>

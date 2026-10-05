@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="assets/logo/logo-501st.webp">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body class="booting">
 
@@ -187,18 +187,12 @@
     <img src="assets/logo/logo-501st.webp" alt="Logo 501st" class="logo-small">
   </footer>
 
-  <script src="js/site.js?v=24"></script>
+  <script src="js/site.js?v=25"></script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getFirestore, collection, onSnapshot, updateDoc, doc, getDoc, setDoc
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import {
-  saveSession, clearSession, readAccessConfig,
-  tryRestoreSession, verifyCode, resetAllSessions, mountOwnerResetButton,
-  mountOwnerBackupButton, downloadFullBackup
-} from "./js/auth.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { login, currentRole as checkRole, clearSession, callServer, mountOwnerResetButton, mountOwnerBackupButton, downloadFullBackup } from "./js/auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCi4qBryZUK4L-FtzpkGZmJ7gd41YdUqYU",
@@ -212,8 +206,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const effCol = collection(db, "effectif");
-const accessDocRef = doc(db, "config", "access");
-let accessConfig = { officerCodeHash: null, authEpoch: "1" };
 
 const GRADE_RANK = {
   "ALPHA": 0, "EM": 1, "MR": 2,
@@ -235,21 +227,22 @@ function esc(s) {
   });
 }
 
-var currentRole = null;
-var currentHash = null;
+var currentRoleName = null;
 
-function isUnlocked() { return currentRole !== null; }
+function isUnlocked() {
+  return currentRoleName === "officier" || currentRoleName === "owner";
+}
 
 function applyRoleUI() {
   var loggedOut = document.getElementById("auth-logged-out");
   var loggedIn = document.getElementById("auth-logged-in");
   var roleLabel = document.getElementById("auth-role");
 
-  if (currentRole) {
+  if (isUnlocked()) {
     loggedOut.style.display = "none";
     loggedIn.style.display = "block";
-    roleLabel.textContent = currentRole === "owner" ? "Owner" : "Officier";
-    if (currentRole === "owner") {
+    roleLabel.textContent = currentRoleName === "owner" ? "Owner" : "Officier";
+    if (currentRoleName === "owner") {
       mountOwnerResetButton(handleOwnerReset);
       mountOwnerBackupButton(handleOwnerBackup);
     }
@@ -265,13 +258,13 @@ function applyRoleUI() {
 }
 
 async function handleOwnerReset() {
-  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE (officiers.html, effectif.html, rapport.html, qualifications.html) ? Chacun devra ressaisir le code.")) return;
+  if (!confirm("Réinitialiser l'accès de TOUT LE MONDE ? Chacun devra ressaisir son code.")) return;
   try {
-    accessConfig.authEpoch = await resetAllSessions(setDoc, accessDocRef, accessConfig.officerCodeHash);
-    currentRole = null;
-    currentHash = null;
+    await callServer("/reset-sessions", {});
+    clearSession();
+    currentRoleName = null;
     applyRoleUI();
-    alert("Accès réinitialisés. Tout le monde (toi y compris) doit ressaisir le code.");
+    alert("Accès réinitialisés. Tout le monde doit ressaisir son code.");
   } catch (e) {
     alert("Échec : " + e.message);
   }
@@ -286,37 +279,26 @@ async function handleOwnerBackup() {
   }
 }
 
-async function restoreSessionIfValid() {
-  try {
-    accessConfig = await readAccessConfig(getDoc, accessDocRef);
-  } catch (e) { return; }
-  var restored = tryRestoreSession(accessConfig);
-  if (restored) {
-    currentRole = restored.role;
-    currentHash = restored.hash;
-    applyRoleUI();
-  }
+async function restoreSession() {
+  currentRoleName = await checkRole();
+  applyRoleUI();
 }
-restoreSessionIfValid();
+restoreSession();
 
 document.getElementById("login-btn").addEventListener("click", async function () {
   var input = document.getElementById("login-code");
   var errEl = document.getElementById("login-error");
-  var code = input.value.trim().toUpperCase();
+  var code = input.value.trim();
   if (!code) return;
-
-  var result = await verifyCode(accessConfig, code);
-  if (result) {
-    currentRole = result.role;
-    currentHash = result.hash;
-    saveSession(result.role, result.hash, accessConfig.authEpoch);
-    input.value = "";
+  var session = await login(code);
+  input.value = "";
+  if (session && (session.role === "officier" || session.role === "owner")) {
+    currentRoleName = session.role;
     errEl.style.display = "none";
     applyRoleUI();
   } else {
-    errEl.textContent = "Code incorrect.";
+    errEl.textContent = session ? "Ce code n'a pas accès aux qualifications." : "Code incorrect.";
     errEl.style.display = "block";
-    input.value = "";
   }
 });
 
@@ -325,8 +307,7 @@ document.getElementById("login-code").addEventListener("keydown", function (e) {
 });
 
 document.getElementById("logout-btn").addEventListener("click", function () {
-  currentRole = null;
-  currentHash = null;
+  currentRoleName = null;
   clearSession();
   applyRoleUI();
 });
@@ -451,7 +432,7 @@ document.getElementById("qual-body").addEventListener("click", function (e) {
   if (action === "edit") { editingId = id; draw(); }
   else if (action === "cancel") { editingId = null; draw(); }
   else if (action === "save") {
-    var payload = { codeHash: currentHash };
+    var payload = { id: id };
     tr.querySelectorAll("[data-group]").forEach(function (group) {
       var groupName = group.getAttribute("data-group");
       var values = [];
@@ -463,7 +444,7 @@ document.getElementById("qual-body").addEventListener("click", function (e) {
     tr.querySelectorAll("[data-bool]").forEach(function (c) {
       payload[c.getAttribute("data-bool")] = c.classList.contains("active");
     });
-    updateDoc(doc(db, "effectif", id), payload).then(function () {
+    callServer("/qualifications", payload).then(function () {
       editingId = null;
       draw();
     }).catch(function (err) {
