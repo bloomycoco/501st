@@ -1,9 +1,7 @@
 name: Weekly report quota check
 
 on:
-  schedule:
-    # Tous les lundis a 15:00 heure de Paris (13:00 UTC en heure d'ete, 14:00 UTC en hiver)
-    - cron: "0 13 * * 1"
+  # Reset hebdomadaire planifie par le Worker Cloudflare (cron), pas par GitHub.
   workflow_dispatch: {}
 
 jobs:
