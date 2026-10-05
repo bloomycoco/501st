@@ -289,7 +289,14 @@
           <div class="eff-form">
             <input id="rec-steamid" placeholder="SteamID de la personne (obligatoire)">
             <input id="rec-discordid" placeholder="Discord ID de la personne (obligatoire)">
-            <textarea id="rec-observation" placeholder="Observation finale (optionnel)"></textarea>
+            <div class="rating-row">
+              <p class="q-text">Pensez-vous que l'unité peut intégrer la 501st ?</p>
+              <div class="rating-scale" data-target="rec-integration">
+                <button type="button" class="rating-btn" data-value="oui">Oui</button>
+                <button type="button" class="rating-btn" data-value="non">Non</button>
+                <input type="hidden" id="rec-integration" value="">
+              </div>
+            </div>
             <button id="rec-submit-btn" class="btn" type="button">Envoyer l'entretien</button>
           </div>
           <div id="rec-status" class="rec-status"></div>
@@ -407,19 +414,24 @@ async function submitRecrutement() {
     };
   }
 
-  var observation = document.getElementById("rec-observation").value.trim();
+  var integration = document.getElementById("rec-integration").value;
+  if (!integration) {
+    setRecStatus("Réponds à la question sur l'intégration de l'unité avant d'envoyer.", "err");
+    return;
+  }
 
   recSubmitBtn.disabled = true;
   setRecStatus("Envoi en cours…", "");
   try {
-    await callServer("/recruitment", { recruteur: recruteur, aspirant: aspirant, steamId: steamId, discordId: discordId, ratings: ratings, observation: observation });
+    await callServer("/recruitment", { recruteur: recruteur, aspirant: aspirant, steamId: steamId, discordId: discordId, ratings: ratings, integration: integration });
     setRecStatus("Entretien envoyé et relayé sur Discord.", "ok");
 
     document.getElementById("rec-recruteur").value = "";
     document.getElementById("rec-aspirant").value = "";
     document.getElementById("rec-steamid").value = "";
     document.getElementById("rec-discordid").value = "";
-    document.getElementById("rec-observation").value = "";
+    document.getElementById("rec-integration").value = "";
+    document.querySelectorAll('.rating-scale[data-target="rec-integration"] .rating-btn').forEach(function (b) { b.classList.remove("active"); });
     for (var j = 0; j < RECRUTEMENT_THEMES.length; j++) {
       var k = RECRUTEMENT_THEMES[j];
       document.getElementById("rate-" + k).value = "";
