@@ -1,0 +1,1405 @@
+{
+  "generatedAt": "2026-10-26T08:26:12.679Z",
+  "effectif": [
+    {
+      "id": "0VgNP1kHWokLKv1BSdIA",
+      "data": {
+        "medecin": false,
+        "lastPromo": "2026-10-13",
+        "formateur": false,
+        "matricule": "2844",
+        "blame": 0,
+        "leads": 0,
+        "code": "1119OFFC",
+        "medailles": [
+          "Premier Rempart"
+        ],
+        "discord": "cteud",
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "reportCount": 0,
+        "cmdMission": 0,
+        "groupe332": false,
+        "kama": false,
+        "steamId": "76561198228575380",
+        "grade": "SGT",
+        "spec": "ARF",
+        "rpName": "Eud",
+        "lead": false
+      }
+    },
+    {
+      "id": "3U2bVwkYePTjgYRTrEZv",
+      "data": {
+        "rpName": "Ratel",
+        "medecin": false,
+        "groupe332": false,
+        "discord": "thomas.lucy",
+        "formations": [
+          "TX-130"
+        ],
+        "leads": 0,
+        "blame": 0,
+        "kama": true,
+        "steamId": "76561198039708459",
+        "matricule": "2591",
+        "grade": "CT",
+        "formateur": true,
+        "cmdMission": 0,
+        "lastPromo": "2026-10-24",
+        "reportCount": 0,
+        "lead": true,
+        "spec": "Heavy",
+        "medailles": []
+      }
+    },
+    {
+      "id": "3q2Jbz1Z2bmARq6oTgW3",
+      "data": {
+        "lastPromo": "2026-10-25",
+        "grade": "CPL",
+        "cmdMission": 0,
+        "discord": "76561198249616666 7395",
+        "matricule": "7395",
+        "rpName": "Lebarge",
+        "blame": 0,
+        "leads": 0,
+        "reportCount": 0,
+        "spec": "Soldat",
+        "steamId": "0:0:144675469"
+      }
+    },
+    {
+      "id": "5RCKUKwiJRc686sNx4dC",
+      "data": {
+        "lead": true,
+        "medailles": [],
+        "spec": "-",
+        "kama": true,
+        "lastPromo": "",
+        "formateur": true,
+        "matricule": "",
+        "steamId": "76561198152962205",
+        "grade": "ALPHA",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "code": "1119OFFC",
+        "discord": "mhyx.",
+        "medecin": true,
+        "rpName": "A-20",
+        "formations": [],
+        "reportCount": 0,
+        "groupe332": false
+      }
+    },
+    {
+      "id": "6K1KWOBYlzureEnUZ65o",
+      "data": {
+        "groupe332": false,
+        "rpName": "Vex",
+        "grade": "SGT-C",
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "code": "1119OFFC",
+        "steamId": "76561198954430995",
+        "reportCount": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-10-23",
+        "matricule": "7869",
+        "discord": "wolfkiller4044",
+        "formateur": true,
+        "cmdMission": 0.5,
+        "kama": true,
+        "blame": 1,
+        "leads": 0.5,
+        "medailles": [],
+        "spec": "ARC Trooper",
+        "medecin": false,
+        "lead": true
+      }
+    },
+    {
+      "id": "71siYnx4Jn6FUQRFxvkz",
+      "data": {
+        "rpName": "Anakin Skywalker",
+        "steamId": "",
+        "grade": "GNL",
+        "lastPromo": "",
+        "matricule": "",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "discord": "",
+        "reportCount": 0,
+        "code": "1119OFFC",
+        "spec": "-"
+      }
+    },
+    {
+      "id": "86R74u3C0qSzpB067mCi",
+      "data": {
+        "rpName": "Sina",
+        "grade": "2nd-LTN",
+        "code": "1119OFFC",
+        "groupe332": false,
+        "steamId": "76561198311226268",
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "cmdMission": 0,
+        "medailles": [
+          "Croix de l'Urgence"
+        ],
+        "discord": "notoruis",
+        "kama": true,
+        "blame": 0,
+        "leads": 3,
+        "lastPromo": "2026-10-13",
+        "matricule": "1001",
+        "formateur": true,
+        "spec": "ARF",
+        "medecin": false,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "reportCount": 0,
+        "lead": true
+      }
+    },
+    {
+      "id": "9s6fFjIS9Iv0k1QPfCam",
+      "data": {
+        "lastPromo": "2026-10-23",
+        "code": "1119OFFC",
+        "matricule": "6116",
+        "formateur": true,
+        "grade": "ADJ",
+        "steamId": "76561198985984582",
+        "medailles": [
+          "Légionnaire",
+          "Croix de Fraternité"
+        ],
+        "reportCount": 0,
+        "cmdMission": 0,
+        "discord": "Old_Deus",
+        "lead": true,
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "groupe332": false,
+        "rpName": "Kix",
+        "spec": "Torrent",
+        "blame": 0,
+        "leads": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "kama": false,
+        "medecin": true
+      }
+    },
+    {
+      "id": "A5u7f1IluOYzt4S8ywnF",
+      "data": {
+        "lastPromo": "2026-10-03",
+        "rpName": "Echo (Nobody)",
+        "matricule": "1409",
+        "code": "1119OFFC",
+        "formateur": true,
+        "discord": "volt.air",
+        "medailles": [],
+        "medecin": false,
+        "cmdMission": 0,
+        "blame": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "groupe332": false,
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "BARC Speeder",
+          "AT-AP"
+        ],
+        "spec": "ARC Trooper",
+        "reportCount": 0,
+        "grade": "2nd-LTN",
+        "lead": true,
+        "steamId": "76561198312750782",
+        "kama": true
+      }
+    },
+    {
+      "id": "BbuIXbm6q30PmHZpc6Tk",
+      "data": {
+        "groupe332": false,
+        "formations": [
+          "AT-AP"
+        ],
+        "rpName": "Cony",
+        "kama": false,
+        "spec": "ARF",
+        "blame": 0,
+        "leads": 0.5,
+        "reportCount": 0,
+        "steamId": "76561198870125842",
+        "lead": true,
+        "lastPromo": "2026-10-05",
+        "discord": "shino9348",
+        "matricule": "7265",
+        "formateur": true,
+        "grade": "SGT",
+        "medailles": [
+          "Premier Rempart"
+        ],
+        "medecin": false,
+        "cmdMission": 0
+      }
+    },
+    {
+      "id": "BzNUyoYFlU3FOyDnFKr0",
+      "data": {
+        "steamId": "76561199379640996",
+        "cmdMission": 0,
+        "reportCount": 0,
+        "rpName": "Ecor",
+        "discord": "957337675763966082",
+        "matricule": "4189",
+        "spec": "Soldat",
+        "lastPromo": "2026-10-19",
+        "grade": "CT"
+      }
+    },
+    {
+      "id": "C2a6VcS6rALZTkjZQ5V2",
+      "data": {
+        "spec": "Soldat",
+        "discord": "theojaeger",
+        "cmdMission": 0,
+        "grade": "CT",
+        "rpName": "Jaeger",
+        "reportCount": 0,
+        "code": "1119OFFC",
+        "lastPromo": "2026-09-27",
+        "leads": 0,
+        "blame": 0,
+        "matricule": "3045",
+        "steamId": "76561199865299325",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6"
+      }
+    },
+    {
+      "id": "CdfhJxxfRbtiSS39qYWX",
+      "data": {
+        "spec": "Soldat",
+        "leads": 0,
+        "blame": 0,
+        "discord": "847062570761846806",
+        "reportCount": 0,
+        "grade": "CPL",
+        "lastPromo": "2026-10-22",
+        "steamId": "76561198288362872",
+        "rpName": "Marengo",
+        "cmdMission": 0,
+        "matricule": "1011"
+      }
+    },
+    {
+      "id": "EAu8TlWtCXrfqHtswq4Y",
+      "data": {
+        "lastPromo": "2026-10-11",
+        "matricule": "2355",
+        "blame": 0,
+        "leads": 0,
+        "steamId": "76561199110873516",
+        "cmdMission": 0,
+        "discord": "1055446289501917214",
+        "spec": "Soldat",
+        "grade": "CT",
+        "reportCount": 0,
+        "rpName": "Falco"
+      }
+    },
+    {
+      "id": "H43bZsROzc79GiOux6QF",
+      "data": {
+        "steamId": "76561198832680580",
+        "rpName": "Karl",
+        "spec": "-",
+        "matricule": "",
+        "cmdMission": 0,
+        "discord": "655550198164094996",
+        "grade": "MR",
+        "lastPromo": "2026-10-22",
+        "reportCount": 0
+      }
+    },
+    {
+      "id": "JS9pVZhEtEnjawq5xApS",
+      "data": {
+        "cmdMission": 0,
+        "groupe332": false,
+        "kama": false,
+        "leads": 0,
+        "blame": 0,
+        "spec": "Soldat",
+        "rpName": "Verso",
+        "steamId": "76561199436431078",
+        "lead": false,
+        "formateur": false,
+        "matricule": "4233",
+        "reportCount": 0,
+        "lastPromo": "2026-10-24",
+        "discord": "1014098201076305981",
+        "grade": "CPL",
+        "medecin": false,
+        "medailles": [],
+        "formations": [
+          "TX-130"
+        ]
+      }
+    },
+    {
+      "id": "PZB1PZPu3wPjLbCYtzAp",
+      "data": {
+        "groupe332": true,
+        "cmdMission": 1,
+        "code": "1119OFFC",
+        "blame": 0,
+        "leads": 5.5,
+        "reportCount": 0,
+        "steamId": "76561198420017576",
+        "lastPromo": "2026-10-11",
+        "lead": true,
+        "formateur": true,
+        "matricule": "2222",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "gaz.part",
+        "spec": "Heavy",
+        "grade": "CPT-2nd",
+        "medailles": [
+          "Feu de Ligne"
+        ],
+        "formations": [
+          "TX-130",
+          "AT-AP"
+        ],
+        "medecin": false,
+        "kama": true,
+        "rpName": "VROUM"
+      }
+    },
+    {
+      "id": "QbZ4P5YWmh5KHQyMcYpc",
+      "data": {
+        "reportCount": 0,
+        "medailles": [],
+        "rpName": "Amon",
+        "code": "1119OFFC",
+        "medecin": false,
+        "grade": "SGT-C",
+        "matricule": "1921",
+        "formations": [
+          "TX-130"
+        ],
+        "formateur": true,
+        "discord": "plordone",
+        "lastPromo": "2026-10-01",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561198121288927",
+        "lead": true,
+        "cmdMission": 0,
+        "spec": "Soldat",
+        "leads": 1,
+        "blame": 0,
+        "groupe332": false,
+        "kama": false
+      }
+    },
+    {
+      "id": "R3FrScZk78bRI7GZmlij",
+      "data": {
+        "grade": "CT",
+        "matricule": "6481",
+        "lastPromo": "2026-10-24",
+        "reportCount": 0,
+        "spec": "Soldat",
+        "discord": "bojan.rdo_52133",
+        "rpName": "Typhon",
+        "cmdMission": 0,
+        "leads": 0,
+        "blame": 0,
+        "steamId": ""
+      }
+    },
+    {
+      "id": "RaaWDJHiEVtge3pdl3wC",
+      "data": {
+        "reportCount": 0,
+        "leads": 0,
+        "blame": 0,
+        "discord": "centurion2034",
+        "rpName": "Tazer",
+        "steamId": "STEAM_0:1:962017742",
+        "spec": "Soldat",
+        "matricule": "9887",
+        "grade": "CT",
+        "cmdMission": 0,
+        "lastPromo": "2026-10-24"
+      }
+    },
+    {
+      "id": "YfIvBqOaj7osfIKP5wSX",
+      "data": {
+        "cmdMission": 0,
+        "lastPromo": "2026-10-25",
+        "discord": "76561198041092688 7112",
+        "rpName": "Kenoji",
+        "matricule": "7112",
+        "grade": "CPL",
+        "steamId": "0:0:40413480",
+        "blame": 0,
+        "leads": 0,
+        "spec": "Soldat",
+        "reportCount": 0
+      }
+    },
+    {
+      "id": "dhZa1IL6H60wCuPI7wxy",
+      "data": {
+        "medecin": true,
+        "code": "1119OFFC",
+        "formateur": true,
+        "matricule": "4529",
+        "lastPromo": "2026-10-25",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "rpName": "Kieron",
+        "reportCount": 0,
+        "medailles": [
+          "Feu de Ligne",
+          "Croix de l'Urgence",
+          "Croix de Fraternité"
+        ],
+        "blame": 0,
+        "leads": 0,
+        "discord": ".zebi",
+        "cmdMission": 0,
+        "grade": "ADJ-C",
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "BARC Speeder",
+          "AT-AP"
+        ],
+        "lead": true,
+        "steamId": "76561198292480975",
+        "spec": "Heavy",
+        "groupe332": false,
+        "kama": false
+      }
+    },
+    {
+      "id": "dnwHSQJu1ACZ1msucUg7",
+      "data": {
+        "ancienGrade": "CPT-2nd",
+        "lead": true,
+        "medecin": false,
+        "spec": "Torrent",
+        "groupe332": false,
+        "ancienDernierePromo": "2026-08-31",
+        "kama": true,
+        "grade": "CPT-2nd",
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "rpName": "Kano",
+        "discord": "shaven1",
+        "reportCount": 0,
+        "formateur": true,
+        "steamId": "76561199050827033",
+        "matricule": "7567",
+        "code": "1119OFFC",
+        "lastPromo": "2026-08-31",
+        "blame": 0,
+        "leads": 0,
+        "cmdMission": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "medailles": []
+      }
+    },
+    {
+      "id": "e0mmJIIXM21HFZBmFoLD",
+      "data": {
+        "kama": false,
+        "discord": "syxles",
+        "lastPromo": "2026-10-23",
+        "matricule": "2634",
+        "formateur": false,
+        "lead": true,
+        "blame": 0,
+        "leads": 1,
+        "spec": "Torrent",
+        "medailles": [
+          "Croix de Fraternité"
+        ],
+        "medecin": true,
+        "cmdMission": 0,
+        "reportCount": 0,
+        "formations": [
+          "TX-130"
+        ],
+        "rpName": "Kraan",
+        "groupe332": false,
+        "grade": "SGT",
+        "steamId": "76561198816308006"
+      }
+    },
+    {
+      "id": "fTGXyVMmAdTiFWBFTmEG",
+      "data": {
+        "cmdMission": 0,
+        "discord": "goldenfoxyy",
+        "lastPromo": "",
+        "spec": "Soldat",
+        "matricule": "1987",
+        "blame": 0,
+        "rpName": "Fred",
+        "steamId": "76561198800038489",
+        "grade": "Réserviste",
+        "ancienGrade": "LTN",
+        "reportCount": 0,
+        "ancienDernierePromo": "2026-03-03"
+      }
+    },
+    {
+      "id": "fX2Kh9ouIJHIbXQR7LnZ",
+      "data": {
+        "discord": "ldn4ever",
+        "blame": 0,
+        "leads": 0,
+        "groupe332": false,
+        "kama": false,
+        "rpName": "Sergius",
+        "spec": "ARF",
+        "cmdMission": 1.5,
+        "lead": true,
+        "medecin": false,
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "reportCount": 0,
+        "lastPromo": "2026-08-31",
+        "matricule": "2093",
+        "formateur": true,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "steamId": "76561198867428192",
+        "code": "1119OFFC",
+        "medailles": [],
+        "grade": "CPT-2nd"
+      }
+    },
+    {
+      "id": "jQkpmLRuQDchKKNUhdm8",
+      "data": {
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "medecin": false,
+        "kama": true,
+        "medailles": [],
+        "cmdMission": 0,
+        "spec": "-",
+        "formateur": true,
+        "discord": "",
+        "lead": true,
+        "matricule": "",
+        "reportCount": 0,
+        "lastPromo": "2026-10-04",
+        "grade": "CMDJ",
+        "blame": 0,
+        "leads": 0,
+        "steamId": "",
+        "formations": [],
+        "code": "1119OFFC",
+        "groupe332": true,
+        "rpName": "Ahsoka Tano"
+      }
+    },
+    {
+      "id": "ogAtEhKo2qH8qMvrTZrq",
+      "data": {
+        "steamId": "76561199118988467",
+        "kama": false,
+        "medailles": [],
+        "formations": [
+          "TX-130"
+        ],
+        "rpName": "Drin",
+        "matricule": "2201",
+        "formateur": false,
+        "lead": false,
+        "lastPromo": "2026-10-25",
+        "grade": "CT",
+        "spec": "Soldat",
+        "medecin": false,
+        "discord": "mandrin_pronier",
+        "cmdMission": 0,
+        "groupe332": false
+      }
+    },
+    {
+      "id": "pcri1nZXZ8uT1MUqeeDp",
+      "data": {
+        "medecin": false,
+        "reportCount": 0,
+        "medailles": [],
+        "code": "1119OFFC",
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "AT-AP"
+        ],
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "grade": "Réserviste",
+        "ancienDernierePromo": "2026-08-14",
+        "rpName": "Jacky",
+        "formateur": true,
+        "discord": "axeman8337",
+        "matricule": "1535",
+        "lastPromo": "2026-08-14",
+        "lead": true,
+        "ancienGrade": "SGT",
+        "spec": "Soldat",
+        "steamId": "76561199494526425",
+        "blame": 0,
+        "leads": 3.5,
+        "kama": false,
+        "cmdMission": 0,
+        "groupe332": false
+      }
+    },
+    {
+      "id": "w8wp6sEKyW5oFu54nf8P",
+      "data": {
+        "formations": [
+          "TX-130",
+          "AT-RT",
+          "BARC Speeder",
+          "AT-AP"
+        ],
+        "spec": "-",
+        "lead": true,
+        "rpName": "Appo",
+        "leads": 0,
+        "blame": 0,
+        "groupe332": false,
+        "steamId": "76561199147977756",
+        "kama": true,
+        "reportCount": 0,
+        "code": "1119OFFC",
+        "grade": "CMDM",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "medailles": [
+          "Premier Rempart",
+          "Feu de Ligne",
+          "Lead de Fer",
+          "Croix de l'Urgence",
+          "Légionnaire",
+          "Croix de Fraternité"
+        ],
+        "discord": ".capitainerex",
+        "medecin": false,
+        "lastPromo": "2026-10-18",
+        "cmdMission": 0,
+        "formateur": true,
+        "matricule": "1119"
+      }
+    },
+    {
+      "id": "wRTRU6jy9YKPuz62Xtrr",
+      "data": {
+        "reportCount": 0,
+        "cmdMission": 0,
+        "discord": "mal_76_53383",
+        "grade": "CT",
+        "spec": "Soldat",
+        "blame": 0,
+        "leads": 0,
+        "rpName": "Ghost",
+        "lastPromo": "2026-10-23",
+        "steamId": "76561199811474418",
+        "matricule": "5647"
+      }
+    },
+    {
+      "id": "x2XwLXfeO9VjcL9AC1lg",
+      "data": {
+        "rpName": "Rek",
+        "kama": false,
+        "grade": "ADJ",
+        "medecin": true,
+        "cmdMission": 0,
+        "groupe332": false,
+        "discord": "zerty0938_64815",
+        "lead": false,
+        "reportCount": 0,
+        "spec": "Médecin",
+        "steamId": "76561198751710747",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "medailles": [],
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "matricule": "9023",
+        "formateur": true,
+        "blame": 0,
+        "leads": 0,
+        "lastPromo": "2026-10-23",
+        "code": "1119OFFC"
+      }
+    },
+    {
+      "id": "xLrgSnU5wfnEOiHC2LJt",
+      "data": {
+        "grade": "CPL-C",
+        "matricule": "4397",
+        "rpName": "Cost",
+        "lastPromo": "2026-10-03",
+        "discord": "a_z_i_z1111",
+        "spec": "Soldat",
+        "cmdMission": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "reportCount": 0,
+        "steamId": "",
+        "leads": 0,
+        "blame": 1
+      }
+    },
+    {
+      "id": "xdEr98haBbPloT1yztPC",
+      "data": {
+        "grade": "ADJ-C",
+        "groupe332": false,
+        "cmdMission": 0,
+        "discord": "roni_26.",
+        "medecin": false,
+        "reportCount": 0,
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "lastPromo": "2026-09-29",
+        "lead": true,
+        "formateur": true,
+        "matricule": "2605",
+        "spec": "Torrent",
+        "rpName": "Slash",
+        "kama": false,
+        "medailles": [],
+        "formations": [],
+        "steamId": "76561198289940795",
+        "blame": 0
+      }
+    },
+    {
+      "id": "zfVqLt9LPMnF8mDhmvpz",
+      "data": {
+        "reportCount": 0,
+        "spec": "ARC Trooper",
+        "blame": 0,
+        "leads": 0,
+        "groupe332": false,
+        "lead": true,
+        "formations": [
+          "TX-130",
+          "BARC Speeder"
+        ],
+        "steamId": "76561198269782596",
+        "rpName": "Freeze",
+        "kama": true,
+        "cmdMission": 0,
+        "lastPromo": "2026-10-25",
+        "codeHash": "f2e8a9b0346cefcbec7da1850247bb0800dc5c0cb1e634048e1cf05803edfc8f",
+        "discord": "luminasiaa",
+        "formateur": true,
+        "matricule": "6362",
+        "grade": "ADJ-C",
+        "medecin": false,
+        "medailles": [
+          "Croix de Fraternité"
+        ]
+      }
+    }
+  ],
+  "rapports": [
+    {
+      "id": "0V8WozyTo7DmVOsMzsTf",
+      "data": {
+        "content": "Début de transmission a l'attention des Officiers,\n\nDate de mission : 24/10\n\nNom de mission : Une pierre 3 coups.\n\nL'objectif de cette mission était d'investiguer sur différents secteur la présence de la C.S.I, pour cela nous avons été déployer en laat depuis le venator qui nous y a conduit, nous avons d'abord été poser sur une planète montagnarde \" Nom Inconnue \" ou l'objectif était de nettoyer l'ensemble de celle-ci de tout présence droide, en tant que Arc, mon rôle a été avec le jedi qui nous accompagnait d'ouvrir la voie pour les unités mais aussi d'explorer les différents point et périmètre tout autour de celle-ci pour couvrir l'avant et arrière de nos unité, après plusieurs combats contre des MTT mais également des droides crabes intelligents, nous avions été demande et  transporter sur une planète voisine ou l'objectif était de reprendre le contrôle du temple Jedi qui s'y trouvais mais également les secteurs qui se trouvait autour, durant cette percée nos unités ont subis beaucoup de perte ce qui nous a obliger a battre en retraite dans l'essaim du Temple et de défendre ces positions coute que coute, Malgré le manque de discipline de certaine unité qui prenait trop de risque en s'exposant au danger, nous avions réussis a repousser les vagues de droides qui nous empêchait de faire notre travail correctement, J'ai également après cela aider les jedis en les couvrant pendant qu'il décryptait l'hollocron présent sur le temple, étant donner le peu de temps que nous avions, l'ordre a été donner de s'extraire avant qu'une bombe placer dans le temple n'explose. L'ensemble de la mission fut une réussite et nous avions et transporter en hyper-espace jusqu'à la base pour le code Marron\n\nSurvivre pour combattre un jour de plus !\n\nAvec tout mes respect,\nARC SGT-C 6362 Freeze.\n\nFin de transmission.",
+        "submittedAt": "2026-10-24T17:45:10.013Z",
+        "status": "accepted",
+        "reviewedBy": "Appo (1119)",
+        "matricule": "6362",
+        "reviewedAt": "2026-10-24T22:32:22.512Z",
+        "rpName": "Freeze"
+      }
+    },
+    {
+      "id": "1P0dq4s2JfUJ7Ngv9g9Z",
+      "data": {
+        "reviewedAt": "2026-10-12T07:03:22.947Z",
+        "rpName": "Rek",
+        "submittedAt": "2026-10-11T21:03:05.583Z",
+        "matricule": "9023",
+        "status": "accepted",
+        "reviewedBy": "Ash (2305)",
+        "content": "Début de transmission..\n\nMes respects dans cette mission dans cette mission nous avons été déployé sur une planète inconnu ou nos services \nde renseignements on vu que la CGO y avait installé une mini ville sous terraine donc l'ensemble de la flotte a été déployé en Parachute,\nmalheureusement de fort courant d'air nous ont fait galéré.\n\nSuite a ca nous avons commencé a nous déployés sur zone pour la Shock Trooper nous ont appelé en renfort dans un petit tunnel,\npour les aidé puis nous avons pénétré ce tunnel puis j'y suis rentré et je suis allé d'u coté ou une ville souterraine y été caché suite a ca j'ai signalé l'ensemble sur radio 501st.\nEnsuite j'ai ordonné a tout le monde de me ramené des cerveaux ainsi que des parties de leur corps pour examiné tout ca,\npuis j'ai directement entamé une analyse.\n\nDonc j'ai réussi"
+      }
+    },
+    {
+      "id": "2cw4EZrRMZ4v6NEPeklL",
+      "data": {
+        "reviewedBy": "Ash (2305)",
+        "status": "accepted",
+        "rpName": "Cony",
+        "submittedAt": "2026-10-11T19:47:33.425Z",
+        "reviewedAt": "2026-10-12T07:03:38.218Z",
+        "matricule": "7265",
+        "content": "Rapport de mission du 10/10/2026 à 18h\nObjectif de mission\nLa Flotte Cosmos a été déployée sur une planète contrôlée par la CSI afin de sécuriser une base séparatiste, retrouver un traître présumé et récupérer des données militaires confidentielles concernant de nouveaux droïdes et prototypes d’armes.\n\nDéroulement\nMon escouade a été chargée de sécuriser les souterrains et de couvrir la progression des autres régiments, afin de limiter les risques de contre-attaque et de faciliter l’avancée des forces républicaines.\n\nLe traître recherché a été retrouvé, mais il s’est suicidé avant de pouvoir être capturé et interrogé, empêchant ainsi son interrogatoire sur les informations transmises à la CSI.\n\nBilan\nMon escouade a assuré sa mission de sécurisation et de couverture. Le décès du traître constitue un obstacle à l’obtention de renseignements supplémentaires. La récupération des données et la neutralisation des prototypes restent à confirmer."
+      }
+    },
+    {
+      "id": "4ptQ0efOOlGRJkMNGNsE",
+      "data": {
+        "rpName": "Echo (Nobody)",
+        "reviewedAt": "2026-10-12T07:03:44.958Z",
+        "matricule": "1409",
+        "content": "╔════════════════════════════════════════════════════════╗  \nVeuillez patienter...  \nNom de l'utilisateur : 2ND-LTN 1409 Echo  \nConnexion en cours...  \nConnexion réussie  \n╚════════════════════════════════════════════════════════╝  \n\n**Rapport de Mission**  \n**Unité :** 501st Légion d'Attaque  \n**Opération :** Underground Business  \n**Lieu :** [Censuré]\n\nAu cours de cette opération, la **501st Légion d'Attaque** a été déployée par parachutage afin d'intervenir sur une installation souterraine contrôlée par la Coalition Galactique Occulte (CGO).\n\nAprès notre insertion, nous avons progressé en **combat rapproché (CQB)** à travers une vaste ville souterraine. Plusieurs affrontements ont éclaté contre les forces de la CGO, rendant la progression difficile et nécessitant une coordination constante entre les effectifs.\n\nDurant notre avancée, nous avons découvert la présence d'un **virus provoquant des mutations et transformant des individus en infectés**, représentant une menace supplémentaire pour les soldats. Malgré les combats et les risques de contamination, nous avons poursuivi notre progression avant de recevoir l'ordre d'évacuation.\n\nL'extraction s'est révélée particulièrement difficile en raison de la résistance ennemie et de la présence des infectés. Malgré ces complications, les troupes ont réussi à rejoindre le point d'évacuation et à quitter la zone.\n\nL'opération s'est conclue après une mission éprouvante, marquée par de violents affrontements et la découverte d'une menace virale nécessitant une attention particulière du commandement.\n\n<:CC501st:892529045865136178> **SURVIVRE POUR COMBATTRE UN JOUR DE PLUS** <:CC501st:892529045865136178>\n\n╔════════════════════════════════════════════════════════╗  \nDéconnexion d'utilisateur en cours...  \nVeuillez patienter...  \nDéconnexion réussie  \n╚════════════════════════════════════════════════════════╝",
+        "submittedAt": "2026-10-11T20:32:00.793Z",
+        "reviewedBy": "Ash (2305)",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "4tIhfGuoxvqJk1fnQdCw",
+      "data": {
+        "status": "rejected",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "content": "En ce 11/10/2026 nous sommes partis en mission a 18h sur une planète qui m’est inconnu et nous sommes partis défendre une zone et des monstre nous onts attaqués mais nous nous en sommes sortis",
+        "submittedAt": "2026-10-12T14:31:58.774Z",
+        "matricule": "2355",
+        "reviewedAt": "2026-10-12T17:40:13.189Z",
+        "rpName": "Freeze"
+      }
+    },
+    {
+      "id": "6RDSTWqA8BDYZJ8HuOdx",
+      "data": {
+        "reviewedBy": "Owner",
+        "submittedAt": "2026-09-29T20:00:00.000Z",
+        "content": "Rapport de test",
+        "archived": true,
+        "matricule": "CT-TEST",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "status": "rejected",
+        "reviewedAt": "2026-09-29T19:56:11.141Z"
+      }
+    },
+    {
+      "id": "7hkwZCsndD3U4hb0P1Yg",
+      "data": {
+        "reviewedBy": "Ash (2305)",
+        "status": "accepted",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 6362 Freeze\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nRapport de mission du 09/10/2026 à 18h\n\nMes respects Officiers, Ayant été déposer sur la planète Tunga, notre objectif était de récupérer une raffinerie de gaz stratégique pour la république, pour ce faire la 501st a été affecter a la 327th car manque d'effectif (3-4) et a du progresser d'abord sur la ville et sur les montagnes pour détruire au départ les MTT éparpiller sur les routes mais par la suite nous avons fais face a plusieurs chute de pods venant de tout les azimutes, Notre régiment étant composer de torrent pour la plus part de la mission a eu pour objectif de détruire les différents pods mais également de soigner les différents blesser de la 327th puisque pour la plupart d'entre nous étions médecin, par la suite nous avons du protéger le tunnel ( Point Final ) menant a des installations que la shock sécurisaient , après plusieurs minutes de combat nous avons reçu l'ordre d'évacuer sur Z.E afin de retourner sur base a bord des LAAT.\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  6362 Freeze\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "submittedAt": "2026-10-10T10:54:13.318Z",
+        "rpName": "Freeze",
+        "reviewedAt": "2026-10-11T16:01:45.217Z",
+        "matricule": "6362"
+      }
+    },
+    {
+      "id": "8bn6oyZC2gdo3JHyvv7p",
+      "data": {
+        "matricule": "CT-TEST2",
+        "content": "Test 2",
+        "status": "zzz",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6"
+      }
+    },
+    {
+      "id": "9urzy2Fb055mw8RPMbHe",
+      "data": {
+        "reviewedBy": "Ash (2305)",
+        "rpName": "Eud",
+        "content": "Opération Dust Storm 13/10/2026 à 21h00\n\nLa flotte Cosmos à été envoyer sur la planète  Kharvos pour sécuriser une ancienne station de communication dans le désert de Dry State, celui avait cessé d'émettre depuis plusieurs jours des éclaireurs y on été envoyer mais le contact à été rompus.\nNous avons repris le contrôle de la ville et sécuriser le secteur à notre arriver, à la suite nous avons lancer les recherches pour retrouver les unités envoyer précédemment en éclaireur.\naprès avoir retrouver un survivant chez les éclaireurs nous avons réussi à récupérer et sécuriser des données   militaires sensibles sur ordre du commandement.\n Au cours de cette opérations nous avons essuyer une lourde réponse séparatiste à l'encontre de nos unités, mais pas assez pour effrayer la 501st.\nLes communication ont été réactiver avec le commandement et nous avons pu rejoindre la Z.E pour un retour sur base.\nEffectifs présents:\n_\n- CPT 2nd 2222 Tutu\n-CPT 2nd 5597 Jesse \n-",
+        "matricule": "2844",
+        "submittedAt": "2026-10-13T21:32:15.016Z",
+        "status": "accepted",
+        "reviewedAt": "2026-10-13T21:36:07.214Z"
+      }
+    },
+    {
+      "id": "AEcFu9Dizkz3Gg7HeqPm",
+      "data": {
+        "content": "\"Opération Œil de Fer\"\nhttps://discord.com/channels/733070665569140769/1054884586032746588/1556687260878110900\n\nLead de mission : 1001 Sina\nCo-Lead de mission : 4529 Kieron\nVéhicules utilisés : AT-AP\nInformation importante : x\n\nEffectif présent : \n-1001 Sina\n-4529 Kieron\n-2305 Ash\n-7265 Cony\n-7869 Vex\n-2806 Old-Deus\n-2309 Kayo\n-1939 Hawck\n-A-20\n-A-69",
+        "status": "rejected",
+        "submittedAt": "2026-10-06T16:09:09.159Z",
+        "reviewedAt": "2026-10-06T16:18:07.843Z",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "matricule": "1001",
+        "rpName": "Sina"
+      }
+    },
+    {
+      "id": "AvoQUJLyCDoDTNQJXcEi",
+      "data": {
+        "status": "accepted",
+        "reviewedBy": "Appo (1119)",
+        "matricule": "6362",
+        "submittedAt": "2026-10-18T18:24:21.507Z",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 6362 Freeze\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\n\n“Opération Reprise de contrôle  ” Le 15/10/2026 à 18H00\n\nLa flotte a été envoyer sur la planète Corellia ou nous possédons déjà une base militaires sur place, l'objectif de la 501st a été de d'abord se stationner sur la base et de défendre celle-ci, nous avons tenu les positions contre différents animaux de la faune local. Suite a cela j'ai reçu l'ordre de monter a bord d'un TX-130 afin d'aider nos troupes aux sol, l'hors de notre avancer sur les différents point nous nous sommes fait attaquer par la CSI mais également par une créature qui apparait et disparait en nous jetant des excrément dessus, cependant grâce a notre force et au commandement du CPT-2ND Jesse, nous avons réussis a repousser l'ennemie et de continuer notre marche vers l'objectif. Apres plusieurs sécurisation de zone, nous avions du nous diriger vers une ville souterraine pour aider l'ensemble des unités présentes, étant peu de 501st, nous avons subit plusieurs pertes mais nous avons réussis a vaincre l'ennemie et sécuriser la zone jusqu'à que de nouveaux ordres soient donner, chose faites, nous avions reçu l'ordre d'assister la shock a l'extraction de plusieurs prisonnier civil, l'extraction dans son ensemble c'est bien passer malgré certaines complication du aux civil qui n'arrêtait pas de nous ralentir, après l'extraction nous avions du couvivre la zone carcérale et ensuite s'extraire aux lattes pour retourner sur la Flotte.\n\n╔═══════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter..\nDéconnexion réussie\n╚═══════════╝",
+        "reviewedAt": "2026-10-19T22:24:16.672Z",
+        "rpName": "Freeze"
+      }
+    },
+    {
+      "id": "CtTcOyTlQL6cdCxE0sQr",
+      "data": {
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 9023 Rek\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nMes respects a vous,\n\nDans cette mission nous avons été déployés sur la planète Jorra-Yx dans une mission qui consistait au fait que les services de renseignements\nde la république on trouvé des informations via des enregistrements donc la mission principale de aujourd'hui étais de trouvé des infos concernant la CSI,\ndonc nous avons été déployés avec le CPT Rex en CMD de flotte Old-Deus en CMD de mission + moi en Co-lead donc nous avons été déployés pour d'abord nous mettre en défense de zone dans un genre d'entrepôt par la suite nous sommes allée sur différents point les déplacements étais très mauvais en barc-speeder car d'après le Superviseur l'endroit étais plat et libre donc j'en ai profité mais non donc par la suite nous sommes partir sur différents point en partant d'abord vers Nord puis une fois que nous   avons sécurisé l'ensemble du Nord nous sommes partie en Ouest ou nous devions nous sécurisé.\n\nPar la suite nous sommes partie sur différents point comme une AP dans mes souvenirs,\npuis nous sommes partie sur différents autre points puis un ordre étais donné par \nle CMD de mission nous a dit d'allé sur le point Papa car le Superviseur a trouvé 2 Terminaux\npour partir directement nous avons contourné les droides j'ai proposé des idées pour pénétré dans le point \net sa a marché.\n\nPuis nous sommes partie après avoir fait des CQB nous avons trouvé un corp que\n j'ai essayé de soigné malheureusement le corp étais mort pour de bon\npuis nous avons embarqué directement pour repartir sur base.\n\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  9023 Rek\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "status": "accepted",
+        "reviewedAt": "2026-10-17T12:18:53.377Z",
+        "matricule": "9023",
+        "reviewedBy": "Jesse (5597)",
+        "submittedAt": "2026-10-16T19:37:07.274Z",
+        "rpName": "Rek"
+      }
+    },
+    {
+      "id": "FOX8qX9O4dfrjsnPMbsI",
+      "data": {
+        "rpName": "Kraan",
+        "submittedAt": "2026-10-13T22:22:23.106Z",
+        "reviewedBy": "Ash (2305)",
+        "content": "Le 13/10, la Flotte Cosmos a été déployée sur la planète Kharvos dans le cadre de l'opération « Dust Storm », placée sous le commandement du CPT 5995 Louchka.\n\nNotre mission consistait à intervenir dans le désert de Dry State afin de retrouver une station de communication ayant cessé toute émission depuis plusieurs jours. Nous devions également enquêter sur la disparition d'un éclaireur précédemment envoyé en reconnaissance, localiser et récupérer des données militaires sensibles, puis sécuriser les installations afin de rétablir les communications.\n\nEn raison de l'absence de l'ADJ-C 9023, initialement chargé du commandement de notre unité durant cette mission, j'ai eu l'honneur d'assurer temporairement cette responsabilité, tout en prenant en charge les communications radio avec le commandement de la flotte.\n\nDans un premier temps, nous avons procédé à la prise et à la sécurisation des points Bravo, Charlie et Delta, conformément aux objectifs fixés. Je considère néanmoins que mon commandement durant cette première phase a été relativement perfectible, notamment en raison d'un manque de pratique récent dans ce domaine.\n\nPar la suite, le CPT 2nd 5597 Jesse a repris la direction de notre unité, me permettant ainsi de me concentrer davantage sur mes responsabilités initiales. J'ai alors pu assurer plus efficacement les communications avec le commandement de la flotte, maintenir une liaison régulière avec le responsable de notre unité et participer pleinement à l'accomplissement de nos objectifs opérationnels.\n\nNous avons ensuite été redéployés en renfort au niveau du Bunker Mike. C'est à cet endroit que nous avons, sans en avoir immédiatement connaissance, établi un premier contact avec l'éclaireur précédemment porté disparu.\n\nNotre progression s'est poursuivie en direction des points Echo, correspondant à une église, et Uniform (désignation à confirmer), correspondant à une usine. Ces deux positions ont été prises et sécurisées avec succès. Cette phase nous a notamment permis de mettre en application nos compétences en combat rapproché en milieu clos (CQB), dans le cadre de la reconnaissance et de la sécurisation des bâtiments.\n\nÀ la suite de ces actions, nous avons reçu l'ordre de rejoindre les autres unités déjà engagées sur le principal point d'intérêt de l'opération afin de leur apporter notre soutien. Notre progression a toutefois été ralentie par la présence de plusieurs unités mécanisées séparatistes, notamment des Transports Multi-Troupes (MTT) et des droïdes de combat DSD1.\n\nMalgré cette opposition, nous sommes parvenus à rejoindre le point d'intérêt et à poursuivre notre avancée jusqu'à la dernière position à sécuriser. Une fois celle-ci sous notre contrôle, nous avons maintenu notre dispositif défensif dans l'attente de nouvelles directives.\n\nLa situation a cependant rapidement évolué lorsque l'éclaireur retrouvé nous a signalé l'approche imminente de dix bâtiments de classe Providence. Peu après cette annonce, des bombardements ont commencé à frapper la zone d'opération, rendant le maintien de nos positions particulièrement dangereux.\n\nFace à cette menace, nous avons rapidement coordonné nos efforts avec la 104th afin d'établir une zone d'extraction (Z.E.) et de permettre l'évacuation des troupes. Une fois le dispositif mis en place, nous avons procédé à l'embarquement avant de quitter la surface de Kharvos.\n\nDans l'ensemble, je considère que cette opération a été menée de manière satisfaisante, notamment grâce au commandement du CPT 2nd 5597 Jesse, qui a su assurer une direction efficace de notre unité tout au long des différentes phases d'engagement.\n\nJe tiens également à souligner la réactivité et la discipline des soldats engagés, qui ont fait preuve d'une bonne capacité d'adaptation face aux différents ordres reçus, aux changements de situation et aux menaces rencontrées sur le terrain.\n\nSur le plan personnel, cette mission m'a permis de reprendre certaines responsabilités de commandement, bien que je reconnaisse plusieurs axes d'amélioration dans ma gestion initiale de l'unité. La reprise du commandement par le CPT 2nd 5597 m'a notamment permis de me recentrer sur les communications radio, domaine dans lequel j'estime avoir été plus efficace.\n\nEnfin, je tiens à remercier une nouvelle fois le corps des officiers pour la confiance qui m'a été accordée en me confiant la responsabilité d'opérateur radio durant cette opération.",
+        "reviewedAt": "2026-10-15T07:21:53.348Z",
+        "matricule": "2634",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "IMp4HbDvRK2sQw9MYaqD",
+      "data": {
+        "rpName": "Sina",
+        "submittedAt": "2026-10-25T22:19:00.018Z",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 1001 Sina\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nMes respects,\n\nPour cette mission, nous avons été envoyé sur la planète Ruche Xilat, dans le secteur Secteur Yakuta, car, d'après une mission passée, nous avons trouvé l'information comme quoi une infection zombie avait lieu sur la planète, dû à des produits expérimentaux développés par la CGO. Nous avons combiné nos forces avec celle du 327th et du 212th. La mission fut extrêmement difficile, en effet les zombies n'étaient pas normaux, ils avaient muté, plus puissant et plus résistant. De plus, les soldats de la CGO étaient présents et contre nous. S'étaient de vrais snipers, invisible avec une précision hors pair. D'autant plus, que le virus commencé a nous infecté. Heureusement, que les médecins ont réussis à concocter un antidote assez rapidement pour nous l'administrer et qu'on puisse évacuer. Heureusement que nous sommes tous rentrés en vie, comme d'habitude.\n\nForce et Honneur !\nSurvivre pour combattre un jour de plus !\n\nFin de transmission.\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  1001 Sina\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "matricule": "1001",
+        "status": "pending"
+      }
+    },
+    {
+      "id": "JGh0ldvAeKTd5EVyD0fj",
+      "data": {
+        "submittedAt": "2026-10-12T14:31:58.607Z",
+        "reviewedBy": "Ash (2305)",
+        "content": "En ce 11/10/2026 nous sommes partis en mission a 18h sur une planète qui m’est inconnu et nous sommes partis défendre une zone et des monstre nous onts attaqués mais nous nous en sommes sortis",
+        "rpName": "Freeze",
+        "status": "rejected",
+        "archived": true,
+        "matricule": "2355",
+        "reviewedAt": "2026-10-12T17:40:19.140Z"
+      }
+    },
+    {
+      "id": "Jct6rlNOWA59DuO9Sgpa",
+      "data": {
+        "submittedAt": "2026-10-25T19:42:57.699Z",
+        "status": "pending",
+        "matricule": "1409",
+        "content": "╔════════════════════════════════════════════════════════╗  \nVeuillez patienter...  \nNom de l'utilisateur : 2ND-LTN 1409 Echo  \nConnexion en cours...  \nConnexion réussie  \n╚════════════════════════════════════════════════════════╝  \n\n**Rapport de Mission**  \n**Unité :** 501st Légion d'Attaque  \n**Opération :** Victory Down  \n**Lieu :** Fantor 2, secteur Yakuta  \n\nAu cours de cette opération, les effectifs de la **501st Légion d'Attaque** ont été déployés sur Fantor 2 afin d'explorer les lieux du crash du *Victory One* et de retrouver les boîtes noires du vaisseau. Dès notre arrivée, une exploration rapide de cette planète désertique a été effectuée afin de repérer les points d'intérêt et de déterminer les zones nécessitant une intervention.\n\nNous avons ensuite progressé en **combat rapproché (CQB)** à l'intérieur du Venator écrasé. L'exploration des différentes sections de l'épave nous a permis de découvrir plusieurs individus infectés par un virus inconnu, représentant une menace importante pour les effectifs républicains. La situation s'est rapidement aggravée lorsque l'infection a commencé à se propager au sein même des rangs clones, compliquant notre progression et mettant en danger la cohésion de nos unités.\n\nAlors que nous tentions de gérer cette nouvelle menace, les forces de la CGO sont arrivées sur zone. Leur intervention a rapidement transformé l'opération de reconnaissance en un affrontement direct. Nos troupes ont dû faire face à des forces terrestres importantes, comprenant des soldats ennemis et des véhicules blindés, tandis que des **hélicoptères de combat** apportaient un soutien aérien à leurs unités.\n\nMalgré la pression exercée par les forces de la CGO et la menace persistante du virus, les soldats de la 501st ont tenté de maintenir leurs positions et de faire face aux assauts ennemis. La situation devenant particulièrement dangereuse, la priorité a été donnée à la survie des effectifs et au regroupement des troupes afin de préparer leur extraction.\n\nAprès ces nombreux affrontements, l'ordre d'évacuation a finalement été donné. Les clones encore opérationnels ont rejoint le point d'extraction dans des conditions difficiles, tandis que la menace ennemie et les risques liés à l'infection continuaient de peser sur la mission. L'opération s'est conclue par l'extraction des effectifs de la 501st, après une intervention marquée par la découverte d'un virus inconnu et une confrontation avec les forces de la CGO.\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS",
+        "rpName": "Echo (Nobody)"
+      }
+    },
+    {
+      "id": "M8b0oFlMhZqP4OoLltjh",
+      "data": {
+        "archived": true,
+        "content": "Test de rapport",
+        "status": "rejected",
+        "reviewedAt": "2026-09-29T19:56:11.649Z",
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "matricule": "Appo",
+        "reviewedBy": "Owner",
+        "submittedAt": "2026-09-29T19:44:02.133Z"
+      }
+    },
+    {
+      "id": "ORVPZeJU5btmCzkt8iin",
+      "data": {
+        "submittedAt": "2026-10-08T20:35:02.933Z",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "rpName": "Slash",
+        "matricule": "2605",
+        "status": "rejected",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 2605 Slash\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nRapport de mission du 08/10/2026 à 18h\n\nAujourd'hui, nous avons été envoyé sur la planète Vandora, nous avions pour objectif d'infiltrer la ville de Belthar et de la sécurisé. Une fois cela fait, nous devions neutraliser les forces et systèmes de communication de la CSI. Suite à cela, nous devions libérer les prisonniers de guerre et sécuriser leur évacuation. Durant cette mission, nous n'étions que 3 membres du 501st de la Compagnie Torrent. Nous avons donc décidé de prendre un TX-130 afin d'avoir une puissance de feu beaucoup plus élevée. Dans l'ensemble, la mission c'est très bien passé et pour moi du côté du 501st, la mission fût réussite malgré la quantité phénoménale de droïdes de la CSI présent. Grâce a l'effort de chacun, l'ensemble des unités à réussi à s'extraire de la planète malgré les nombreuses difficultés rencontré durant la mission.\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  2605 Slash\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "reviewedAt": "2026-10-09T19:03:46.258Z"
+      }
+    },
+    {
+      "id": "PRseQYYE4sXhmVwgvy7d",
+      "data": {
+        "rpName": "Cony",
+        "submittedAt": "2026-10-25T22:57:00.054Z",
+        "matricule": "7265",
+        "status": "pending",
+        "content": "Date : 25/10/2026 à 21h00\nUnité : 501st Legion\nGrade : SGT 7265 Cony\nSpécialisation : ARF — Sniper\nSecteur : Yakuta\nStatut : ✅ Mission réussie\n\nDéroulement\nLors de l'opération A Pandemic's Crisis, la flotte Cosmos a été déployée dans le secteur Yakuta afin d'enquêter sur une infection semblable à une épidémie de zombies, de protéger la population civile et de rechercher un vaccin ou un antidote.\n\nEn tant que SGT 7265 Cony, j'ai tenu la première ligne jusqu'à la fin de la mission, contribuant au bon déroulement de l'opération.\n\nBilan\nLa mission s'est achevée avec succès. La menace virale reste néanmoins préoccupante et nécessite une surveillance continue.\n\nRapport rédigé par le SGT 7265 Cony — 501st Legion."
+      }
+    },
+    {
+      "id": "UDE2eVo9qFKrlJ7QokHy",
+      "data": {
+        "content": "Bonjour en ce 11/10/2026 nous sommes partis en mission sur une planète inconnu pour défendre une zone face à des monstres",
+        "status": "rejected",
+        "reviewedAt": "2026-10-12T17:40:25.817Z",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "matricule": "2355",
+        "submittedAt": "2026-10-12T14:30:53.354Z",
+        "rpName": "Freeze"
+      }
+    },
+    {
+      "id": "UgefGUUSRiWOCD0DgPjT",
+      "data": {
+        "reviewedAt": "2026-10-05T22:06:07.645Z",
+        "matricule": "1939",
+        "archived": true,
+        "submittedAt": "2026-10-05T18:50:37.268Z",
+        "status": "rejected",
+        "rpName": "Hawck",
+        "content": "Du CPL-C 1939 Hawck\n\nDate : 05/10/26\nMatricule : 2518 Saint\n\nDiscord : boby0420 - 460994664678555668\nSteam ID64 : 76561198396282284\n \nDécision : Accepte\n\nObservation : necessite de l entrainement",
+        "reviewedBy": "Ash (2305)"
+      }
+    },
+    {
+      "id": "VUrVN0VM03Q1vgqrsmwE",
+      "data": {
+        "rpName": "Falco",
+        "submittedAt": "2026-10-14T20:05:08.002Z",
+        "reviewedAt": "2026-10-15T07:22:08.974Z",
+        "reviewedBy": "Ash (2305)",
+        "content": "Rapport de mission\n\nDate : 14/10/2026  \nHeure : 22h03\n\nLa mission s’est globalement bien déroulée au début, mais la situation a rapidement pris une tournure dangereuse lorsqu’un individu a pris l’un de nos clones en otage, ce qui a compliqué le déroulement de l’opération et mis notre équipe en difficulté.\n\nAu cours de la mission, nous avons dû faire face à une situation de plus en plus risquée, et vers la fin, notre équipe s’est retrouvée complètement encerclée par des individus hostiles, nous laissant très peu de possibilités pour nous sortir de cette situation.\n\nFace à la gravité des événements et au danger auquel nous étions exposés, nous avons failli y passer, ce qui a rendu la situation particulièrement critique pour l’ensemble des membres présents sur le terrain.\n\nDevant l’impossibilité de poursuivre la mission dans des conditions de sécurité acceptables, la décision a été prise de déclencher le code bleu afin de signaler l’urgence et de lancer les procédures nécessaires pour protéger notre équipe.\n\nL’évacuation de la planète a finalement été ordonnée pour permettre à tout le monde de quitter la zone dangereuse et d’éviter davantage de pertes, mettant ainsi fin à une mission qui s’est terminée dans des circonstances particulièrement tendues.",
+        "status": "accepted",
+        "matricule": "2355"
+      }
+    },
+    {
+      "id": "YlbKnAN6baVwxkPYHoCm",
+      "data": {
+        "submittedAt": "2026-10-11T21:35:49.714Z",
+        "reviewedBy": "Ash (2305)",
+        "rpName": "Vex",
+        "status": "accepted",
+        "matricule": "7869",
+        "reviewedAt": "2026-10-12T07:03:58.976Z",
+        "content": "Rapport de mission du 11/10/2026 à 21h\n\n╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 7869 Vex\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nTout d'abords, nous avons été envoyé sur un planète inconnue afin de nettoyer ce planète plus précisément nettoyer une base prise et posséder par la C.G.O.  Arriver dans l'Atmosphère de cette planète le climat local était propice a un déploiement générale en parachute. Durant le larguage une tempête c'est levé et la plus part des hommes sont tombé dans l'eau au fond du ravin. Cette eau étant toxique pour l'homme, cela a donner une écatombe de blesser. Cependant on a quand même réussi a rentrée dans la base de la C.G.O. Une fois dans les tunels nous avons été accueillit par quelque membre armée de la C.G.O. Après avoir clear les tunnels  nous sommes arriver sur une place principale dans une ville souteraine. Sur cette place, nous avons été accueillis par plusieurs anomalie contaminé par un parasite dans le cerveau repérer par l'Adjudent-C Rek. À cause de cette forte présence d'anomalies nous avons fait une défense de zone sur cette dite place publique en hauteur pour éviter d'être toucher par ces dites anomalies. Cependant, malgré la défense, plusieurs anomalies et membres de la C.G.O on réussit a passer plusieurs fois. Un membre de la C.G.O a même réussi a prendre en otage un soldat clone, le preneur d'otage a été abattue par mes soins suite a son attaque sur un autre membre de la république. Par la suite l'ordre d'évacuation a été donner mais les anomalies et les soldats de la C.G.O ont réussi a bloquer le passage a plusieurs membre de la 501st. Mais nous avons quand même réussi a passé grâce a l'aide de nos médecins et d'autre régiments tels que la 41st et la 408th. Après cela nous avons réussi a trouver la sortie et avons évacuer. \n\nCe qui conclut ce rapport sur une victoire écrassante de la république en vers la C.G.O\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  7869 Vex\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════"
+      }
+    },
+    {
+      "id": "ZmDOSnIGFHG9y9BHLk8j",
+      "data": {
+        "matricule": "7265",
+        "submittedAt": "2026-10-19T16:51:02.614Z",
+        "rpName": "Cony",
+        "content": "Date : 18/10/2026\nHeure de début : 17h00\nHeure de retour à la base : 17h40\n\n1. Objectif de la mission\nLa mission avait pour objectif de sécuriser un village et de procéder à la capture d'un VIP ainsi que de ses alliés.\n\n2. Effectifs engagés\nLes forces déployées lors de cette opération étaient composées des unités suivantes :\n\n501st Legion\n104th Battalion\nShock Troopers\nBOS\n3. Répartition des effectifs\nAfin de mener à bien les objectifs de la mission, les effectifs ont été répartis en deux groupes distincts.\n\nGroupe d'intervention :\n\nUnité Torrent de la 501st\nBOS\nShock Troopers\nGroupe de sécurisation :\n\nAutres unités de la 501st\n104th Battalion\n4. Déroulement de la mission\nJ'ai été déployé en tant que SGT 7265 Cony de la 501st Legion, au sein du groupe de sécurisation, chargé d'assurer la sécurité du village et de prévenir toute menace éventuelle.\n\nÉtant la seule unité de l'ARF (Advanced Recon Force) présente lors de l'opération, j'ai été affecté à une position de tir de précision en hauteur, surplombant le village. Cette position avait pour but de permettre une surveillance optimale de la zone et d'assurer un appui potentiel aux troupes au sol.\n\nLa mission s'est déroulée conformément aux objectifs fixés, sans incident ni débordement signalé. Le VIP ainsi que ses alliés ont été appréhendés, puis placés en détention.\n\n5. Bilan de la mission\nSécurisation du village : effectuée.\nCapture du VIP : réussie.\nArrestation des alliés du VIP : réussie.\nIncidents signalés : aucun.\nRetour à la base : 17h40.\n6. Conclusion\nL'opération s'est déroulée dans de bonnes conditions et a permis d'atteindre l'ensemble des objectifs fixés. La zone a été sécurisée, et le VIP ainsi que ses alliés ont été capturés puis placés en détention.\n\nRapport rédigé par : SGT 7265 Cony\nUnité : 501st Legion — ARF\nStatut de la mission : Terminée avec succès.",
+        "reviewedBy": "Appo (1119)",
+        "reviewedAt": "2026-10-19T22:24:37.995Z",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "bAelcoHW9CSM7xoaTrIi",
+      "data": {
+        "status": "accepted",
+        "content": "Rapport de mission du 24/10/2026 à 18h\n\n╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 7869 Vex\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nTout d’abord nous n'avons pas été envoyer sur une planète mais sur trois planètes différentes. L’objectif de mission consistait d’enquêter sur ces différents secteurs. Arrivés sur la première planète nous avons été accueilli par plusieurs MTT et PODS de la CSI. Nous les arc de la 501st nous avions eu comme affectation l’avant de la ligne de feu à côté des Jedi. Malgré la présence assez importante de droïdes nous avons pu nous frayer un chemin vers la grotte principale de cette planète. Après avoir sécurisé la grotte, nous sommes retournés devant celles-ci afin de sécuriser entièrement la planète de la présence de la CSI. Suite à ça nous nous sommes rendus sur Tython pour prêter main forte au Jedi présent sur place. Devant le temple nous avons été accueillis par de multiples PODS des BX intelligents. Mais les forces ennemies étant trop importantes pour nous seul, nous nous sommes repliés dans le temple pour effectuer une défense de celui-ci. Après un long combat, nous avons réussi à libérer l’entrée du temple et ainsi l'éviter suite à l'information de la présence d’une bombe sur celui-ci. Par la suite nous nous sommes rendus sur les plateformes d'atterrissage des LAAT afin d'effectuer une défense de celles-ci. Malheureusement la bombe a explosé dans le temple mais heureusement on était déjà loin. Après avoir détruit plusieurs PODS, de droïdes araignée et un BX intelligent, nous avons évacué la planète et nous sommes retournés au Venator pour effectuer un retour sur Base.\n\nCe qui conclut ce rapport sur une victoire évidente de la république sur la CSI. Respectueusement.\n\nSurvivre pour combattre un jour de plus !\n\nFin de transmission.\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  7869 Vex\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "submittedAt": "2026-10-24T18:09:24.122Z",
+        "reviewedAt": "2026-10-24T22:32:29.513Z",
+        "reviewedBy": "Appo (1119)",
+        "matricule": "7869",
+        "rpName": "Vex"
+      }
+    },
+    {
+      "id": "bLi8OXd2WxWJ3QsKPDn3",
+      "data": {
+        "rpName": "Falco",
+        "submittedAt": "2026-10-14T20:05:18.828Z",
+        "reviewedAt": "2026-10-15T07:22:01.203Z",
+        "content": "**Rapport de mission**\n\n**Date :** 14/10/2026  \n**Heure :** 22h03\n\nLa mission s’est globalement bien déroulée au début, mais la situation a rapidement pris une tournure dangereuse lorsqu’un individu a pris l’un de nos clones en otage, ce qui a compliqué le déroulement de l’opération et mis notre équipe en difficulté.\n\nAu cours de la mission, nous avons dû faire face à une situation de plus en plus risquée, et vers la fin, notre équipe s’est retrouvée complètement encerclée par des individus hostiles, nous laissant très peu de possibilités pour nous sortir de cette situation.\n\nFace à la gravité des événements et au danger auquel nous étions exposés, nous avons failli y passer, ce qui a rendu la situation particulièrement critique pour l’ensemble des membres présents sur le terrain.\n\nDevant l’impossibilité de poursuivre la mission dans des conditions de sécurité acceptables, la décision a été prise de déclencher le code bleu afin de signaler l’urgence et de lancer les procédures nécessaires pour protéger notre équipe.\n\nL’évacuation de la planète a finalement été ordonnée pour permettre à tout le monde de quitter la zone dangereuse et d’éviter davantage de pertes, mettant ainsi fin à une mission qui s’est terminée dans des circonstances particulièrement tendues.",
+        "matricule": "2355",
+        "reviewedBy": "Ash (2305)",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "bqwtJJTeuqnHmTOZZpSh",
+      "data": {
+        "rpName": "Falco",
+        "archived": true,
+        "submittedAt": "2026-10-13T17:30:45.013Z",
+        "content": "Rapport de mission – Opération Basilic\n\nLe 13 octobre 2026, les forces de la République ont été déployées pour assurer une opération humanitaire sur une planète sous contrôle séparatiste. Cinq véhicules ont été mobilisés afin d'acheminer des provisions vers les différents points de ravitaillement.\n\nAu cours de l'opération, lors de l'escorte du VIP, des gaz ont été répandus sur notre itinéraire, ce qui a légèrement compliqué notre progression et mis les troupes en difficulté pendant un court instant. Malgré cet imprévu, les soldats ont maintenu leur vigilance et poursuivi leur mission en veillant à la sécurité du convoi.\n\nL'objectif est resté le même : assurer le bon déroulement des livraisons humanitaires et protéger les personnes présentes sur la zone d'intervention.",
+        "reviewedBy": "Ash (2305)",
+        "reviewedAt": "2026-10-13T20:34:39.992Z",
+        "matricule": "2355",
+        "status": "rejected"
+      }
+    },
+    {
+      "id": "cG6KxMd5SAqCz4LTuRL3",
+      "data": {
+        "status": "accepted",
+        "matricule": "7869",
+        "reviewedBy": "Appo (1119)",
+        "content": "Rapport de mission du 18/10/2026 à 18h\n\n╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 7869 Vex\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nTout d'abords, nous avons été envoyé sur la planète Basilic afin de prendre le contrôle et de sécuriser la capitale afin d'encercler la CSI et de les forcer à relâcher les VIP qu'ils retiennent en otage. Après la fin de la reconnaissance, Nous nous sommes diriger des appartements en périphérie de la ville jusqu'au port situé au nord de ceux-ci. Cepandant, la CSI avait éffectuer un blocus avec des MTT et plusieurs PODS. Malgré cela, nous avons quand même réussi a atteindre le port où aucun droïde était présent. Après la sécurisation de ce port, nous nous sommes diriger vers les chalets a proximité et avons fait une sécurisation de ceux-ci. Suite a cette sécurisation nous avons repérer l'entrée d'une grotte. La 501st c'est diviser en deux groupe, le premier composé de la Heavy, des ARF et du Squad Leader son rester sur la montagne et ont progresser vers les habitations en prériphérie du centre ville tandis que nous la torrent avons sécuriser la grotte. Après sécurisation de celle-ci, nous avons déboucher sur un ravin a proximité de la position du deuxième groupe. Une fois les habitations sécuriser, l'ensemble de la 501st nous nous sommes diriger vers le bâtiment administratif au coeur du centre ville. Nous avons fait une sécurisation totale des alentours de celui-ci détruisant les PODS qui arrivait. Grâce a cette sécurisation, la Shock Trooper a pu gérer les négociations de ce dit bâtiment étant donner que les VIP était prit en otage dans celui-ci. Suite a ça les VIP ont été extrait et nous avons sécuriser l'arriver des LAATS comme la 501st sait bien le faire. Pour finir nous avons évacuer en derniers de cette planète. \n\nCe qui conclut ce rapport sur une victoire évidente de la république sur la CSI. Respectueusement.\n\nSurvivre pour combattre un jour de plus !\n\nFin de transmission.\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  7869 Vex\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "reviewedAt": "2026-10-19T22:24:30.502Z",
+        "submittedAt": "2026-10-18T20:52:42.343Z",
+        "rpName": "Vex"
+      }
+    },
+    {
+      "id": "evDu5YNd0StZJRICjW1D",
+      "data": {
+        "submittedAt": "2026-10-16T19:49:53.666Z",
+        "reviewedBy": "Jesse (5597)",
+        "rpName": "Sina",
+        "matricule": "1001",
+        "status": "accepted",
+        "reviewedAt": "2026-10-17T12:18:35.542Z",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 1001 Sina\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nMes respects,\n\nPour cette mission, nous avons été envoyés sur la planète Jorra-yx, pour intercepter une communication CSI, contenant des informations déterminantes pour suite du conflit. J'ai eu l'occasion de piloter un AT-RT lors de cette mission. Cependant, le champ de bataille ne fut absolument adapter pour son utilisation. J'ai donc aidé au maximum l'infanterie au sol, même si j'ai du retourner plusieurs fois sur ZA pour réparer l'AT-RT et donc délaisser l'infanterie. Heureusement que les médecins étaient là pour venir en aide aux hommes et nous permettre de continuer sur le terrain. Ainsi, la 501st a notamment transitée entre les différents points pour anéantir les tas de ferrailles.  \n\nEnsuite, de retour sur base, nous avons du intervenir dans un conflit entre deux civils, lorsque nous étions en patrouille. Un homme prenait en prise d'otage sa copine, dans un bar. Nous avons vite appelé la Shock, mais ils prirent trop de temps à arriver, nous avons donc du intervenir nous même pour éviter la catastrophe. Puis, un mandalorien, terroriste, nous a attaqué mais nous l'avons vite neutralisé. \n\n\nFin de rapport.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  1001 Sina\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════"
+      }
+    },
+    {
+      "id": "f6gYVOk8fqUHjYmjIfcO",
+      "data": {
+        "reviewedBy": "Ash (2305)",
+        "submittedAt": "2026-10-11T21:07:21.094Z",
+        "rpName": "Rek",
+        "status": "accepted",
+        "content": "Début de transmission..\n\nMes respects dans cette mission dans cette mission nous avons été déployé sur une planète inconnu ou nos services \nde renseignements on vu que la CGO y avait installé une mini ville sous terraine donc l'ensemble de la flotte a été déployé en Parachute,\nmalheureusement de fort courant d'air nous ont fait galéré.\n\nSuite a ca nous avons commencé a nous déployés sur zone pour la Shock Trooper nous ont appelé en renfort dans un petit tunnel,\npour les aidé puis nous avons pénétré ce tunnel puis j'y suis rentré et je suis allé d'u coté ou une ville souterraine y été caché suite a ca j'ai signalé l'ensemble sur radio 501st.\nEnsuite j'ai ordonné a tout le monde de me ramené des cerveaux ainsi que des parties de leur corps pour examiné tout ca,\npuis j'ai directement entamé une analyse.\n\nDonc j'ai réussi a voir que tout cela étais un parasite qui se transmet via morsure et voie liquide donc j'ai signalé tout ca sur radio\npuis j'ai continué a entamé le combat avec les troopes de la 501st juste avant j'avais le SGT Vex \nqui étais a mes cotés pendants mes opérations pour me défendre.\n\nJuste après ca nous avions reçu l'ordre d'évacué malheureusement l'ordre n'a pas été compris\npour tout le monde.\n\nJuste apres nous sommes partie.\n\nFin de rapport.\n\nSurvirve pour combattre un jour de plus !\n\nFin de transmission...",
+        "reviewedAt": "2026-10-12T07:03:52.909Z",
+        "matricule": "9023"
+      }
+    },
+    {
+      "id": "fMxvoNJJlwx6Xs9kg5EU",
+      "data": {
+        "content": "\"Opération Œil de Fer\"\nhttps://discord.com/channels/733070665569140769/1054884586032746588/1556687260878110900\n\nLead de mission : 1001 Sina\nCo-Lead de mission : 4529 Kieron\nVéhicules utilisés : AT-AP\nInformation importante : x\n\nEffectif présent : \n-1001 Sina\n-4529 Kieron\n-2305 Ash\n-7265 Cony\n-7869 Vex\n-2806 Old-Deus\n-2309 Kayo\n-1939 Hawck\n-A-20\n-A-69",
+        "status": "rejected",
+        "reviewedAt": "2026-10-06T16:18:00.375Z",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "rpName": "Sina",
+        "matricule": "1001",
+        "submittedAt": "2026-10-06T16:09:09.230Z"
+      }
+    },
+    {
+      "id": "g5VeZD90pGTEirvPbe8R",
+      "data": {
+        "content": "╔════════════╗\nConnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur : 501st HV-C ADJ 4529 Kieron\nConnexion en cours...\nConnexion réussie\nDébut de transmission...\n╚════════════╝\n\nRapport de Mission 16/10/2026 à 22h,\n\nLors de notre débarquement sur Nevarro, la 501st reçut pour objectif de se diriger vers le village afin d'établir, aux côtés des autres escouades, une présence pacifique auprès de la population.\n\nPar la suite, nous reçûmes l'ordre de rejoindre Echo Base, repérée par la 41st en début de mission. Lors de notre approche, les escouades déjà présentes sur place étaient engagées par les forces ennemies. Alors que nous progressions dans le col montagneux, la CSI lança une embuscade depuis les hauteurs. Malgré cette attaque, la 501st parvint à éliminer les forces ennemies et à poursuivre son avancée.\n\nÀ notre arrivée à Echo Base, plusieurs unités de la CSI attaquaient les forces alliées présentes. La 501st pénétra dans la base et neutralisa les forces ennemies rencontrées, permettant de sécuriser le secteur.\n\nPeu après, une importante vague d'assaut de la CSI fut déployée afin de reprendre la position. Après de violents combats et malgré de lourdes pertes, la 501st et les forces alliées parvinrent à conserver le contrôle de la base.\n\nNotre nouvel objectif fut ensuite de reprendre le village occupé par la CSI. À l'approche de celui-ci, une importante ligne ennemie nous attendait et engagea la 501st ainsi que les autres régiments alliés. Après un long affrontement, nos forces réussirent à pénétrer dans le village et à éliminer les dernières forces ennemies présentes.\n\nLe village repris et les objectifs accomplis, une extraction fut finalement engagée.\n\nRespectueusement,\n\n501st HV-C ADJ 4529 Kieron\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS\n\n╔═══════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter..\nDéconnexion réussie\n╚═══════════╝",
+        "rpName": "Kieron",
+        "reviewedAt": "2026-10-19T22:24:09.921Z",
+        "submittedAt": "2026-10-18T16:34:52.351Z",
+        "reviewedBy": "Appo (1119)",
+        "matricule": "4529",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "gDz2iz4xFPE5dmScc8T8",
+      "data": {
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 1001 Sina\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nRapport de mission du 07/10/2026 à 18h\n\nPour cette opération, nous fûmes envoyés sur la planète, désertique, Kompy, pour y établir un avant-poste qui aura pour objectif de préparer une opération future, sur Tatooine. Cependant, la Confédération était au courant de notre manœuvre et nous attendait sur la planète. Ainsi, une bataille acharnée débuta. En tant qu'ARF, je pris le SGT Cony avec moi, lui aussi ARF, pour nous séparer du gros des troupes, prendre les hauteurs, et ainsi, utiliser en optimalité nos capacités d'ARF. Cependant, la CSI commença rapidement à nous dominer. Les médecins, de la compagnie Torrent, effectuèrent un excellent travail, notamment grâce à leur jetpack, pour sauver tout les blessés sur le champ de bataille. Nous fûmes retranchés sur nos dernière lignes de défense. Les tas de ferrailles nous ont dominé sur les tout les aspects. La retraite et l'abandon de mission, fût inévitable. Ainsi, la bataille pour Kompy fur un échec. Cependant, nous russisâmes à saboter les infrastructures de la planète avant de battre en retraite.       \n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  1001 Sina\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "matricule": "1001",
+        "status": "accepted",
+        "reviewedBy": "Ash (2305)",
+        "reviewedAt": "2026-10-09T19:04:07.963Z",
+        "submittedAt": "2026-10-09T12:32:08.410Z",
+        "rpName": "Sina"
+      }
+    },
+    {
+      "id": "iaoiYm8ZZ4d803uNnHjU",
+      "data": {
+        "codeHash": "d5f1931f04a5b2082a63363cf9c3f24d182fc4d4a3fdff69a4b8f1a3442c33b6",
+        "reviewedAt": "2026-09-30T12:37:05.646Z",
+        "status": "rejected",
+        "archived": true,
+        "content": "TEST",
+        "rpName": "Jaeger",
+        "reviewedBy": "Owner",
+        "matricule": "3045",
+        "submittedAt": "2026-09-30T12:35:27.575Z"
+      }
+    },
+    {
+      "id": "k8iJINfzFfGhiByv3mCw",
+      "data": {
+        "matricule": "4048",
+        "archived": true,
+        "submittedAt": "2026-10-18T15:21:10.490Z",
+        "status": "rejected",
+        "reviewedBy": "Appo (1119)",
+        "reviewedAt": "2026-10-19T22:24:00.859Z",
+        "rpName": "Fox",
+        "content": "J'ai participer a un entrenement organiser par ADJ-C 9023 rek nous avons securisé des A.P. Afin d'avoir des amélioration  et de récuperer un datapad"
+      }
+    },
+    {
+      "id": "kxRuNbY560g3HliVKQDD",
+      "data": {
+        "submittedAt": "2026-10-05T13:01:10.962Z",
+        "reviewedBy": "Ash (2305)",
+        "rpName": "Old-Deus",
+        "matricule": "2806",
+        "status": "rejected",
+        "archived": true,
+        "content": "╔════════════╗\nConnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur : 2806 Old-Deus\nConnexion en cours...\nConnexion réussie\nDébut de transmission... \n╚════════════╝\n\nRapport de Mission, du 04/10/2026\n\nNotre mission été courte, le bute de la mission était de défendre notre base d'une attaque de droïde. Cette mission était très éprouvante tant par le nombres de perte que parts le bruit des balles, des cries, des explosions. La mission ma permis de travailler sur met compétences de soin et de réanimation au combat. En plein milieu de mission nous avons eu notre commandant de mission qui à était affecté par un mal de tête et à commencé à tirer sur touts le mondes. Nous étions dans l'obligation de le neutraliser pour éviter d'autre perte. Une fois les soldats touché relevé et soignée mon devoir de médecin m'obligé de réanimer le commandant y compris si il était sous l'emprise d'une force obscure. Une fois le commandant relever et menotter, j'ai du faire un examen médicale au commandant. L'examen était vraiment faite dans une ambiance bizarre, en effet tout les regards ce porté sur moi et mon diagnostic. étant donnée mon grade de médecin je n'ai pu lui donnée qu'un doliprane pour soulager ces mal de tête.\n\nÀ l'issu de cet mission j'ai pu décrocher la médaille du tireur d'élite.\n\n501st [MDC-AM] TRT-I | CPL-C 2806 Old-Deus\n\n :CC501st: SURVIVRE POUR COMBATTRE UN JOUR DE PLUS:CC501st: \n\n╔═══════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter..\nDéconnexion réussie\n╚═══════════╝",
+        "reviewedAt": "2026-10-05T22:09:09.140Z"
+      }
+    },
+    {
+      "id": "oHqjNrZ8OcQn6Jd8Pzpj",
+      "data": {
+        "submittedAt": "2026-10-16T19:37:07.354Z",
+        "reviewedBy": "Jesse (5597)",
+        "rpName": "Rek",
+        "matricule": "9023",
+        "reviewedAt": "2026-10-17T12:18:44.459Z",
+        "status": "accepted",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 9023 Rek\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nMes respects a vous,\n\nDans cette mission nous avons été déployés sur la planète Jorra-Yx dans une mission qui consistait au fait que les services de renseignements\nde la république on trouvé des informations via des enregistrements donc la mission principale de aujourd'hui étais de trouvé des infos concernant la CSI,\ndonc nous avons été déployés avec le CPT Rex en CMD de flotte Old-Deus en CMD de mission + moi en Co-lead donc nous avons été déployés pour d'abord nous mettre en défense de zone dans un genre d'entrepôt par la suite nous sommes allée sur différents point les déplacements étais très mauvais en barc-speeder car d'après le Superviseur l'endroit étais plat et libre donc j'en ai profité mais non donc par la suite nous sommes partir sur différents point en partant d'abord vers Nord puis une fois que nous   avons sécurisé l'ensemble du Nord nous sommes partie en Ouest ou nous devions nous sécurisé.\n\nPar la suite nous sommes partie sur différents point comme une AP dans mes souvenirs,\npuis nous sommes partie sur différents autre points puis un ordre étais donné par \nle CMD de mission nous a dit d'allé sur le point Papa car le Superviseur a trouvé 2 Terminaux\npour partir directement nous avons contourné les droides j'ai proposé des idées pour pénétré dans le point \net sa a marché.\n\nPuis nous sommes partie après avoir fait des CQB nous avons trouvé un corp que\n j'ai essayé de soigné malheureusement le corp étais mort pour de bon\npuis nous avons embarqué directement pour repartir sur base.\n\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  9023 Rek\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════"
+      }
+    },
+    {
+      "id": "oh8R9jx35D1XstPRvjGS",
+      "data": {
+        "rpName": "Kraan",
+        "reviewedAt": "2026-10-24T22:32:14.295Z",
+        "content": "Le 22/10/26 à 21h00, la Flotte Cosmos a été déployée sur Nova dans le cadre de l’opération Run Forward.\n\nCette mission avait pour but de prendre d’assaut un complexe militaire séparatiste découvert grâce aux données du droïde récupéré lors de notre dernière opération. Une fois sur place, nous devions forcer l’entrée de la base, éliminer les forces ennemies et détruire toutes leurs installations.\n\nLa 501st a d’abord été déployée en défense de zone sur la Z.A., avant de se diriger vers le complexe militaire. La progression était très lente et difficile, surtout au début, où je n’ai pas tiré une seule fois, en tant que médecin, mon rôle était alors uniquement de soigner.\n\nNous avons ensuite continué notre progression sur une plage, qui était une position forte de la C.S.I. Là encore, j’ai peu tiré et me suis surtout concentré sur les soins.\n\nNous avons ensuite atteint le complexe militaire et réussi à pénétrer dans la prison, la position la plus fortifiée de la C.S.I. Nous y avons mené du CQB pendant une quinzaine de minutes, avant d’être extraits, les renseignements signalant l’arrivée de renforts ennemis.\n\nJe remercie la 501st d’avoir su écouter les ordres. J’aurais toutefois aimé rappeler au débriefing la 3ème règle d’or : ne pas interférer dans un duel entre un Jedi et son adversaire, sauf si le Jedi le demande ou meurt.",
+        "reviewedBy": "Appo (1119)",
+        "submittedAt": "2026-10-23T19:04:48.925Z",
+        "matricule": "2634",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "pUMxSffjNMJccRjXH7pN",
+      "data": {
+        "reviewedAt": "2026-10-12T07:02:59.702Z",
+        "status": "accepted",
+        "matricule": "2806",
+        "submittedAt": "2026-10-11T18:58:27.165Z",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 2806 Old-Deus\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nRapport de mission du 11/10/2026\n\nJ'ai était surpris de voire le type de planète sur laquelle nous allons progresser, une planète forestière. Pour le commencement de mission, nous avons commencer avancer en groupe, en temps que torrent je fessai partie de la tête de fils. Mon rôle était de prévenir le reste de l'escouade en cas d'attaque. Nous avons poursuivie la mission tranquillement sans attaque ennemie lorsque de espèce d'alien mutant nous prix par surprise. Cette défense de base été très difficile à cause de l'environnement difficile et du champs de vision réduit. Les alien exterminer nous continuions à avancer pour continuer notre mission. D'un coup une grosse explosion retentie. Nous avons reçu le message que des saleté de droïde aller nous rendre un petit bonjour. En plein de le combat une fusée ou un missile, tombe sur la 501st casiment toute l'escouade fur décimer. Heureusement pour nous jeter un des seul debout de cette explosion j'ai pue donc relever (grâce à mes super compétence de médecin). La mission à pue finir normalement dans tout le sérieux et le force de la 501st.\n\nMission réussi, tout les camarade on pue revenir sein et sauf\n\nFin de transmission.\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  2806 Old-Deus\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "rpName": "Old-Deus",
+        "reviewedBy": "Ash (2305)"
+      }
+    },
+    {
+      "id": "sYobJqzfayo6cRUooZ5Z",
+      "data": {
+        "submittedAt": "2026-10-12T19:38:52.084Z",
+        "reviewedAt": "2026-10-13T18:47:42.198Z",
+        "rpName": "Freeze",
+        "status": "rejected",
+        "matricule": "2355",
+        "reviewedBy": "Ash (2305)",
+        "archived": true,
+        "content": "EN CE 12/10/2026 a 21H NOUS SOMMES PARTIS EN MISSION SUR LA PLANETE PASAANA et avons combattus contre des droides"
+      }
+    },
+    {
+      "id": "tRAb2CkMSCCDWVh1iSrw",
+      "data": {
+        "rpName": "Falco",
+        "reviewedAt": "2026-10-13T20:34:44.059Z",
+        "reviewedBy": "Ash (2305)",
+        "status": "rejected",
+        "submittedAt": "2026-10-13T20:02:51.965Z",
+        "content": "**Rapport de mission – Opération Dust Storm**\n\n**Date :** 13/10/2026 à 21 h  \n**Lieu :** Kharvos, désert de Dry State\n\nMes respects à tous,\n\nL’Opération Dust Storm s’est déroulée avec succès. Les unités de la Flotte Cosmos ont réussi à nettoyer et sécuriser le bunker ainsi que l’hôtel.\n\n**Bilan :** Mission réussie, objectifs opérationnels accomplis.\n\nFin du rapport.",
+        "archived": true,
+        "matricule": "2355"
+      }
+    },
+    {
+      "id": "tgeXPcDF0cTUxamEm1kc",
+      "data": {
+        "matricule": "1409",
+        "rpName": "Echo (Nobody)",
+        "reviewedBy": "Appo (1119)",
+        "reviewedAt": "2026-10-19T22:24:24.118Z",
+        "submittedAt": "2026-10-18T18:38:38.655Z",
+        "content": "╔════════════════════════════════════════════════════════╗  \nVeuillez patienter...  \nNom de l'utilisateur : 2nd-LTN 1409 Echo  \nConnexion en cours...  \nConnexion réussie  \n╚════════════════════════════════════════════════════════╝  \n\nRapport de Mission\nUnité : ARC Alpha  \nOpération : Basilic  \nLieu : Capitale sous contrôle de la CSI  \n\nAu cours de cette opération, j'ai été affecté aux côtés des membres de l'**ARC Alpha** afin de reprendre le contrôle d'une capitale occupée par la CSI et de porter secours aux représentants républicains retenus en otage. Dès notre arrivée sur zone, nous avons entamé notre progression à travers un environnement mêlant **zones urbaines et rurales**, avec une ville principale et plusieurs chemins permettant d'accéder aux secteurs annexes.\n\nNotre avancée s'est effectuée méthodiquement afin de sécuriser les axes de déplacement et de limiter les risques pour la population civile. Les différents chemins menant aux zones périphériques ont été explorés afin d'identifier les positions ennemies et de faciliter les déplacements des forces républicaines. Malgré la présence de la CSI, nous avons poursuivi notre progression jusqu'à obtenir des informations permettant de **localiser les VIP**.\n\nUne fois leur position identifiée, nous avons rapidement sécurisé le secteur afin d'assurer leur protection et d'empêcher toute tentative ennemie de les déplacer ou de leur porter atteinte. Cette étape constituait une priorité majeure de la mission, les représentants capturés étant d'une importance stratégique pour la République.\n\nLa mission s'est ensuite orientée vers la **recherche de bombes et de dispositifs explosifs** susceptibles de menacer la capitale et ses habitants. Les membres de l'ARC Alpha ont participé aux recherches dans les différents secteurs, tout en restant prêts à intervenir face aux forces séparatistes. Plusieurs affrontements contre la CSI ont alors éclaté, compliquant les recherches et nécessitant une vigilance constante pour maintenir le contrôle des zones déjà sécurisées.\n\nMalgré la résistance ennemie, nous avons poursuivi nos efforts afin de réduire la menace séparatiste et de sécuriser les secteurs prioritaires. Une fois les objectifs principaux accomplis et la situation suffisamment maîtrisée, l'ordre d'**extraction** a été donné. Les effectifs ont rejoint le point d'évacuation avant de quitter la zone.\n\nL'opération **Basilic** s'est conclue après la localisation et la sécurisation des VIP, les recherches de dispositifs explosifs et plusieurs affrontements contre la CSI. Cette mission menée aux côtés de l'ARC Alpha a permis de progresser dans la capitale ennemie et de remplir les objectifs qui nous avaient été confiés.\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS\n\n╔════════════════════════════════════════════════════════╗  \nDéconnexion d'utilisateur en cours...  \nVeuillez patienter...  \nDéconnexion réussie  \n╚════════════════════════════════════════════════════════╝",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "v9F9HS59AoSeAfBJfJLr",
+      "data": {
+        "status": "accepted",
+        "content": "╔════════════════════════════════════════════════════════╗\nVeuillez patienter...\nNom de l'Utilisateur: 2806 Old-Deus\nConnexion en cours...\nConnexion réussie\n╚════════════════════════════════════════════════════════╝\n\nRapport de mission du 18/10/2026 :\n\nNous avons étaient déployer dur la planète Basilic enfin de sécuriser la zone demander. Nous avons commencer par un sécuriser le point julliette port. La zone étaient très calme et nous avons repéré aucun droïde à l'horizon. Nous avons continuer par une attaque de bâtiment qui c'est conclue par un  RAS pour tout les bâtiment. Puis moi et mes compatriote Torrent nous avons sécuriser une grotte. Nous avons pue mettre en lumière les différente formation et compétence acquise via les entrainements CQB. La grotte terminer, nous avons rejoint l'autre partie de l'escouade. Nous avons continuer par de la sécurisation de maison et autre bâtiments. RAS pendant un bon 15min nous avons bifurquer en direction de la mairie la sécuriser. Après moulte tonne de droïde détruite, la prise d'otage du maire été toujours en cours. Nous (la torrent) avons tenus les positions et repousser toute les attaques de droïde. Je n'ai pas reçu les information concernant la prise d'otage, mais je sais que la mission été réussit. Encore une fois la 501st à fait sont travaille dans les règle de l'art.\n\n\n\nSurvivre pour combattre un jour de plus !\n\n╔════════════════════════════════════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur:  2806 Old-Deus\nDéconnexion en cours...\nDéconnexion réussie\n╚════════════════════════════════════════════════════════",
+        "reviewedAt": "2026-10-19T22:24:45.314Z",
+        "reviewedBy": "Appo (1119)",
+        "submittedAt": "2026-10-18T18:44:44.728Z",
+        "rpName": "Old-Deus",
+        "matricule": "2806"
+      }
+    },
+    {
+      "id": "x9f6zKA2sGrf1SFtAyLt",
+      "data": {
+        "rpName": "Kieron",
+        "reviewedAt": "2026-10-12T07:03:12.513Z",
+        "content": "Rapport de mission 11/10/2026 18h\n\nGant de velours \n\n\n╔════════════╗\nConnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur : 501st HV-C ADJ 4529 Kieron\nConnexion en cours...\nConnexion réussie\nDébut de transmission...\n╚════════════╝\n\nRapport de Mission,\n\nÀ notre arrivée sur Verdre-Six, la 501st reçut pour objectif de progresser discrètement et de capturer plusieurs points stratégiques afin de sécuriser la zone.\n\nDès notre déploiement, une épaisse brume orange obstrua notre champ de vision, rendant notre progression particulièrement difficile. La présence de nombreux insectes sur place compliqua davantage notre avancée.\n\nMalgré ces conditions défavorables, la 501st parvint à progresser en préservant sa discrétion et à reprendre les différents points stratégiques de la zone.\n\nCependant, notre présence finit par être découverte par la CSI, qui lança plusieurs vagues de renforts sur nos positions. Face à ces assauts répétés, nos troupes tinrent leurs positions et engagèrent les forces ennemies.\n\nMalgré l'intensité des déploiements adverses, la 501st parvint à repousser et à éliminer les forces de la CSI, reprenant ainsi les points stratégiques encore détenus par l'ennemi.\n\nUne fois la zone sécurisée et les objectifs accomplis, nous entamâmes la procédure d'extraction.\n\nRespectueusement,\n\n501st HV-C ADJ 4529 Kieron\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS\n\n╔═══════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter..\nDéconnexion réussie\n╚═══════════╝",
+        "matricule": "4529",
+        "reviewedBy": "Ash (2305)",
+        "submittedAt": "2026-10-11T19:10:20.068Z",
+        "status": "accepted"
+      }
+    },
+    {
+      "id": "xMcZJtgdn8RRBNK19It4",
+      "data": {
+        "status": "pending",
+        "matricule": "4529",
+        "content": "╔════════════╗ Connexion d'utilisateur en cours Veuillez patienter... Nom de l'Utilisateur : 501st HV-CG ADJ-C 4529 Kieron Connexion en cours... Connexion réussie Début de transmission... ╚════════════╝\n\nRapport de Mission 26/10/2026 21h,\n\nÀ son arrivée sur la planète Xilat, dans le secteur Yakuta, la 501st reçut pour mission d'investir les lieux afin de reconnaître et sécuriser la zone, tout en cherchant à comprendre l'infection mutée et les moyens de la contrer.\n\nDurant notre progression à travers la ville, nous fûmes confrontés à de nombreuses vagues d'infectés ainsi qu'à une milice armée hostile. Malgré les assauts incessants, la 501st poursuivit son avancée, explorant les lieux et sécurisant les points stratégiques afin de permettre la poursuite de l'opération.\n\nPar la suite, il fut ordonné à la 501st de rejoindre le site où un infecté spécial avait été capturé, celui-ci contenant des données jugées importantes pour la compréhension de l'infection. Nos unités furent chargées de tenir la position afin de protéger le site et les informations récupérées.\n\nMalgré de violentes attaques répétées des infectés et de la milice, la 501st maintint ses positions jusqu'au lancement de l'évacuation. Enfin, l'antidote fut déployé, marquant une étape importante dans la lutte contre cette infection.\n\nRespectueusement,\n\n501st HV-CG ADJ-C 4529 Kieron\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS\n\n╔═══════════╗ Déconnexion d'utilisateur en cours Veuillez patienter.. Déconnexion réussie ╚═══════════╝",
+        "submittedAt": "2026-10-25T23:30:38.665Z",
+        "rpName": "Kieron"
+      }
+    },
+    {
+      "id": "xffxJeQZYmckTfKdqLF0",
+      "data": {
+        "status": "accepted",
+        "content": "Le 12/10, la Flotte Cosmos a été envoyée en mission sur Pasaana pour trouver un Venator de la république qui s'était écrasé, et qui contenait des données confidentielles. La 501st était comme d'habitude assignée à des missions d'infanterie, notamment de la prise de zone, et de la défense de zone. J'ai été assigné durant cette mission à celle d'artilleur sur un AT-AP conduit par le Major 2305. Nous avons commencé par tenir la ZA, accompagnés de l'ensemble des régiments, car des Transports multi-troupes nous prenaient en tenaille. Après les avoir entièrement décimés, nous avont continué notre progression, point après point, l'objectif principal de l'AT-AP était d'abord de passer en première ligne, et une fois les zones contrôlées, de rester derrière pour empêcher toute tentative d'attaque éclaire enemie. \nLe Major, de par son expérience et son excellente conduite en terrain abrupte, nous a permis de remplir ce rôle à la perfection, éliminant tous les enemis tentant de contourner nos alliés.\nJe dirais que cette mission s'est, dans l'ensemble, bien passée tout au plus, même si quelques points auraient pu être mieux abordés, notamment sur les ordres du commandant de mission, qui, selon moi, avait quelques lacunes sur la communication tactique en radio (il lui arrivait de dire tout ce qu'il lui passait par la tête, ce défaut se règlera sûrement avec l'expérience). \nMerci au Major de m'avoir emmené en mission avec lui, et merci au corps des officiers pour la confiance accordée qui viens avec le grade de caporal.",
+        "matricule": "2634",
+        "submittedAt": "2026-10-12T22:22:31.876Z",
+        "reviewedBy": "Ash (2305)",
+        "reviewedAt": "2026-10-13T18:49:45.526Z",
+        "rpName": "Kraan"
+      }
+    },
+    {
+      "id": "ybq7ZiVFQG3ZsFTjtaDP",
+      "data": {
+        "status": "rejected",
+        "reviewedAt": "2026-10-05T22:09:16.278Z",
+        "submittedAt": "2026-10-04T18:08:26.282Z",
+        "archived": true,
+        "content": "╔═════════════════════════╗\nConnexion d'utilisateur en cours\nVeuillez patienter...\nNom de l'Utilisateur : 9023 Rek\nConnexion en cours...\nConnexion réussie\nDébut de transmission... \n╚═════════════════════════╝\n\nMes respects dans ce Code rouge il y avait différents BX qui étais infiltré en Shock Trooper juste après il ce sont fait attrapées mêmes BX infiltré on d'abord été détruit puis donné au 104th,\ndonc ces mêmes BX ont évidement fait le CM puis le debriefing avec la Shock Trooper ensuite le MJR Billy a alerté la base de leur présence et juste après un Code Rouge a été enclenché donc d'abord des unités ont fait des patrouilles sur base pour vor si des potentielles BX été encore sur base.\n\nPersonellement je suis arrivé un peu tard mais j'ai fait des patrouilles a différents endroit de la base comme le Mess le CM le Tarmac  puis la Shock Trooper a organisé un contrôle casque et carte pour chaque unité de la base et quand le contrôle été finis la 501 avait rien a signalé tout comme les autres régiments personne n'avait de BX infiltré. J'ai oublié de précisé que un BX qui étais encore vivant car 3 BX étais sur base donc ce même BX a tenté de faire explosé la SDM heureusement le BX est mort d'une raison qui m'est inconnu donc cette attaque a échoué \n\nDonc juste après la Shock Trooper avait rien a signalé par rapport aux différents contrôle de chaque régiment.\n\nRespectueusement,\n\nADJ-C 9023 Rek MDC-AC\n\nSURVIVRE POUR COMBATTRE UN JOUR DE PLUS \n\n╔═════════════════════════╗\nDéconnexion d'utilisateur en cours\nVeuillez patienter..\nDéconnexion réussie\n╚═════════════════════════╝",
+        "matricule": "9023",
+        "reviewedBy": "Ash (2305)",
+        "rpName": "Rek"
+      }
+    }
+  ]
+}
